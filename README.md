@@ -33,4 +33,4 @@ Website ini merupakan portofolio pribadi untuk **Brian Fauzan Lukman**, yang dir
    - **Swiper.js**: Untuk membuat slider interaktif pada halaman.
 
 ### 8. **Penggunaan**
-   - Website ini dapat digunakan sebagai portofolio online untuk menampilkan keahlian dan pengalaman pribadi Brian Fauzan Lukman di berbagai bidang teknologi dan media sosial.
+   - Website ini dapat digunakan sebagai portofolio online untuk menampilkan Biografi Brian Fauzan Lukman di media sosial.
