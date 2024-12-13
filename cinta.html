@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cinta</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fecfef);
+            color: #333;
+        }
+
+        .container {
+            margin-top: 1%;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #fff;
+        }
+
+        label {
+            font-size: 1.2em;
+            color: #fff;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #ff6f91;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff4e7a;
+        }
+
+        .logo {
+            width: 100px;
+            margin: 20px auto;
+        }
+    </style>
+    <script>
+        function showPopup() {
+            const userInput = document.getElementById("userInput").value;
+            if (userInput.toLowerCase() === "i love you") {
+                alert("I love you more");
+            } else {
+                alert("Cari yang lain aja ya");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="https://static.vecteezy.com/system/resources/previews/017/178/055/non_2x/love-heart-symbol-on-transparent-background-free-png.png" alt="Love Logo" class="logo">
+        <h1>ketik i love you</h1>
+        <label for="userInput">masukkan disini:</label><br>
+        <input type="text" id="userInput" /><br>
+        <button onclick="showPopup()">Submit</button>
+    </div>
+</body>
+</html>
