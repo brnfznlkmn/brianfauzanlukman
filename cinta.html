@@ -1,79 +1,400 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cinta</title>
+    <title>Untuk Cahaya ❤️</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(to right, #ff9a9e, #fecfef);
-            color: #333;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
         .container {
-            margin-top: 1%;
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
-        h1 {
-            font-size: 3em;
-            color: #fff;
+        .envelope {
+            background: #f4e4c1;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: fadeIn 1s ease-in;
         }
 
-        label {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: url('https://static.vecteezy.com/system/resources/previews/017/178/055/non_2x/love-heart-symbol-on-transparent-background-free-png.png') no-repeat center;
+            background-size: contain;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #d4a574;
+        }
+
+        .header h1 {
+            color: #8b4513;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            color: #a0522d;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+
+        .letter-content {
+            color: #4a3728;
+            line-height: 1.8;
+            font-size: 1.1em;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .letter-content p {
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #8b4513;
             font-size: 1.2em;
-            color: #fff;
+            margin-top: 30px;
         }
 
-        input {
-            padding: 10px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            margin: 10px;
+        .question-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-box h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .input-group {
+            margin: 20px 0;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
         }
 
         button {
-            padding: 10px 20px;
-            font-size: 1em;
-            color: #fff;
-            background-color: #ff6f91;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            font-weight: bold;
         }
 
         button:hover {
-            background-color: #ff4e7a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
         }
 
-        .logo {
-            width: 100px;
-            margin: 20px auto;
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
         }
-    </style>
-    <script>
-        function showPopup() {
-            const userInput = document.getElementById("userInput").value;
-            if (userInput.toLowerCase() === "i love you") {
-                alert("I love you more");
-            } else {
-                alert("Cari yang lain aja ya");
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            animation: modalPop 0.5s ease;
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
             }
         }
-    </script>
+
+        .modal-content h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            color: #333;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .close-modal {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .hearts-animation {
+            position: fixed;
+            pointer-events: none;
+            font-size: 30px;
+            animation: floatUp 3s ease-in forwards;
+            z-index: 999;
+        }
+
+        @keyframes floatUp {
+            from {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-200px) rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .letter-content {
+                font-size: 1em;
+            }
+            
+            .envelope {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="stars" id="stars"></div>
+    
     <div class="container">
-        <img src="https://static.vecteezy.com/system/resources/previews/017/178/055/non_2x/love-heart-symbol-on-transparent-background-free-png.png" alt="Love Logo" class="logo">
-        <h1>ketik i love you</h1>
-        <label for="userInput">masukkan disini:</label><br>
-        <input type="text" id="userInput" /><br>
-        <button onclick="showPopup()">Submit</button>
+        <div class="envelope">
+            <div class="header">
+                <h1>Untuk Cahaya 💫</h1>
+                <p>Orang yang pernah menerangi hidupku</p>
+            </div>
+            
+            <div class="letter-content">
+                <p>Hai Cahaya,</p>
+                
+                <p>Aku tidak tahu harus mulai dari mana. Setiap hari yang berlalu tanpa dirimu terasa seperti langit yang kehilangan bintang-bintangnya. Namamu bukan hanya sekadar nama, tapi makna yang sesungguhnya kau berikan dalam hidupku - cahaya yang menerangi setiap sudut gelap dalam hatiku.</p>
+                
+                <p>Aku kangen. Kangen yang bukan sekadar rindu biasa. Aku kangen cara kamu tertawa, cara matamu berbinar saat menceritakan hal-hal yang kamu suka, cara kamu selalu tahu kapan aku butuh dipeluk tanpa harus aku minta. Aku kangen menjadi tempat terbaikmu berbagi cerita, menjadi alasan kamu tersenyum di pagi hari.</p>
+                
+                <p>Aku sadar, mungkin aku pernah salah. Mungkin ada momen di mana aku tidak cukup menunjukkan betapa berharganya kamu. Tapi kehilanganmu mengajarkan aku sesuatu yang tak bisa diajarkan siapapun - bahwa kamu adalah rumah yang aku cari di tengah dunia yang penuh kebisingan ini.</p>
+                
+                <p>Setiap tempat yang pernah kita kunjungi bersama kini terasa berbeda. Kopi yang dulu kita nikmati bersama kini terasa hambar. Lagu-lagu yang dulu kita dengar bersama kini terdengar seperti kenangan yang menyayat. Semua hal mengingatkanku padamu, Cahaya.</p>
+                
+                <p>Aku tidak memintamu untuk melupakan kesalahan-kesalahanku. Aku hanya meminta satu kesempatan - kesempatan untuk membuktikan bahwa aku bisa menjadi versi terbaik dari diriku, versi yang layak untuk berdiri di sampingmu. Aku ingin kembali menjadi alasan kamu percaya pada cinta, menjadi tempat ternyamanmu pulang.</p>
+                
+                <p>Jika kamu memberi aku kesempatan, aku berjanji akan menjaga hatimu lebih baik dari sebelumnya. Aku akan menjadi pendengar terbaik untuk setiap ceritamu, menjadi pendukung terbesar untuk setiap mimpimu, dan menjadi cinta yang tidak pernah membuatmu merasa sendiri lagi.</p>
+                
+                <p>Hidup tanpa dirimu terasa seperti buku tanpa ending yang bahagia. Dan aku percaya, kita belum selesai menulis cerita kita. Masih ada banyak halaman yang menunggu untuk diisi dengan tawa, cinta, dan kebahagiaan kita bersama.</p>
+                
+                <p>Kembalilah, Cahaya. Kembalilah menerangi hidupku seperti dulu. Aku akan menunggu, karena beberapa orang memang layak untuk ditunggu. Dan kamu adalah orang itu.</p>
+                
+                <div class="signature">
+                    Dengan cinta yang tak pernah padam,<br>
+                    Yang akan selalu menunggumu 💕
+                </div>
+            </div>
+            
+            <div class="question-box">
+                <h2>Maukah kamu memberi aku kesempatan lagi?</h2>
+                <p style="color: #666; margin-bottom: 15px;">Ketik "I love you" jika kamu masih merasakan hal yang sama...</p>
+                <div class="input-group">
+                    <input type="text" id="userInput" placeholder="Ketik jawaban dari hatimu...">
+                </div>
+                <button onclick="checkAnswer()">Kirim Jawabanmu</button>
+            </div>
+        </div>
     </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">❤️</h2>
+            <p id="modalText"></p>
+            <button class="close-modal" onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        function createHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.className = 'hearts-animation';
+            heart.textContent = '❤️';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        function checkAnswer() {
+            const input = document.getElementById('userInput').value.trim();
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalText = document.getElementById('modalText');
+            
+            if (input.toLowerCase() === 'i love you') {
+                modalTitle.textContent = '💕 Terima kasih, Cahaya! 💕';
+                modalText.innerHTML = 'Kamu baru saja membuat hatiku penuh lagi. Aku berjanji akan menjadi yang terbaik untukmu. Aku akan menjaga hatimu, menghargai setiap detik bersamamu, dan tidak akan pernah membuatmu menyesal telah memberi kesempatan ini. I love you more than words can say. ❤️';
+                
+                // Create multiple hearts
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        const x = Math.random() * window.innerWidth;
+                        const y = Math.random() * window.innerHeight;
+                        createHeart(x, y);
+                    }, i * 100);
+                }
+            } else {
+                modalTitle.textContent = '💔';
+                modalText.innerHTML = 'Aku mengerti jika kamu butuh waktu. Hatiku akan tetap menunggu, karena cinta sejati tidak pernah memaksa. Apapun keputusanmu, aku tetap mendoakan yang terbaik untukmu, Cahaya.';
+            }
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
