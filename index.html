@@ -123,12 +123,12 @@ header{
 }
 
 .logo{
-  font-weight:700;
-  font-size:24px;
+  font-weight:800;
+  font-size:28px;
   letter-spacing:-0.5px;
 }
 
-.theme-toggle{
+.github-link{
   width:44px;
   height:44px;
   border-radius:12px;
@@ -137,20 +137,21 @@ header{
   display:flex;
   align-items:center;
   justify-content:center;
-  cursor:pointer;
-  font-size:20px;
+  color:var(--text);
+  font-size:22px;
   transition:var(--transition);
+  text-decoration:none;
   -webkit-tap-highlight-color:transparent;
 }
 
-.theme-toggle:hover{
-  transform:scale(1.1) rotate(15deg);
+.github-link:hover{
+  transform:scale(1.1);
   background:var(--accent);
   color:#fff;
   border-color:var(--accent);
 }
 
-.theme-toggle:active{
+.github-link:active{
   transform:scale(0.95);
 }
 
@@ -506,94 +507,131 @@ header{
   color:var(--text-muted);
 }
 
-/* CONTACT */
-.contact{
-  max-width:700px;
+/* YOUTUBE SECTION */
+.youtube-section-container{
+  max-width:1000px;
   margin:0 auto 100px;
   padding:0 24px;
 }
 
-.contact-card{
-  background:var(--card-bg);
-  border-radius:var(--radius);
-  padding:48px;
-  box-shadow:0 20px 60px var(--shadow);
-  border:1px solid var(--border);
+.youtube-section{
+  text-align:center;
+  margin-bottom:48px;
 }
 
-.contact-card h2{
-  font-size:32px;
+.youtube-section h2{
+  font-size:clamp(28px, 4vw, 36px);
   font-weight:700;
   margin-bottom:12px;
   letter-spacing:-0.5px;
-  text-align:center;
 }
 
-.contact-card p{
-  text-align:center;
+.youtube-section p{
   color:var(--text-muted);
+  font-size:16px;
   margin-bottom:40px;
 }
 
-.form-group{
-  margin-bottom:24px;
+.youtube-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:24px;
 }
 
-.form-group label{
-  display:block;
-  margin-bottom:8px;
-  font-weight:500;
-  font-size:14px;
-}
-
-.form-group input,
-.form-group textarea{
-  width:100%;
-  padding:14px 18px;
+.youtube-card{
+  background:var(--card-bg);
+  border-radius:var(--radius);
+  overflow:hidden;
   border:1px solid var(--border);
-  border-radius:12px;
-  background:var(--bg);
-  color:var(--text);
-  font-family:inherit;
-  font-size:15px;
+  box-shadow:0 2px 8px var(--shadow);
   transition:var(--transition);
-  min-height:48px;
-}
-
-.form-group input:focus,
-.form-group textarea:focus{
-  outline:none;
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(59,130,246,0.1);
-}
-
-.form-group textarea{
-  resize:vertical;
-  min-height:150px;
-}
-
-.btn-submit{
-  width:100%;
-  padding:16px;
-  background:linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  font-size:16px;
-  font-weight:600;
-  cursor:pointer;
-  transition:var(--transition);
-  min-height:52px;
+  text-decoration:none;
+  color:inherit;
+  display:block;
   -webkit-tap-highlight-color:transparent;
 }
 
-.btn-submit:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 24px rgba(59,130,246,0.3);
+.youtube-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 12px 32px rgba(13,110,253,0.15);
+  border-color:var(--accent-light);
 }
 
-.btn-submit:active{
-  transform:translateY(0) scale(0.98);
+.youtube-card:active{
+  transform:translateY(-4px) scale(0.98);
+}
+
+.youtube-thumbnail{
+  position:relative;
+  width:100%;
+  padding-bottom:56.25%; /* 16:9 aspect ratio */
+  background:#000;
+  overflow:hidden;
+}
+
+.youtube-thumbnail img{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:var(--transition);
+}
+
+.youtube-card:hover .youtube-thumbnail img{
+  transform:scale(1.05);
+}
+
+.youtube-play-icon{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:60px;
+  height:60px;
+  background:rgba(255,0,0,0.9);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:24px;
+  transition:var(--transition);
+}
+
+.youtube-card:hover .youtube-play-icon{
+  transform:translate(-50%, -50%) scale(1.1);
+  background:rgba(255,0,0,1);
+}
+
+.youtube-info{
+  padding:20px;
+}
+
+.youtube-info h3{
+  font-size:16px;
+  font-weight:600;
+  line-height:1.4;
+  margin-bottom:8px;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.youtube-meta{
+  display:flex;
+  gap:12px;
+  font-size:13px;
+  color:var(--text-muted);
+}
+
+.youtube-loading{
+  text-align:center;
+  padding:40px;
+  color:var(--text-muted);
+  font-size:16px;
 }
 
 /* FOOTER */
@@ -717,8 +755,8 @@ footer{
     grid-template-columns:1fr;
   }
   
-  .contact-card{
-    padding:32px 24px;
+  .youtube-grid{
+    grid-template-columns:1fr;
   }
   
   .footer-content{
@@ -748,10 +786,6 @@ footer{
   .card-inner{
     padding:24px 20px;
   }
-  
-  .contact-card{
-    padding:28px 20px;
-  }
 }
 </style>
 </head>
@@ -770,15 +804,15 @@ footer{
 
 <header>
   <div class="logo">brnfznlkmn</div>
-  <button class="theme-toggle" aria-label="Toggle theme">
-    <i class="bi bi-moon-stars"></i>
-  </button>
+  <a href="https://github.com/brnfznlkmn/brianfauzanlukman" target="_blank" rel="noopener" class="github-link" aria-label="GitHub Repository">
+    <i class="bi bi-github"></i>
+  </a>
 </header>
 
 <section class="hero" id="home">
   <div class="hero-content">
     <div class="hero-badge">
-      <span id="visitorCount">Loading...</span> Visitors
+      Website Online
     </div>
     <div class="hero-logo">
       <img src="assets/img/favicon.png" alt="Logo">
@@ -877,26 +911,14 @@ footer{
     </a>
   </div>
 </section>
-
-<section class="contact" id="contact">
-  <div class="contact-card">
-    <h2>Get In Touch</h2>
-    <p>Ada project atau pertanyaan? Hubungi saya!</p>
-    <form id="contactForm">
-      <div class="form-group">
-        <label for="name">Nama</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      <div class="form-group">
-        <label for="message">Pesan</label>
-        <textarea id="message" name="message" required></textarea>
-      </div>
-      <button type="submit" class="btn-submit">Kirim Pesan</button>
-    </form>
+<section class="youtube-section-container" id="youtube">
+  <div class="youtube-section">
+    <h2>Latest on YouTube</h2>
+    <p>Video terbaru dari channel YouTube saya</p>
+  </div>
+  
+  <div class="youtube-grid" id="youtubeVideos">
+    <div class="youtube-loading">Loading videos...</div>
   </div>
 </section>
 
@@ -927,55 +949,100 @@ footer{
   </div>
   
   <div class="footer-bottom">
-    © 2026 Brian Fauzan Lukman. All rights reserved.
+    © 2026 Made with ❤️ by brnfznlkmn
   </div>
 </footer>
 
 <script>
 <script>
-// VISITOR COUNTER
-function updateVisitorCount() {
-  let count = localStorage.getItem('visitorCount');
-  if (!count) {
-    count = Math.floor(Math.random() * 500) + 1000; // Start from 1000-1500
-    localStorage.setItem('visitorCount', count);
-  } else {
-    count = parseInt(count) + 1;
-    localStorage.setItem('visitorCount', count);
-  }
-  document.getElementById('visitorCount').textContent = count.toLocaleString();
-}
-
-// Call on page load
-updateVisitorCount();
-
-// THEME TOGGLE
-const themeToggle = document.querySelector('.theme-toggle');
-const themeIcon = themeToggle.querySelector('i');
-
-// Check saved theme or default to light
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  updateThemeIcon(savedTheme);
-}
-
-themeToggle.addEventListener('click', () => {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+// LOAD YOUTUBE VIDEOS
+async function loadYouTubeVideos() {
+  const container = document.getElementById('youtubeVideos');
   
-  document.documentElement.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
-  updateThemeIcon(newTheme);
-});
-
-function updateThemeIcon(theme) {
-  if (theme === 'dark') {
-    themeIcon.className = 'bi bi-sun';
-  } else {
-    themeIcon.className = 'bi bi-moon-stars';
+  try {
+    // YouTube channel ID from the URL
+    const channelUsername = 'brnfznlkmn';
+    
+    // Using YouTube RSS feed (no API key needed)
+    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=UC7rKO3pPBqYmqhN2g7vGYPg`;
+    
+    // Fetch through RSS to JSON proxy
+    const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`);
+    const data = await response.json();
+    
+    if (data.status === 'ok' && data.items && data.items.length > 0) {
+      container.innerHTML = '';
+      
+      // Show latest 3 videos
+      const videos = data.items.slice(0, 3);
+      
+      videos.forEach(video => {
+        const videoId = video.link.split('v=')[1];
+        const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        
+        const card = document.createElement('a');
+        card.className = 'youtube-card';
+        card.href = video.link;
+        card.target = '_blank';
+        card.rel = 'noopener';
+        
+        // Format date
+        const pubDate = new Date(video.pubDate);
+        const timeAgo = getTimeAgo(pubDate);
+        
+        card.innerHTML = `
+          <div class="youtube-thumbnail">
+            <img src="${thumbnail}" alt="${video.title}" loading="lazy">
+            <div class="youtube-play-icon">
+              <i class="bi bi-play-fill"></i>
+            </div>
+          </div>
+          <div class="youtube-info">
+            <h3>${video.title}</h3>
+            <div class="youtube-meta">
+              <span>${timeAgo}</span>
+            </div>
+          </div>
+        `;
+        
+        container.appendChild(card);
+      });
+    } else {
+      throw new Error('No videos found');
+    }
+  } catch (error) {
+    console.error('Error loading YouTube videos:', error);
+    container.innerHTML = `
+      <div class="youtube-loading">
+        <p>Tidak dapat memuat video. <a href="https://www.youtube.com/@brnfznlkmn/videos" target="_blank" rel="noopener" style="color: var(--accent);">Kunjungi channel YouTube →</a></p>
+      </div>
+    `;
   }
 }
+
+function getTimeAgo(date) {
+  const seconds = Math.floor((new Date() - date) / 1000);
+  
+  let interval = seconds / 31536000;
+  if (interval > 1) return Math.floor(interval) + ' tahun lalu';
+  
+  interval = seconds / 2592000;
+  if (interval > 1) return Math.floor(interval) + ' bulan lalu';
+  
+  interval = seconds / 86400;
+  if (interval > 1) return Math.floor(interval) + ' hari lalu';
+  
+  interval = seconds / 3600;
+  if (interval > 1) return Math.floor(interval) + ' jam lalu';
+  
+  interval = seconds / 60;
+  if (interval > 1) return Math.floor(interval) + ' menit lalu';
+  
+  return 'Baru saja';
+}
+
+// Load videos on page load
+loadYouTubeVideos();
 
 // CARD RIPPLE EFFECT
 document.querySelectorAll('.card').forEach(card => {
@@ -986,20 +1053,6 @@ document.querySelectorAll('.card').forEach(card => {
     card.querySelector('.card-inner').style.setProperty('--x', `${x}%`);
     card.querySelector('.card-inner').style.setProperty('--y', `${y}%`);
   });
-});
-
-// CONTACT FORM
-document.getElementById('contactForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
-  
-  const subject = encodeURIComponent(`Pesan dari ${name}`);
-  const body = encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`);
-  
-  window.location.href = `mailto:brnfznlkmn@proton.me?subject=${subject}&body=${body}`;
 });
 </script>
 
