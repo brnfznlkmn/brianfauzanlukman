@@ -111,13 +111,21 @@ header{
 
 /* ===== GLASS ===== */
 .glass{
-  background:var(--card);
-  backdrop-filter:var(--blur);
-  border:1px solid var(--border);
-  border-radius:26px;
-  box-shadow:0 40px 120px rgba(0,0,0,.35);
-  position:relative;
-  overflow:hidden;
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 28px;
+  box-shadow:
+    0 40px 120px rgba(0,0,0,.25);
+  position: relative;
+  overflow: hidden;
+}
+
+/* MATIKAN SEMUA GRADIENT */
+.glass::before,
+.glass::after{
+  display: none !important;
 }
 
 .glass::after{
@@ -264,12 +272,18 @@ footer{
   </div>
 
   <div class="grid">
-    <a class="card" href="#"><div class="icon"><i class="bi bi-linkedin"></i></div><h3>LinkedIn</h3><p>Professional</p></a>
-    <a class="card" href="#"><div class="icon"><i class="bi bi-instagram"></i></div><h3>Instagram</h3><p>Daily</p></a>
-    <a class="card" href="#"><div class="icon"><i class="bi bi-github"></i></div><h3>GitHub</h3><p>Repository</p></a>
-    <a class="card" href="#"><div class="icon"><i class="bi bi-spotify"></i></div><h3>Spotify</h3><p>Playlist</p></a>
-    <a class="card" href="#"><div class="icon"><i class="bi bi-tiktok"></i></div><h3>TikTok</h3><p>Short video</p></a>
-    <a class="card" href="#"><div class="icon"><i class="bi bi-cart"></i></div><h3>Tokopedia</h3><p>Store</p></a>
+    <a class="card" href="https://www.linkedin.com/in/brnfznlkmn/"><div class="icon"><i class="bi bi-linkedin"></i></div><h3>LinkedIn</h3><p>Professional</p></a>
+    <a class="card" href="https://www.instagram.com/brnfznlkmn"><div class="icon"><i class="bi bi-instagram"></i></div><h3>Instagram</h3><p>Daily</p></a>
+    <a class="card" href="https://www.facebook.com/brnfznlkmn/"><div class="icon"><i class="bi bi-facebook"></i></div><h3>Facebook</h3><p>Facebook Page</p></a>
+    <a class="card" href="https://x.com/brnfznlkmn"><div class="icon"><i class="bi bi-twitter-x"></i></div><h3>X</h3><p>X page</p></a>
+    <a class="card" href="https://www.tiktok.com/@brnfznlkmn_"><div class="icon"><i class="bi bi-tiktok"></i></div><h3>TikTok</h3><p>Short video</p></a>
+    <a class="card" href="http://yt.openinapp.co/86d8g"><div class="icon"><i class="bi bi-tiktok"></i></div><h3>YouTube</h3><p>Long Form Video</p></a>
+    <a class="card" href="https://open.spotify.com/user/21ybv6hgar5tqrqhl4ran4jhi?si=3Esx0-x5Q32-eNvWyeCC0g"><div class="icon"><i class="bi bi-spotify"></i></div><h3>Spotify</h3><p>Playlist</p></a>
+    <a class="card" href="https://www.github.com/brnfznlkmn/"><div class="icon"><i class="bi bi-github"></i></div><h3>GitHub</h3><p>Repository</p></a>
+    <a class="card" href="https://monkeytype.com/profile/brnfznlkmn"><div class="icon"><i class="bi bi-keyboard"></i></div><h3>Monkeytype</h3><p>WPM</p></a>
+    <a class="card" href="https://www.tokopedia.com/brnfznlkmn"><div class="icon"><i class="bi bi-cart"></i></div><h3>Tokopedia</h3><p>Store</p></a>
+    <a class="card" href="https://shopee.co.id/brnfznlkmn"><div class="icon"><i class="bi bi-cart"></i></div><h3>Shopee</h3><p>Store</p></a>
+    <a class="card" href="https://www.facebook.com/marketplace/profile/100003929237903/"><div class="icon"><i class="bi bi-cart"></i></div><h3>Facebook Marketplace</h3><p>Store</p></a>
   </div>
 </section>
 
@@ -325,3 +339,4 @@ document.querySelectorAll(".reveal").forEach(el=>{
 
 </body>
 </html>
+
