@@ -1,7 +1,7 @@
 :root {
   --accent: #3b82f6;
   --accent-light: #60a5fa;
-  --bg: #f8f9fa;
+  --bg: #333333;
   --text: #1a1a1a;
   --text-muted: #6c757d;
   --card-bg: #ffffff;
@@ -11,7 +11,7 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --header-bg: #000000;
   --header-text: #ffffff;
-  --footer-bg: #1a1a1a;
+  --footer-bg: #000000;
   --footer-text: #f8f9fa;
 }
 
@@ -612,7 +612,8 @@ footer {
   background: var(--footer-bg);
   color: var(--footer-text);
   padding: 60px 24px 40px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .footer-content {
