@@ -38,18 +38,19 @@ body{
 
 /* HEADER */
 header{
-  max-width:1200px;
-  margin:0 auto;
-  padding:24px;
+  max-width:100%;
+  width:100%;
+  margin:0;
+  padding:24px 48px;
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-start;
   align-items:center;
   position:sticky;
   top:0;
-  background:rgba(248,249,250,.95);
-  backdrop-filter:blur(10px);
+  background:#ffffff;
   z-index:100;
   border-bottom:1px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
 }
 
 .logo{
@@ -61,7 +62,7 @@ header{
 /* HERO */
 .hero{
   min-height:60vh;
-  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background:linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -83,6 +84,29 @@ header{
   z-index:2;
   padding:40px 24px;
   animation:fadeInUp 0.8s ease;
+}
+
+.hero-logo{
+  width:80px;
+  height:80px;
+  margin:0 auto 20px;
+  animation:float 3s ease-in-out infinite;
+}
+
+.hero-logo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+}
+
+@keyframes float{
+  0%, 100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-10px);
+  }
 }
 
 @keyframes fadeInUp{
@@ -113,7 +137,7 @@ header{
 /* ABOUT */
 .about{
   max-width:900px;
-  margin:-80px auto 100px;
+  margin:-60px auto 100px;
   padding:0 24px;
   position:relative;
   z-index:10;
@@ -129,6 +153,19 @@ header{
   gap:32px;
   align-items:center;
   border:1px solid var(--border);
+  animation:cardPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+  transform-style:preserve-3d;
+}
+
+@keyframes cardPop{
+  0%{
+    opacity:0;
+    transform:scale(0.8) translateY(40px) rotateX(10deg);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1) translateY(0) rotateX(0deg);
+  }
 }
 
 .about img{
@@ -276,6 +313,10 @@ footer{
 
 /* MOBILE */
 @media(max-width:768px){
+  header{
+    padding:20px 24px;
+  }
+  
   .about-card{
     grid-template-columns:1fr;
     text-align:center;
@@ -322,8 +363,11 @@ footer{
 
 <section class="hero">
   <div class="hero-content">
+    <div class="hero-logo">
+      <img src="assets/img/favicon.png" alt="Logo">
+    </div>
     <h1>Brian Fauzan Lukman</h1>
-    <p>IT • Hardware • Software • Design</p>
+    <p>IT Support / Graphic Design</p>
   </div>
 </section>
 
