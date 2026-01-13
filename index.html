@@ -6,12 +6,12 @@
 <title>Brian Fauzan Lukman</title>
 <link rel="icon" href="assets/img/favicon.png">
 <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --accent:#0d6efd;
-  --accent-light:#4d94ff;
+  --accent:#3b82f6;
+  --accent-light:#60a5fa;
   --bg:#f8f9fa;
   --text:#1a1a1a;
   --text-muted:#6c757d;
@@ -20,6 +20,20 @@
   --shadow:rgba(0,0,0,.08);
   --radius:20px;
   --transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --header-bg:#ffffff;
+  --footer-bg:#1a1a1a;
+  --footer-text:#f8f9fa;
+}
+
+[data-theme="dark"]{
+  --bg:#0a0a0a;
+  --text:#f8f9fa;
+  --text-muted:#a0a0a0;
+  --card-bg:#1a1a1a;
+  --border:rgba(255,255,255,.1);
+  --shadow:rgba(0,0,0,.3);
+  --header-bg:#0f0f0f;
+  --footer-bg:#000000;
 }
 
 *{
@@ -28,12 +42,66 @@
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:'Inter',sans-serif;
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
+  transition:background 0.3s ease, color 0.3s ease;
+}
+
+/* LOADING */
+.loader{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(165deg, #0f172a 0%, #1e3a8a 35%, #3b82f6 65%, #60a5fa 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  animation:fadeOut 0.5s ease 2s forwards;
+}
+
+.loader-content{
+  text-align:center;
+}
+
+.loader-logo{
+  width:100px;
+  height:100px;
+  margin:0 auto 20px;
+  animation:bounce 1s ease-in-out infinite;
+}
+
+.loader-logo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+}
+
+.loader-text{
+  color:#fff;
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:2px;
+}
+
+@keyframes bounce{
+  0%, 100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+}
+
+@keyframes fadeOut{
+  to{
+    opacity:0;
+    pointer-events:none;
+  }
 }
 
 /* HEADER */
@@ -41,16 +109,17 @@ header{
   max-width:100%;
   width:100%;
   margin:0;
-  padding:24px 48px;
+  padding:20px 48px;
   display:flex;
-  justify-content:flex-start;
+  justify-content:space-between;
   align-items:center;
   position:sticky;
   top:0;
-  background:#ffffff;
+  background:var(--header-bg);
   z-index:100;
   border-bottom:1px solid var(--border);
   box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  transition:var(--transition);
 }
 
 .logo{
@@ -59,16 +128,43 @@ header{
   letter-spacing:-0.5px;
 }
 
+.theme-toggle{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:20px;
+  transition:var(--transition);
+  -webkit-tap-highlight-color:transparent;
+}
+
+.theme-toggle:hover{
+  transform:scale(1.1) rotate(15deg);
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+
+.theme-toggle:active{
+  transform:scale(0.95);
+}
+
 /* HERO */
 .hero{
-  min-height:70vh;
-  background:linear-gradient(165deg, #0f172a 0%, #1e3a8a 40%, #3b82f6 70%, #60a5fa 100%);
+  min-height:80vh;
+  background:linear-gradient(165deg, #0f172a 0%, #1e3a8a 35%, #3b82f6 65%, #60a5fa 100%);
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   position:relative;
   overflow:hidden;
+  padding-bottom:120px;
 }
 
 .hero::before{
@@ -185,12 +281,37 @@ header{
   color:rgba(255,255,255,0.8);
   font-weight:400;
   letter-spacing:0.5px;
+  margin-top:24px;
+}
+
+/* SCROLL INDICATOR */
+.scroll-indicator{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:3;
+  animation:bounce-smooth 2s ease-in-out infinite;
+}
+
+.scroll-indicator i{
+  font-size:32px;
+  color:rgba(255,255,255,0.8);
+}
+
+@keyframes bounce-smooth{
+  0%, 100%{
+    transform:translateX(-50%) translateY(0);
+  }
+  50%{
+    transform:translateX(-50%) translateY(10px);
+  }
 }
 
 /* ABOUT */
 .about{
   max-width:900px;
-  margin:-60px auto 100px;
+  margin:-100px auto 100px;
   padding:0 24px;
   position:relative;
   z-index:10;
@@ -208,6 +329,12 @@ header{
   border:1px solid var(--border);
   animation:cardPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
   transform-style:preserve-3d;
+  transition:var(--transition);
+}
+
+.about-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 30px 80px var(--shadow);
 }
 
 @keyframes cardPop{
@@ -227,6 +354,11 @@ header{
   border-radius:50%;
   border:4px solid var(--bg);
   box-shadow:0 8px 24px var(--shadow);
+  transition:var(--transition);
+}
+
+.about img:hover{
+  transform:scale(1.05);
 }
 
 .about-text h2{
@@ -288,6 +420,7 @@ header{
   color:inherit;
   display:block;
   height:100%;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .card-inner{
@@ -296,6 +429,7 @@ header{
   border-radius:var(--radius);
   padding:32px 28px;
   height:100%;
+  min-height:180px;
   transition:var(--transition);
   box-shadow:0 2px 8px var(--shadow);
   position:relative;
@@ -315,14 +449,31 @@ header{
   transition:transform 0.3s ease;
 }
 
+.card-inner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(59,130,246,0.1), transparent 50%);
+  opacity:0;
+  transition:opacity 0.3s ease;
+}
+
 .card:hover .card-inner::before{
   transform:scaleX(1);
+}
+
+.card:hover .card-inner::after{
+  opacity:1;
 }
 
 .card:hover .card-inner{
   transform:translateY(-8px);
   box-shadow:0 12px 32px rgba(13,110,253,0.15);
   border-color:var(--accent-light);
+}
+
+.card:active .card-inner{
+  transform:translateY(-4px) scale(0.98);
 }
 
 .icon{
@@ -355,19 +506,194 @@ header{
   color:var(--text-muted);
 }
 
+/* CONTACT */
+.contact{
+  max-width:700px;
+  margin:0 auto 100px;
+  padding:0 24px;
+}
+
+.contact-card{
+  background:var(--card-bg);
+  border-radius:var(--radius);
+  padding:48px;
+  box-shadow:0 20px 60px var(--shadow);
+  border:1px solid var(--border);
+}
+
+.contact-card h2{
+  font-size:32px;
+  font-weight:700;
+  margin-bottom:12px;
+  letter-spacing:-0.5px;
+  text-align:center;
+}
+
+.contact-card p{
+  text-align:center;
+  color:var(--text-muted);
+  margin-bottom:40px;
+}
+
+.form-group{
+  margin-bottom:24px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:8px;
+  font-weight:500;
+  font-size:14px;
+}
+
+.form-group input,
+.form-group textarea{
+  width:100%;
+  padding:14px 18px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--bg);
+  color:var(--text);
+  font-family:inherit;
+  font-size:15px;
+  transition:var(--transition);
+  min-height:48px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(59,130,246,0.1);
+}
+
+.form-group textarea{
+  resize:vertical;
+  min-height:150px;
+}
+
+.btn-submit{
+  width:100%;
+  padding:16px;
+  background:linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:var(--transition);
+  min-height:52px;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.btn-submit:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(59,130,246,0.3);
+}
+
+.btn-submit:active{
+  transform:translateY(0) scale(0.98);
+}
+
 /* FOOTER */
 footer{
-  text-align:center;
-  padding:60px 24px;
-  color:var(--text-muted);
-  font-size:14px;
+  background:var(--footer-bg);
+  color:var(--footer-text);
+  padding:60px 24px 40px;
   border-top:1px solid var(--border);
+}
+
+.footer-content{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+  gap:48px;
+  margin-bottom:40px;
+}
+
+.footer-section h3{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:20px;
+  color:#fff;
+}
+
+.footer-section p{
+  color:rgba(255,255,255,0.7);
+  font-size:14px;
+  line-height:1.8;
+}
+
+.footer-links{
+  list-style:none;
+}
+
+.footer-links li{
+  margin-bottom:12px;
+}
+
+.footer-links a{
+  color:rgba(255,255,255,0.7);
+  text-decoration:none;
+  font-size:14px;
+  transition:var(--transition);
+  display:inline-block;
+}
+
+.footer-links a:hover{
+  color:#fff;
+  transform:translateX(4px);
+}
+
+.footer-social{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.footer-social a{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:18px;
+  transition:var(--transition);
+  text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.footer-social a:hover{
+  background:var(--accent);
+  transform:translateY(-4px);
+}
+
+.footer-social a:active{
+  transform:translateY(-2px) scale(0.95);
+}
+
+.footer-bottom{
+  text-align:center;
+  padding-top:32px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.5);
+  font-size:14px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
   header{
     padding:20px 24px;
+  }
+  
+  .hero{
+    min-height:90vh;
+    padding-bottom:100px;
   }
   
   .about-card{
@@ -390,11 +716,29 @@ footer{
   .grid{
     grid-template-columns:1fr;
   }
+  
+  .contact-card{
+    padding:32px 24px;
+  }
+  
+  .footer-content{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
 }
 
 @media(max-width:480px){
   header{
     padding:16px 20px;
+  }
+  
+  .logo{
+    font-size:18px;
+  }
+  
+  .theme-toggle{
+    width:40px;
+    height:40px;
   }
   
   .about-card{
@@ -404,14 +748,31 @@ footer{
   .card-inner{
     padding:24px 20px;
   }
+  
+  .contact-card{
+    padding:28px 20px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOADING -->
+<div class="loader">
+  <div class="loader-content">
+    <div class="loader-logo">
+      <img src="assets/img/favicon.png" alt="Loading">
+    </div>
+    <div class="loader-text">LOADING...</div>
+  </div>
+</div>
+
 <header>
   <div class="logo">brnfznlkmn</div>
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <i class="bi bi-moon-stars"></i>
+  </button>
 </header>
 
 <section class="hero">
@@ -427,6 +788,9 @@ footer{
       <span class="name-line"><span class="highlight">FAUZAN</span> <span class="highlight">LUKMAN</span></span>
     </h1>
     <p>IT Support / Graphic Design</p>
+  </div>
+  <div class="scroll-indicator">
+    <i class="bi bi-chevron-down"></i>
   </div>
 </section>
 
@@ -514,9 +878,100 @@ footer{
   </div>
 </section>
 
+<section class="contact">
+  <div class="contact-card">
+    <h2>Get In Touch</h2>
+    <p>Ada project atau pertanyaan? Hubungi saya!</p>
+    <form id="contactForm">
+      <div class="form-group">
+        <label for="name">Nama</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Pesan</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Kirim Pesan</button>
+    </form>
+  </div>
+</section>
+
 <footer>
-  © 2026 Brian Fauzan Lukman
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Brian Fauzan Lukman</h3>
+      <p>IT Support & Graphic Design specialist. Membangun solusi teknis yang efisien dan modern untuk membantu bisnis berkembang.</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#social">Social Media</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Connect</h3>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/brnfznlkmn/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="https://www.instagram.com/brnfznlkmn" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://www.github.com/brnfznlkmn/" target="_blank" rel="noopener" aria-label="GitHub">
+          <i class="bi bi-github"></i>
+        </a>
+        <a href="https://x.com/brnfznlkmn" target="_blank" rel="noopener" aria-label="X">
+          <i class="bi bi-twitter-x"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    © 2026 Brian Fauzan Lukman. All rights reserved.
+  </div>
 </footer>
 
-</body>
-</html>
+<script>
+// THEME TOGGLE
+const themeToggle = document.querySelector('.theme-toggle');
+const html = document.documentElement;
+const themeIcon = themeToggle.querySelector('i');
+
+const currentTheme = localStorage.getItem('theme') || 'light';
+html.setAttribute('data-theme', currentTheme);
+updateThemeIcon(currentTheme);
+
+themeToggle.addEventListener('click', () => {
+  const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  updateThemeIcon(theme);
+});
+
+function updateThemeIcon(theme) {
+  themeIcon.className = theme === 'light' ? 'bi bi-moon-stars' : 'bi bi-sun';
+}
+
+// CARD RIPPLE EFFECT
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.querySelector('.card-inner').style.setProperty('--x', `${x}%`);
+    card.querySelector('.card-inner').style.setProperty('--y', `${y}%`);
+  });
+});
+
+// CONTACT FORM
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault
