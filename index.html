@@ -64,24 +64,17 @@ body{
   align-items:center;
   justify-content:center;
   z-index:9999;
-  transition:opacity 0.5s ease;
-}
-
-.loader.fade-out{
-  opacity:0;
-  pointer-events:none;
+  animation:fadeOut 0.5s ease 2s forwards;
 }
 
 .loader-content{
   text-align:center;
-  max-width:400px;
-  width:90%;
 }
 
 .loader-logo{
   width:100px;
   height:100px;
-  margin:0 auto 30px;
+  margin:0 auto 20px;
   animation:bounce 1s ease-in-out infinite;
 }
 
@@ -92,61 +85,37 @@ body{
   filter:drop-shadow(0 8px 20px rgba(0,0,0,0.3));
 }
 
-.progress-container{
-  width:100%;
-  margin-top:20px;
-}
-
-.progress-bar-bg{
-  width:100%;
-  height:8px;
+.loader-progress{
+  width:200px;
+  height:4px;
   background:rgba(255,255,255,0.2);
   border-radius:10px;
   overflow:hidden;
-  position:relative;
-  backdrop-filter:blur(10px);
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  margin:0 auto;
 }
 
-.progress-bar-fill{
+.loader-progress-bar{
   height:100%;
-  background:linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+  background:#fff;
   border-radius:10px;
-  width:0%;
-  transition:width 0.3s ease;
-  position:relative;
-  overflow:hidden;
+  animation:loadProgress 2s ease forwards;
 }
 
-.progress-bar-fill::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  animation:shimmer 1.5s infinite;
-}
-
-@keyframes shimmer{
-  0%{
-    transform:translateX(-100%);
-  }
-  100%{
-    transform:translateX(100%);
-  }
-}
-
-.progress-text{
-  color:#fff;
-  font-size:14px;
-  font-weight:600;
-  margin-top:12px;
-  letter-spacing:1px;
-  opacity:0.9;
+@keyframes loadProgress{
+  0%{width:0%}
+  100%{width:100%}
 }
 
 @keyframes bounce{
   0%, 100%{transform:translateY(0)}
   50%{transform:translateY(-20px)}
+}
+
+@keyframes fadeOut{
+  to{
+    opacity:0;
+    pointer-events:none;
+  }
 }
 
 /* HEADER */
@@ -169,8 +138,9 @@ header{
 
 .logo{
   font-weight:800;
-  font-size:28px;
+  font-size:32px;
   letter-spacing:-0.5px;
+  color:var(--text);
 }
 
 .github-link{
@@ -323,9 +293,9 @@ header{
 }
 
 .hero p{
-  font-size:clamp(18px, 2.5vw, 24px);
-  color:rgba(255,255,255,0.8);
-  font-weight:400;
+  font-size:clamp(20px, 2.5vw, 28px);
+  color:rgba(255,255,255,0.95);
+  font-weight:700;
   letter-spacing:0.5px;
   margin-top:24px;
 }
@@ -408,16 +378,18 @@ header{
 }
 
 .about-text h2{
-  font-size:28px;
-  font-weight:700;
+  font-size:32px;
+  font-weight:800;
   margin-bottom:16px;
   letter-spacing:-0.5px;
+  color:var(--text);
 }
 
 .about-text p{
-  font-size:16px;
+  font-size:17px;
   color:var(--text);
   margin-bottom:12px;
+  line-height:1.7;
 }
 
 .quote{
@@ -442,15 +414,16 @@ header{
 }
 
 .section-title h2{
-  font-size:clamp(28px, 4vw, 36px);
-  font-weight:700;
+  font-size:clamp(32px, 4vw, 40px);
+  font-weight:800;
   margin-bottom:12px;
   letter-spacing:-0.5px;
+  color:var(--text);
 }
 
 .section-title p{
   color:var(--text-muted);
-  font-size:16px;
+  font-size:17px;
 }
 
 /* GRID */
@@ -489,7 +462,7 @@ header{
   left:0;
   right:0;
   height:4px;
-  background:var(--accent);
+  background:linear-gradient(90deg, #ffffff 0%, #e0f2fe 50%, #3b82f6 100%);
   transform:scaleX(0);
   transform-origin:left;
   transition:transform 0.3s ease;
@@ -541,14 +514,14 @@ header{
 }
 
 .card h3{
-  font-size:18px;
-  font-weight:600;
+  font-size:20px;
+  font-weight:700;
   margin-bottom:6px;
   letter-spacing:-0.3px;
 }
 
 .card p{
-  font-size:14px;
+  font-size:15px;
   color:var(--text-muted);
 }
 
@@ -570,7 +543,7 @@ footer{
 }
 
 .footer-section h3{
-  font-size:18px;
+  font-size:20px;
   font-weight:700;
   margin-bottom:20px;
   color:#fff;
@@ -578,7 +551,7 @@ footer{
 
 .footer-section p{
   color:rgba(255,255,255,0.7);
-  font-size:14px;
+  font-size:15px;
   line-height:1.8;
 }
 
@@ -707,16 +680,13 @@ footer{
 <body>
 
 <!-- LOADING -->
-<div class="loader" id="loader">
+<div class="loader">
   <div class="loader-content">
     <div class="loader-logo">
       <img src="assets/img/favicon.png" alt="Loading">
     </div>
-    <div class="progress-container">
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progressBar"></div>
-      </div>
-      <div class="progress-text" id="progressText">0%</div>
+    <div class="loader-progress">
+      <div class="loader-progress-bar"></div>
     </div>
   </div>
 </div>
@@ -751,7 +721,7 @@ footer{
   <div class="about-card">
     <img src="assets/img/profile-img4.png" alt="Brian Fauzan Lukman">
     <div class="about-text">
-      <h2>About Me</h2>
+      <h1>Tentang Brian</h1>
       <p>Fokus di hardware komputer, software, dan desain grafis. Terbiasa membangun solusi teknis yang efisien dan modern.</p>
       <div class="quote">"If the service is free, you are the product."</div>
     </div>
@@ -760,7 +730,7 @@ footer{
 
 <section class="section" id="social">
   <div class="section-title">
-    <h2>Social Media</h2>
+    <h1>Social Media</h1>
     <p>Semua platform Brian dalam satu tempat</p>
   </div>
 
@@ -863,28 +833,6 @@ footer{
 </footer>
 
 <script>
-// PROGRESS BAR LOADER
-let progress = 0;
-const progressBar = document.getElementById('progressBar');
-const progressText = document.getElementById('progressText');
-const loader = document.getElementById('loader');
-
-const interval = setInterval(() => {
-  progress += Math.random() * 15;
-  
-  if (progress >= 100) {
-    progress = 100;
-    clearInterval(interval);
-    
-    setTimeout(() => {
-      loader.classList.add('fade-out');
-    }, 300);
-  }
-  
-  progressBar.style.width = progress + '%';
-  progressText.textContent = Math.floor(progress) + '%';
-}, 150);
-
 // CARD RIPPLE EFFECT
 document.querySelectorAll('.card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
