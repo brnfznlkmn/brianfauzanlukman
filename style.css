@@ -9,7 +9,8 @@
   --shadow: rgba(0, 0, 0, .08);
   --radius: 20px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --header-bg: #ffffff;
+  --header-bg: #000000;
+  --header-text: #ffffff;
   --footer-bg: #1a1a1a;
   --footer-text: #f8f9fa;
 }
@@ -21,7 +22,8 @@
   --card-bg: #1a1a1a;
   --border: rgba(255, 255, 255, .1);
   --shadow: rgba(0, 0, 0, .3);
-  --header-bg: #0f0f0f;
+  --header-bg: #000000;
+  --header-text: #ffffff;
   --footer-bg: #000000;
 }
 
@@ -120,8 +122,8 @@ header {
   top: 0;
   background: var(--header-bg);
   z-index: 100;
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   transition: var(--transition);
 }
 
@@ -129,19 +131,19 @@ header {
   font-weight: 800;
   font-size: 32px;
   letter-spacing: -0.5px;
-  color: var(--text);
+  color: var(--header-text);
 }
 
 .github-link {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text);
+  color: #ffffff;
   font-size: 22px;
   transition: var(--transition);
   text-decoration: none;
