@@ -61,8 +61,8 @@ header{
 
 /* HERO */
 .hero{
-  min-height:60vh;
-  background:linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+  min-height:70vh;
+  background:linear-gradient(165deg, #0f172a 0%, #1e3a8a 40%, #3b82f6 70%, #60a5fa 100%);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -75,21 +75,67 @@ header{
   content:"";
   position:absolute;
   inset:0;
-  background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 0v60M0 30h60' stroke='rgba(255,255,255,.05)' stroke-width='1'/%3E%3C/svg%3E");
-  opacity:0.3;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(30, 58, 138, 0.4) 0%, transparent 40%);
+  opacity:0.6;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 0v60M0 30h60' stroke='rgba(255,255,255,.03)' stroke-width='1'/%3E%3C/svg%3E");
+  opacity:0.4;
 }
 
 .hero-content{
   position:relative;
   z-index:2;
-  padding:40px 24px;
+  padding:60px 24px;
   animation:fadeInUp 0.8s ease;
 }
 
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(15, 23, 42, 0.6);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(96, 165, 250, 0.3);
+  border-radius:50px;
+  padding:8px 20px;
+  margin-bottom:32px;
+  font-size:14px;
+  color:rgba(255,255,255,0.9);
+  font-weight:500;
+}
+
+.hero-badge::before{
+  content:"";
+  width:8px;
+  height:8px;
+  background:#10b981;
+  border-radius:50%;
+  animation:pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%, 100%{
+    opacity:1;
+    transform:scale(1);
+  }
+  50%{
+    opacity:0.5;
+    transform:scale(1.2);
+  }
+}
+
 .hero-logo{
-  width:80px;
-  height:80px;
-  margin:0 auto 20px;
+  width:120px;
+  height:120px;
+  margin:0 auto 24px;
   animation:float 3s ease-in-out infinite;
 }
 
@@ -97,7 +143,7 @@ header{
   width:100%;
   height:100%;
   object-fit:contain;
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  filter:drop-shadow(0 6px 16px rgba(0,0,0,0.25));
 }
 
 @keyframes float{
@@ -121,17 +167,24 @@ header{
 }
 
 .hero h1{
-  font-size:clamp(32px, 5vw, 52px);
+  font-size:clamp(48px, 8vw, 80px);
   color:#fff;
-  font-weight:700;
-  letter-spacing:-1px;
-  margin-bottom:12px;
+  font-weight:800;
+  letter-spacing:-2px;
+  margin-bottom:16px;
+  text-transform:uppercase;
+  line-height:1.1;
+}
+
+.hero h1 .highlight{
+  color:#60a5fa;
 }
 
 .hero p{
-  font-size:clamp(16px, 2vw, 20px);
-  color:rgba(255,255,255,0.9);
+  font-size:clamp(18px, 2.5vw, 24px);
+  color:rgba(255,255,255,0.8);
   font-weight:400;
+  letter-spacing:0.5px;
 }
 
 /* ABOUT */
@@ -363,10 +416,16 @@ footer{
 
 <section class="hero">
   <div class="hero-content">
+    <div class="hero-badge">
+      Website Online
+    </div>
     <div class="hero-logo">
       <img src="assets/img/favicon.png" alt="Logo">
     </div>
-    <h1>Brian Fauzan Lukman</h1>
+    <h1>
+      <span class="name-line">BRIAN</span><br>
+      <span class="name-line"><span class="highlight">FAUZAN</span> <span class="highlight">LUKMAN</span></span>
+    </h1>
     <p>IT Support / Graphic Design</p>
   </div>
 </section>
