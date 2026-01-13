@@ -1,187 +1,291 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brian Fauzan Lukman</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brian Fauzan Lukman</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- Bootstrap -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- AOS -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --card: #ffffff;
+  --text: #0a0a0a;
+  --muted: #666;
+  --accent: #0d6efd;
+  --border: rgba(0,0,0,.06);
+  --shadow: 0 20px 60px rgba(0,0,0,.08);
+}
 
-  <!-- Main CSS -->
-  <link href="assets/css/main.css" rel="stylesheet">
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --card: #121212;
+  --text: #ffffff;
+  --muted: #aaa;
+  --border: rgba(255,255,255,.08);
+  --shadow: 0 20px 60px rgba(0,0,0,.5);
+}
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    /* Joko UI inspired */
-    .ui-card {
-      background: var(--surface-color);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.08);
-      transition: .3s ease;
-      height: 100%;
-    }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: .3s ease;
+}
 
-    .ui-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,.12);
-    }
+/* ================= HEADER ================= */
+header {
+  max-width: 1100px;
+  margin: auto;
+  padding: 32px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .ui-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: var(--accent-color);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 16px;
-    }
+.logo {
+  font-weight: 700;
+  font-size: 20px;
+}
 
-    .ui-badge {
-      display: inline-block;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      background: rgba(0,0,0,.06);
-      margin-bottom: 16px;
-    }
-  </style>
+.toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--card);
+}
+
+/* ================= HERO ================= */
+.hero {
+  max-width: 800px;
+  margin: 80px auto 120px;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.hero h1 {
+  font-size: 44px;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-top: 16px;
+  color: var(--muted);
+}
+
+/* ================= SOCIAL ================= */
+.section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 24px 120px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.section-title h2 {
+  font-size: 32px;
+}
+
+.section-title p {
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 22px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: .3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  font-size: 18px;
+}
+
+.card p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ================= FOOTER ================= */
+footer {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:600px){
+  .hero h1 {
+    font-size: 32px;
+  }
+}
+</style>
 </head>
 
-<body class="index-page">
+<body>
 
-<!-- ================= HEADER ================= -->
-<header class="header sticky-top">
-  <div class="container d-flex align-items-center justify-content-between">
-    <h1 class="logo m-0">brnfznlkmn</h1>
-    <nav class="navmenu">
-      <ul class="d-flex gap-4 m-0">
-        <li><a href="#hero" class="active">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#socials">Socials</a></li>
-      </ul>
-    </nav>
+<header>
+  <div class="logo">brnfznlkmn</div>
+  <div class="toggle" id="themeToggle">
+    <i class="bi bi-moon-stars-fill"></i>
   </div>
 </header>
 
-<!-- ================= HERO ================= -->
-<section id="hero" class="hero dark-background text-center">
-  <img src="assets/img/main-hero.jpg" alt="">
-  <div class="container" data-aos="fade-up">
-    <h2 class="mb-3">Brian Fauzan Lukman</h2>
-    <p class="fs-4 opacity-75">
-      IT • Hardware • Software • Design
-    </p>
+<section class="hero">
+  <h1>Brian Fauzan Lukman</h1>
+  <p>IT • Hardware • Software • Design</p>
+</section>
+
+<section class="section">
+  <div class="section-title">
+    <h2>Social Media</h2>
+    <p>Semua platform Brian dalam satu tempat</p>
+  </div>
+
+  <div class="grid">
+
+    <a class="card" href="https://linkedin.com/in/brnfznlkmn" target="_blank">
+      <div class="icon"><i class="bi bi-linkedin"></i></div>
+      <h3>LinkedIn</h3>
+      <p>Professional profile</p>
+    </a>
+
+    <a class="card" href="https://instagram.com/brnfznlkmn" target="_blank">
+      <div class="icon"><i class="bi bi-instagram"></i></div>
+      <h3>Instagram</h3>
+      <p>Daily & story</p>
+    </a>
+
+    <a class="card" href="https://github.com/brnfznlkmn" target="_blank">
+      <div class="icon"><i class="bi bi-github"></i></div>
+      <h3>GitHub</h3>
+      <p>Code & repository</p>
+    </a>
+
+    <a class="card" href="https://x.com/brnfznlkmn" target="_blank">
+      <div class="icon"><i class="bi bi-twitter-x"></i></div>
+      <h3>X (Twitter)</h3>
+      <p>Thoughts & updates</p>
+    </a>
+
+    <a class="card" href="https://facebook.com/brnfznlkmn" target="_blank">
+      <div class="icon"><i class="bi bi-facebook"></i></div>
+      <h3>Facebook</h3>
+      <p>Personal profile</p>
+    </a>
+
+    <a class="card" href="https://tiktok.com/@brnfznlkmn_" target="_blank">
+      <div class="icon"><i class="bi bi-tiktok"></i></div>
+      <h3>TikTok</h3>
+      <p>Short videos</p>
+    </a>
+
+    <a class="card" href="https://youtube.com" target="_blank">
+      <div class="icon"><i class="bi bi-youtube"></i></div>
+      <h3>YouTube</h3>
+      <p>Video content</p>
+    </a>
+
+    <a class="card" href="https://open.spotify.com" target="_blank">
+      <div class="icon"><i class="bi bi-spotify"></i></div>
+      <h3>Spotify</h3>
+      <p>Public playlists</p>
+    </a>
+
+    <a class="card" href="https://monkeytype.com/profile/brnfznlkmn" target="_blank">
+      <div class="icon"><i class="bi bi-keyboard"></i></div>
+      <h3>Monkeytype</h3>
+      <p>Typing stats</p>
+    </a>
+
+    <a class="card" href="https://shopee.co.id/brnfznlkmn" target="_blank">
+      <div class="icon"><i class="bi bi-bag"></i></div>
+      <h3>Shopee</h3>
+      <p>Online store</p>
+    </a>
+
+    <a class="card" href="https://tokopedia.com/brnfznlkmn" target="_blank">
+      <div class="icon"><i class="bi bi-cart"></i></div>
+      <h3>Tokopedia</h3>
+      <p>Marketplace</p>
+    </a>
+
   </div>
 </section>
 
-<!-- ================= ABOUT ================= -->
-<section id="about" class="section">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-md-4 text-center" data-aos="fade-right">
-        <img src="assets/img/profile-img4.png" class="img-fluid rounded-circle shadow" width="220">
-      </div>
-
-      <div class="col-md-8" data-aos="fade-left">
-        <span class="ui-badge">About Me</span>
-        <h3 class="mb-3">Tentang Brian</h3>
-        <p class="fs-5">
-          Saya fokus di bidang <strong>Hardware Komputer, Software, dan Desain Grafis</strong>.
-          Memiliki motivasi tinggi, senang belajar hal baru, dan terbiasa menyelesaikan masalah teknis.
-        </p>
-        <p class="fst-italic opacity-75">
-          “If the service is free, you are the product.”
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= SOCIALS ================= -->
-<section id="socials" class="section light-background">
-  <div class="container">
-
-    <div class="section-title" data-aos="fade-up">
-      <h2>Social Media</h2>
-      <p>Semua platform Brian dalam satu tempat</p>
-    </div>
-
-    <div class="row g-4">
-
-      <!-- Card -->
-      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up">
-        <a href="https://www.linkedin.com/in/brnfznlkmn/" target="_blank" class="text-decoration-none text-dark">
-          <div class="ui-card">
-            <div class="ui-icon"><i class="bi bi-linkedin"></i></div>
-            <h5>LinkedIn</h5>
-            <p class="small opacity-75">Professional profile</p>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="50">
-        <a href="https://www.instagram.com/brnfznlkmn" target="_blank" class="text-decoration-none text-dark">
-          <div class="ui-card">
-            <div class="ui-icon"><i class="bi bi-instagram"></i></div>
-            <h5>Instagram</h5>
-            <p class="small opacity-75">Daily & story</p>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
-        <a href="https://github.com/brnfznlkmn" target="_blank" class="text-decoration-none text-dark">
-          <div class="ui-card">
-            <div class="ui-icon"><i class="bi bi-github"></i></div>
-            <h5>GitHub</h5>
-            <p class="small opacity-75">Code & repository</p>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="150">
-        <a href="https://open.spotify.com/user/21ybv6hgar5tqrqhl4ran4jhi" target="_blank" class="text-decoration-none text-dark">
-          <div class="ui-card">
-            <div class="ui-icon"><i class="bi bi-spotify"></i></div>
-            <h5>Spotify</h5>
-            <p class="small opacity-75">Public playlists</p>
-          </div>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer class="footer accent-background text-center">
-  <div class="container">
-    <p class="mb-0">
-      © 2026 <strong>Brian Fauzan Lukman</strong>
-    </p>
-  </div>
+<footer>
+  © 2026 Brian Fauzan Lukman
 </footer>
 
-<!-- JS -->
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/aos/aos.js"></script>
 <script>
-  AOS.init();
+const toggle = document.getElementById('themeToggle');
+const icon = toggle.querySelector('i');
+
+function setTheme(theme){
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  icon.className = theme === 'dark'
+    ? 'bi bi-sun-fill'
+    : 'bi bi-moon-stars-fill';
+}
+
+toggle.onclick = () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark');
+}
+
+const saved = localStorage.getItem('theme') || 'light';
+setTheme(saved);
 </script>
 
 </body>
