@@ -64,17 +64,24 @@ body{
   align-items:center;
   justify-content:center;
   z-index:9999;
-  animation:fadeOut 0.5s ease 2s forwards;
+  transition:opacity 0.5s ease;
+}
+
+.loader.fade-out{
+  opacity:0;
+  pointer-events:none;
 }
 
 .loader-content{
   text-align:center;
+  max-width:400px;
+  width:90%;
 }
 
 .loader-logo{
   width:100px;
   height:100px;
-  margin:0 auto 20px;
+  margin:0 auto 30px;
   animation:bounce 1s ease-in-out infinite;
 }
 
@@ -85,23 +92,61 @@ body{
   filter:drop-shadow(0 8px 20px rgba(0,0,0,0.3));
 }
 
-.loader-text{
+.progress-container{
+  width:100%;
+  margin-top:20px;
+}
+
+.progress-bar-bg{
+  width:100%;
+  height:8px;
+  background:rgba(255,255,255,0.2);
+  border-radius:10px;
+  overflow:hidden;
+  position:relative;
+  backdrop-filter:blur(10px);
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+
+.progress-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+  border-radius:10px;
+  width:0%;
+  transition:width 0.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.progress-bar-fill::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation:shimmer 1.5s infinite;
+}
+
+@keyframes shimmer{
+  0%{
+    transform:translateX(-100%);
+  }
+  100%{
+    transform:translateX(100%);
+  }
+}
+
+.progress-text{
   color:#fff;
-  font-size:18px;
+  font-size:14px;
   font-weight:600;
-  letter-spacing:2px;
+  margin-top:12px;
+  letter-spacing:1px;
+  opacity:0.9;
 }
 
 @keyframes bounce{
   0%, 100%{transform:translateY(0)}
   50%{transform:translateY(-20px)}
-}
-
-@keyframes fadeOut{
-  to{
-    opacity:0;
-    pointer-events:none;
-  }
 }
 
 /* HEADER */
@@ -662,12 +707,17 @@ footer{
 <body>
 
 <!-- LOADING -->
-<div class="loader">
+<div class="loader" id="loader">
   <div class="loader-content">
     <div class="loader-logo">
       <img src="assets/img/favicon.png" alt="Loading">
     </div>
-    <div class="loader-text">LOADING...</div>
+    <div class="progress-container">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+      <div class="progress-text" id="progressText">0%</div>
+    </div>
   </div>
 </div>
 
@@ -813,7 +863,28 @@ footer{
 </footer>
 
 <script>
-<script>
+// PROGRESS BAR LOADER
+let progress = 0;
+const progressBar = document.getElementById('progressBar');
+const progressText = document.getElementById('progressText');
+const loader = document.getElementById('loader');
+
+const interval = setInterval(() => {
+  progress += Math.random() * 15;
+  
+  if (progress >= 100) {
+    progress = 100;
+    clearInterval(interval);
+    
+    setTimeout(() => {
+      loader.classList.add('fade-out');
+    }, 300);
+  }
+  
+  progressBar.style.width = progress + '%';
+  progressText.textContent = Math.floor(progress) + '%';
+}, 150);
+
 // CARD RIPPLE EFFECT
 document.querySelectorAll('.card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
