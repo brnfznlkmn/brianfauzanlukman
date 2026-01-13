@@ -507,133 +507,6 @@ header{
   color:var(--text-muted);
 }
 
-/* YOUTUBE SECTION */
-.youtube-section-container{
-  max-width:1000px;
-  margin:0 auto 100px;
-  padding:0 24px;
-}
-
-.youtube-section{
-  text-align:center;
-  margin-bottom:48px;
-}
-
-.youtube-section h2{
-  font-size:clamp(28px, 4vw, 36px);
-  font-weight:700;
-  margin-bottom:12px;
-  letter-spacing:-0.5px;
-}
-
-.youtube-section p{
-  color:var(--text-muted);
-  font-size:16px;
-  margin-bottom:40px;
-}
-
-.youtube-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-  gap:24px;
-}
-
-.youtube-card{
-  background:var(--card-bg);
-  border-radius:var(--radius);
-  overflow:hidden;
-  border:1px solid var(--border);
-  box-shadow:0 2px 8px var(--shadow);
-  transition:var(--transition);
-  text-decoration:none;
-  color:inherit;
-  display:block;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.youtube-card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 12px 32px rgba(13,110,253,0.15);
-  border-color:var(--accent-light);
-}
-
-.youtube-card:active{
-  transform:translateY(-4px) scale(0.98);
-}
-
-.youtube-thumbnail{
-  position:relative;
-  width:100%;
-  padding-bottom:56.25%; /* 16:9 aspect ratio */
-  background:#000;
-  overflow:hidden;
-}
-
-.youtube-thumbnail img{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:var(--transition);
-}
-
-.youtube-card:hover .youtube-thumbnail img{
-  transform:scale(1.05);
-}
-
-.youtube-play-icon{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  width:60px;
-  height:60px;
-  background:rgba(255,0,0,0.9);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-size:24px;
-  transition:var(--transition);
-}
-
-.youtube-card:hover .youtube-play-icon{
-  transform:translate(-50%, -50%) scale(1.1);
-  background:rgba(255,0,0,1);
-}
-
-.youtube-info{
-  padding:20px;
-}
-
-.youtube-info h3{
-  font-size:16px;
-  font-weight:600;
-  line-height:1.4;
-  margin-bottom:8px;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
-
-.youtube-meta{
-  display:flex;
-  gap:12px;
-  font-size:13px;
-  color:var(--text-muted);
-}
-
-.youtube-loading{
-  text-align:center;
-  padding:40px;
-  color:var(--text-muted);
-  font-size:16px;
-}
-
 /* FOOTER */
 footer{
   background:var(--footer-bg);
@@ -752,10 +625,6 @@ footer{
   }
   
   .grid{
-    grid-template-columns:1fr;
-  }
-  
-  .youtube-grid{
     grid-template-columns:1fr;
   }
   
@@ -911,16 +780,6 @@ footer{
     </a>
   </div>
 </section>
-<section class="youtube-section-container" id="youtube">
-  <div class="youtube-section">
-    <h2>Latest on YouTube</h2>
-    <p>Video terbaru dari channel YouTube saya</p>
-  </div>
-  
-  <div class="youtube-grid" id="youtubeVideos">
-    <div class="youtube-loading">Loading videos...</div>
-  </div>
-</section>
 
 <footer>
   <div class="footer-content">
@@ -949,101 +808,12 @@ footer{
   </div>
   
   <div class="footer-bottom">
-    © 2026 Made with ❤️ by brnfznlkmn
+    Made with ❤️ by brnfznlkmn
   </div>
 </footer>
 
 <script>
 <script>
-// LOAD YOUTUBE VIDEOS
-async function loadYouTubeVideos() {
-  const container = document.getElementById('youtubeVideos');
-  
-  try {
-    // YouTube channel ID from the URL
-    const channelUsername = 'brnfznlkmn';
-    
-    // Using YouTube RSS feed (no API key needed)
-    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=UC7rKO3pPBqYmqhN2g7vGYPg`;
-    
-    // Fetch through RSS to JSON proxy
-    const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`);
-    const data = await response.json();
-    
-    if (data.status === 'ok' && data.items && data.items.length > 0) {
-      container.innerHTML = '';
-      
-      // Show latest 3 videos
-      const videos = data.items.slice(0, 3);
-      
-      videos.forEach(video => {
-        const videoId = video.link.split('v=')[1];
-        const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-        
-        const card = document.createElement('a');
-        card.className = 'youtube-card';
-        card.href = video.link;
-        card.target = '_blank';
-        card.rel = 'noopener';
-        
-        // Format date
-        const pubDate = new Date(video.pubDate);
-        const timeAgo = getTimeAgo(pubDate);
-        
-        card.innerHTML = `
-          <div class="youtube-thumbnail">
-            <img src="${thumbnail}" alt="${video.title}" loading="lazy">
-            <div class="youtube-play-icon">
-              <i class="bi bi-play-fill"></i>
-            </div>
-          </div>
-          <div class="youtube-info">
-            <h3>${video.title}</h3>
-            <div class="youtube-meta">
-              <span>${timeAgo}</span>
-            </div>
-          </div>
-        `;
-        
-        container.appendChild(card);
-      });
-    } else {
-      throw new Error('No videos found');
-    }
-  } catch (error) {
-    console.error('Error loading YouTube videos:', error);
-    container.innerHTML = `
-      <div class="youtube-loading">
-        <p>Tidak dapat memuat video. <a href="https://www.youtube.com/@brnfznlkmn/videos" target="_blank" rel="noopener" style="color: var(--accent);">Kunjungi channel YouTube →</a></p>
-      </div>
-    `;
-  }
-}
-
-function getTimeAgo(date) {
-  const seconds = Math.floor((new Date() - date) / 1000);
-  
-  let interval = seconds / 31536000;
-  if (interval > 1) return Math.floor(interval) + ' tahun lalu';
-  
-  interval = seconds / 2592000;
-  if (interval > 1) return Math.floor(interval) + ' bulan lalu';
-  
-  interval = seconds / 86400;
-  if (interval > 1) return Math.floor(interval) + ' hari lalu';
-  
-  interval = seconds / 3600;
-  if (interval > 1) return Math.floor(interval) + ' jam lalu';
-  
-  interval = seconds / 60;
-  if (interval > 1) return Math.floor(interval) + ' menit lalu';
-  
-  return 'Baru saja';
-}
-
-// Load videos on page load
-loadYouTubeVideos();
-
 // CARD RIPPLE EFFECT
 document.querySelectorAll('.card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
