@@ -12,12 +12,7 @@
 <style>
 :root{
   --accent:#0d6efd;
-  --blur: blur(22px);
-}
-
-[data-theme="light"]{
   --bg:#eef1f7;
-  --card:rgba(255,255,255,.68);
   --text:#0a0a0a;
   --muted:#666;
   --border:rgba(0,0,0,.08);
@@ -30,10 +25,9 @@ body{
   background:var(--bg);
   color:var(--text);
   overflow-x:hidden;
-  transition:.4s ease;
 }
 
-/* ===== NOISE ===== */
+/* NOISE */
 body::before{
   content:"";
   position:fixed;
@@ -43,7 +37,7 @@ body::before{
   z-index:1;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
   max-width:1200px;
   margin:auto;
@@ -54,20 +48,9 @@ header{
   position:relative;
   z-index:3;
 }
-
 .logo{font-weight:700;font-size:20px}
 
-.toggle{
-  width:46px;height:46px;
-  border-radius:50%;
-  background:var(--card);
-  backdrop-filter:var(--blur);
-  border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;
-}
-
-/* ===== HERO ===== */
+/* HERO */
 .hero{
   min-height:95vh;
   background:url("assets/img/main-hero.jpg") center/cover no-repeat;
@@ -77,62 +60,36 @@ header{
   text-align:center;
   position:relative;
 }
-
 .hero::after{
   content:"";
-  position:absolute;inset:0;
+  position:absolute;
+  inset:0;
   background:radial-gradient(circle at top,rgba(0,0,0,.25),rgba(0,0,0,.75));
 }
-
 .hero-content{
   position:relative;
   z-index:2;
-  transform:translateZ(0);
 }
-
 .hero h1{
   font-size:48px;
   color:#fff;
 }
-
 .hero p{
   margin-top:14px;
   font-size:18px;
   color:#ddd;
 }
 
-/* ===== GLASS ===== */
+/* GLASS */
 .glass{
-  background: rgba(255,255,255,.72);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(0,0,0,.08);
-  border-radius: 28px;
-  box-shadow:
-    0 40px 120px rgba(0,0,0,.25);
-  position: relative;
-  overflow: hidden;
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(30px);
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:28px;
+  box-shadow:0 40px 120px rgba(0,0,0,.25);
 }
 
-/* MATIKAN SEMUA GRADIENT */
-.glass::before,
-.glass::after{
-  display: none !important;
-}
-
-.glass::after{
-  content:"";
-  position:absolute;
-  inset:-60%;
-  background:conic-gradient(from 0deg,transparent,rgba(13,110,253,.35),transparent);
-  animation:flow 14s linear infinite;
-}
-
-@keyframes flow{
-  to{transform:rotate(360deg)}
-}
-
-/* ===== ABOUT ===== */
+/* ABOUT */
 .about{
   max-width:1100px;
   margin:-140px auto 140px;
@@ -140,97 +97,80 @@ header{
   position:relative;
   z-index:3;
 }
-
 .about-card{
   display:grid;
   grid-template-columns:240px 1fr;
   gap:40px;
   padding:48px;
 }
-
 .about img{
   width:200px;
   border-radius:50%;
-  z-index:2;
 }
-
 .about h2{font-size:28px}
 .about p{margin-top:14px;font-size:17px}
 
-/* ===== SECTION ===== */
+/* SECTION */
 .section{
   max-width:1200px;
   margin:auto;
   padding:0 24px 160px;
 }
-
 .section-title{
   text-align:center;
   margin-bottom:72px;
 }
-
 .section-title h2{font-size:32px}
 .section-title p{margin-top:10px;color:var(--muted)}
 
-/* ===== GRID ===== */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
   gap:32px;
 }
 
-/* ===== CARD (MAGNETIC + PARALLAX) ===== */
+/* CARD */
 .card{
+  perspective:1000px;
+  animation: float 6s ease-in-out infinite;
+  text-decoration:none;
+  color:inherit;
+}
+.card:nth-child(even){animation-delay:1.5s}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+  100%{transform:translateY(0)}
+}
+
+.card-inner{
   padding:30px;
   border-radius:26px;
   background:rgba(255,255,255,.78);
   backdrop-filter:blur(24px);
   border:1px solid rgba(0,0,0,.08);
-  color:inherit;
-  text-decoration:none;
-  position:relative;
   transform-style:preserve-3d;
-
-  /* FLYING BASE */
-  transform: translateY(0) scale(1);
+  transition:transform .6s cubic-bezier(.22,1,.36,1),
+             box-shadow .6s cubic-bezier(.22,1,.36,1);
   box-shadow:
     0 20px 40px rgba(0,0,0,.12),
     0 60px 120px rgba(0,0,0,.08);
-
-  transition:
-    transform .6s cubic-bezier(.22,1,.36,1),
-    box-shadow .6s cubic-bezier(.22,1,.36,1);
 }
 
-/* FLOATING IDLE */
-.card{
-  animation: float 6s ease-in-out infinite;
-}
-.card:nth-child(even){
-  animation-delay: 1.5s;
-}
-
-@keyframes float{
-  0%{ transform: translateY(0); }
-  50%{ transform: translateY(-14px); }
-  100%{ transform: translateY(0); }
-}
-
-/* POP UP ON HOVER */
-.card:hover{
+.card:hover .card-inner{
   transform:
     translateY(-32px)
     scale(1.06)
     rotateX(6deg)
     rotateY(-6deg);
-
   box-shadow:
     0 40px 80px rgba(13,110,253,.25),
     0 120px 260px rgba(0,0,0,.25);
-  z-index:10;
 }
 
-
+/* ICON */
 .icon{
   width:58px;
   height:58px;
@@ -242,23 +182,21 @@ header{
   justify-content:center;
   font-size:24px;
   margin-bottom:18px;
-
-  transform: translateZ(50px);
-  box-shadow:
-    0 10px 30px rgba(13,110,253,.4);
+  transform:translateZ(50px);
+  box-shadow:0 10px 30px rgba(13,110,253,.4);
 }
 
 .card h3{font-size:18px}
 .card p{font-size:14px;color:var(--muted);margin-top:6px}
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{
   text-align:center;
   padding:80px 24px;
   color:var(--muted);
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:768px){
   .about-card{grid-template-columns:1fr;text-align:center}
   .about img{margin:auto}
@@ -281,17 +219,12 @@ footer{
 </section>
 
 <section class="about">
-  <div class="glass about-card reveal">
+  <div class="glass about-card">
     <img src="assets/img/profile-img4.png">
     <div>
       <h2>About Me</h2>
-      <p>
-        Fokus di hardware komputer, software, dan desain grafis.
-        Terbiasa membangun solusi teknis yang efisien dan modern.
-      </p>
-      <p style="font-style:italic;color:var(--muted)">
-        “If the service is free, you are the product.”
-      </p>
+      <p>Fokus di hardware komputer, software, dan desain grafis. Terbiasa membangun solusi teknis yang efisien dan modern.</p>
+      <p style="font-style:italic;color:var(--muted)">“If the service is free, you are the product.”</p>
     </div>
   </div>
 </section>
@@ -303,18 +236,64 @@ footer{
   </div>
 
   <div class="grid">
-    <a class="card" href="https://www.linkedin.com/in/brnfznlkmn/"><div class="icon"><i class="bi bi-linkedin"></i></div><h3>LinkedIn</h3><p>Professional</p></a>
-    <a class="card" href="https://www.instagram.com/brnfznlkmn"><div class="icon"><i class="bi bi-instagram"></i></div><h3>Instagram</h3><p>Daily</p></a>
-    <a class="card" href="https://www.facebook.com/brnfznlkmn/"><div class="icon"><i class="bi bi-facebook"></i></div><h3>Facebook</h3><p>Facebook Page</p></a>
-    <a class="card" href="https://x.com/brnfznlkmn"><div class="icon"><i class="bi bi-twitter-x"></i></div><h3>X</h3><p>X page</p></a>
-    <a class="card" href="https://www.tiktok.com/@brnfznlkmn_"><div class="icon"><i class="bi bi-tiktok"></i></div><h3>TikTok</h3><p>Short video</p></a>
-    <a class="card" href="http://yt.openinapp.co/86d8g"><div class="icon"><i class="bi bi-tiktok"></i></div><h3>YouTube</h3><p>Long Form Video</p></a>
-    <a class="card" href="https://open.spotify.com/user/21ybv6hgar5tqrqhl4ran4jhi?si=3Esx0-x5Q32-eNvWyeCC0g"><div class="icon"><i class="bi bi-spotify"></i></div><h3>Spotify</h3><p>Playlist</p></a>
-    <a class="card" href="https://www.github.com/brnfznlkmn/"><div class="icon"><i class="bi bi-github"></i></div><h3>GitHub</h3><p>Repository</p></a>
-    <a class="card" href="https://monkeytype.com/profile/brnfznlkmn"><div class="icon"><i class="bi bi-keyboard"></i></div><h3>Monkeytype</h3><p>WPM</p></a>
-    <a class="card" href="https://www.tokopedia.com/brnfznlkmn"><div class="icon"><i class="bi bi-cart"></i></div><h3>Tokopedia</h3><p>Store</p></a>
-    <a class="card" href="https://shopee.co.id/brnfznlkmn"><div class="icon"><i class="bi bi-cart"></i></div><h3>Shopee</h3><p>Store</p></a>
-    <a class="card" href="https://www.facebook.com/marketplace/profile/100003929237903/"><div class="icon"><i class="bi bi-cart"></i></div><h3>Facebook Marketplace</h3><p>Store</p></a>
+
+    <!-- CARD TEMPLATE -->
+    <a class="card" href="https://www.linkedin.com/in/brnfznlkmn/">
+      <div class="card-inner">
+        <div class="icon"><i class="bi bi-linkedin"></i></div>
+        <h3>LinkedIn</h3><p>Professional</p>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.instagram.com/brnfznlkmn">
+      <div class="card-inner">
+        <div class="icon"><i class="bi bi-instagram"></i></div>
+        <h3>Instagram</h3><p>Daily</p>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.facebook.com/brnfznlkmn/">
+      <div class="card-inner">
+        <div class="icon"><i class="bi bi-facebook"></i></div>
+        <h3>Facebook</h3><p>Page</p>
+      </div>
+    </a>
+
+    <a class="card" href="https://x.com/brnfznlkmn">
+      <div class="card-inner">
+        <div class="icon"><i class="bi bi-twitter-x"></i></div>
+        <h3>X</h3><p>Social</p>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.tiktok.com/@brnfznlkmn_">
+      <div class="card-inner">
+        <div class="icon"><i class="bi bi-tiktok"></i></div>
+        <h3>TikTok</h3><p>Short Video</p>
+      </div>
+    </a>
+
+    <a class="card" href="http://yt.openinapp.co/86d8g">
+      <div class="card-inner">
+        <div class="icon"><i class="bi bi-youtube"></i></div>
+        <h3>YouTube</h3><p>Long Form</p>
+      </div>
+    </a>
+
+    <a class="card" href="https://open.spotify.com/user/21ybv6hgar5tqrqhl4ran4jhi">
+      <div class="card-inner">
+        <div class="icon"><i class="bi bi-spotify"></i></div>
+        <h3>Spotify</h3><p>Playlist</p>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.github.com/brnfznlkmn/">
+      <div class="card-inner">
+        <div class="icon"><i class="bi bi-github"></i></div>
+        <h3>GitHub</h3><p>Repository</p>
+      </div>
+    </a>
+
   </div>
 </section>
 
@@ -323,41 +302,26 @@ footer{
 </footer>
 
 <script>
-/* MAGNETIC PARALLAX */
 document.querySelectorAll(".card").forEach(card=>{
+  const inner = card.querySelector(".card-inner");
+
   card.addEventListener("mousemove",e=>{
-    const r=card.getBoundingClientRect();
-    const x=e.clientX-r.left;
-    const y=e.clientY-r.top;
-    card.style.transform=
-      `rotateX(${-(y-r.height/2)/12}deg)
-       rotateY(${(x-r.width/2)/12}deg)
-       translateY(-12px)`;
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width/2;
+    const y = e.clientY - r.top - r.height/2;
+
+    inner.style.transform =
+      `translateY(-32px)
+       rotateX(${-(y/18)}deg)
+       rotateY(${(x/18)}deg)
+       scale(1.06)`;
   });
+
   card.addEventListener("mouseleave",()=>{
-    card.style.transform="";
+    inner.style.transform = "";
   });
-});
-
-/* SCROLL REVEAL */
-const obs=new IntersectionObserver(e=>{
-  e.forEach(i=>{
-    if(i.isIntersecting){
-      i.target.style.opacity=1;
-      i.target.style.transform="none";
-    }
-  });
-},{threshold:.15});
-
-document.querySelectorAll(".reveal").forEach(el=>{
-  el.style.opacity=0;
-  el.style.transform="translateY(40px)";
-  el.style.transition=".8s cubic-bezier(.22,1,.36,1)";
-  obs.observe(el);
 });
 </script>
 
 </body>
 </html>
-
-
