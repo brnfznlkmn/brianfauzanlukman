@@ -5,185 +5,267 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brian Fauzan Lukman</title>
 
-<!-- Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-<!-- Font -->
+<link rel="icon" href="assets/img/favicon.png">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg: #ffffff;
-  --card: #ffffff;
-  --text: #0a0a0a;
-  --muted: #666;
-  --accent: #0d6efd;
-  --border: rgba(0,0,0,.06);
-  --shadow: 0 20px 60px rgba(0,0,0,.08);
+/* ================= CORE VAR ================= */
+:root{
+  --accent:#0d6efd;
+  --blur:blur(28px);
+  --spring:cubic-bezier(.22,1,.36,1);
 }
 
-[data-theme="dark"] {
-  --bg: #0a0a0a;
-  --card: #121212;
-  --text: #ffffff;
-  --muted: #aaa;
-  --border: rgba(255,255,255,.08);
-  --shadow: 0 20px 60px rgba(0,0,0,.5);
+/* ================= THEMES ================= */
+[data-theme="light"]{
+  --bg:#eef1f7;
+  --card:rgba(255,255,255,.68);
+  --text:#0a0a0a;
+  --muted:#666;
+  --border:rgba(0,0,0,.08);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+[data-theme="dark"]{
+  --bg:#050505;
+  --card:rgba(18,18,18,.68);
+  --text:#fff;
+  --muted:#aaa;
+  --border:rgba(255,255,255,.08);
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: .3s ease;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  transition:.5s ease;
+}
+
+/* ================= CURSOR BLOB ================= */
+.blob{
+  position:fixed;
+  width:420px;
+  height:420px;
+  background:radial-gradient(circle,var(--accent),transparent 60%);
+  filter:blur(120px);
+  opacity:.35;
+  pointer-events:none;
+  z-index:0;
+  transition:transform .2s linear;
+}
+
+/* ================= NOISE ================= */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:1;
 }
 
 /* ================= HEADER ================= */
-header {
-  max-width: 1100px;
-  margin: auto;
-  padding: 32px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+header{
+  max-width:1200px;
+  margin:auto;
+  padding:32px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:relative;
+  z-index:3;
 }
 
-.logo {
-  font-weight: 700;
-  font-size: 20px;
-}
+.logo{font-weight:700;font-size:20px}
 
-.toggle {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background: var(--card);
+.toggle{
+  width:48px;height:48px;
+  border-radius:50%;
+  background:var(--card);
+  backdrop-filter:var(--blur);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
 }
 
 /* ================= HERO ================= */
-.hero {
-  max-width: 800px;
-  margin: 80px auto 120px;
-  text-align: center;
-  padding: 0 24px;
+.hero{
+  min-height:100vh;
+  background:url("assets/img/main-hero.jpg") center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
 }
 
-.hero h1 {
-  font-size: 44px;
-  font-weight: 700;
+.hero::after{
+  content:"";
+  position:absolute;inset:0;
+  background:radial-gradient(circle at top,rgba(0,0,0,.2),rgba(0,0,0,.85));
 }
 
-.hero p {
-  font-size: 18px;
-  margin-top: 16px;
-  color: var(--muted);
+.hero-content{
+  position:relative;
+  z-index:2;
 }
 
-/* ================= SOCIAL ================= */
-.section {
-  max-width: 1100px;
-  margin: auto;
-  padding: 0 24px 120px;
+.hero h1{
+  font-size:52px;
+  color:#fff;
 }
 
-.section-title {
-  text-align: center;
-  margin-bottom: 64px;
+.hero p{
+  margin-top:14px;
+  font-size:18px;
+  color:#ddd;
 }
 
-.section-title h2 {
-  font-size: 32px;
+/* ================= GLASS ================= */
+.glass{
+  background:var(--card);
+  backdrop-filter:var(--blur);
+  border:1px solid var(--border);
+  border-radius:28px;
+  box-shadow:0 50px 160px rgba(0,0,0,.45);
+  position:relative;
+  overflow:hidden;
 }
 
-.section-title p {
-  margin-top: 12px;
-  color: var(--muted);
+/* ENERGY FLOW */
+.glass::before{
+  content:"";
+  position:absolute;
+  inset:-70%;
+  background:conic-gradient(from 0deg,transparent,rgba(13,110,253,.4),transparent);
+  animation:spin 18s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ================= ABOUT ================= */
+.about{
+  max-width:1100px;
+  margin:-160px auto 160px;
+  padding:0 24px;
+  position:relative;
+  z-index:3;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 24px;
+.about-card{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:48px;
+  padding:56px;
 }
 
-.card {
-  background: var(--card);
-  border-radius: 22px;
-  padding: 28px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  transition: .3s ease;
-  text-decoration: none;
-  color: inherit;
+.about img{
+  width:210px;
+  border-radius:50%;
 }
 
-.card:hover {
-  transform: translateY(-8px);
+.about h2{font-size:30px}
+.about p{margin-top:16px;font-size:17px}
+
+/* ================= SECTION ================= */
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:0 24px 180px;
 }
 
-.icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: var(--accent);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  margin-bottom: 20px;
+.section-title{text-align:center;margin-bottom:80px}
+.section-title h2{font-size:34px}
+.section-title p{margin-top:12px;color:var(--muted)}
+
+/* ================= GRID ================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:36px;
 }
 
-.card h3 {
-  font-size: 18px;
+/* ================= CARD ================= */
+.card{
+  padding:32px;
+  border-radius:26px;
+  background:var(--card);
+  backdrop-filter:var(--blur);
+  border:1px solid var(--border);
+  text-decoration:none;
+  color:inherit;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:.45s var(--spring);
 }
 
-.card p {
-  margin-top: 6px;
-  font-size: 14px;
-  color: var(--muted);
+.card:hover{
+  box-shadow:0 50px 140px rgba(13,110,253,.35);
 }
+
+.icon{
+  width:58px;height:58px;
+  border-radius:18px;
+  background:var(--accent);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;
+  margin-bottom:20px;
+  transform:translateZ(50px);
+}
+
+.card h3{font-size:18px}
+.card p{font-size:14px;color:var(--muted);margin-top:6px}
 
 /* ================= FOOTER ================= */
-footer {
-  text-align: center;
-  padding: 48px 24px;
-  color: var(--muted);
-  font-size: 14px;
+footer{
+  text-align:center;
+  padding:90px 24px;
+  color:var(--muted);
 }
 
-/* ================= RESPONSIVE ================= */
-@media(max-width:600px){
-  .hero h1 {
-    font-size: 32px;
-  }
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+  .about-card{grid-template-columns:1fr;text-align:center}
+  .about img{margin:auto}
+  .hero h1{font-size:36px}
 }
 </style>
 </head>
 
-<body>
+<body data-theme="light">
+
+<div class="blob" id="blob"></div>
 
 <header>
   <div class="logo">brnfznlkmn</div>
-  <div class="toggle" id="themeToggle">
-    <i class="bi bi-moon-stars-fill"></i>
-  </div>
+  <div class="toggle" id="toggle"><i class="bi bi-moon-stars-fill"></i></div>
 </header>
 
 <section class="hero">
-  <h1>Brian Fauzan Lukman</h1>
-  <p>IT • Hardware • Software • Design</p>
+  <div class="hero-content">
+    <h1>Brian Fauzan Lukman</h1>
+    <p>IT • Hardware • Software • Design</p>
+  </div>
+</section>
+
+<section class="about">
+  <div class="glass about-card">
+    <img src="assets/img/profile-img4.png">
+    <div>
+      <h2>About Me</h2>
+      <p>
+        Fokus di hardware komputer, software, dan desain grafis.
+        Terbiasa membangun sistem modern dengan pendekatan efisien,
+        scalable, dan clean.
+      </p>
+      <p style="font-style:italic;color:var(--muted)">
+        “If the service is free, you are the product.”
+      </p>
+    </div>
+  </div>
 </section>
 
 <section class="section">
@@ -193,73 +275,12 @@ footer {
   </div>
 
   <div class="grid">
-
-    <a class="card" href="https://linkedin.com/in/brnfznlkmn" target="_blank">
-      <div class="icon"><i class="bi bi-linkedin"></i></div>
-      <h3>LinkedIn</h3>
-      <p>Professional profile</p>
-    </a>
-
-    <a class="card" href="https://instagram.com/brnfznlkmn" target="_blank">
-      <div class="icon"><i class="bi bi-instagram"></i></div>
-      <h3>Instagram</h3>
-      <p>Daily & story</p>
-    </a>
-
-    <a class="card" href="https://github.com/brnfznlkmn" target="_blank">
-      <div class="icon"><i class="bi bi-github"></i></div>
-      <h3>GitHub</h3>
-      <p>Code & repository</p>
-    </a>
-
-    <a class="card" href="https://x.com/brnfznlkmn" target="_blank">
-      <div class="icon"><i class="bi bi-twitter-x"></i></div>
-      <h3>X (Twitter)</h3>
-      <p>Thoughts & updates</p>
-    </a>
-
-    <a class="card" href="https://facebook.com/brnfznlkmn" target="_blank">
-      <div class="icon"><i class="bi bi-facebook"></i></div>
-      <h3>Facebook</h3>
-      <p>Personal profile</p>
-    </a>
-
-    <a class="card" href="https://tiktok.com/@brnfznlkmn_" target="_blank">
-      <div class="icon"><i class="bi bi-tiktok"></i></div>
-      <h3>TikTok</h3>
-      <p>Short videos</p>
-    </a>
-
-    <a class="card" href="https://youtube.com" target="_blank">
-      <div class="icon"><i class="bi bi-youtube"></i></div>
-      <h3>YouTube</h3>
-      <p>Video content</p>
-    </a>
-
-    <a class="card" href="https://open.spotify.com" target="_blank">
-      <div class="icon"><i class="bi bi-spotify"></i></div>
-      <h3>Spotify</h3>
-      <p>Public playlists</p>
-    </a>
-
-    <a class="card" href="https://monkeytype.com/profile/brnfznlkmn" target="_blank">
-      <div class="icon"><i class="bi bi-keyboard"></i></div>
-      <h3>Monkeytype</h3>
-      <p>Typing stats</p>
-    </a>
-
-    <a class="card" href="https://shopee.co.id/brnfznlkmn" target="_blank">
-      <div class="icon"><i class="bi bi-bag"></i></div>
-      <h3>Shopee</h3>
-      <p>Online store</p>
-    </a>
-
-    <a class="card" href="https://tokopedia.com/brnfznlkmn" target="_blank">
-      <div class="icon"><i class="bi bi-cart"></i></div>
-      <h3>Tokopedia</h3>
-      <p>Marketplace</p>
-    </a>
-
+    <a class="card" href="#"><div class="icon"><i class="bi bi-linkedin"></i></div><h3>LinkedIn</h3><p>Professional</p></a>
+    <a class="card" href="#"><div class="icon"><i class="bi bi-instagram"></i></div><h3>Instagram</h3><p>Daily</p></a>
+    <a class="card" href="#"><div class="icon"><i class="bi bi-github"></i></div><h3>GitHub</h3><p>Repository</p></a>
+    <a class="card" href="#"><div class="icon"><i class="bi bi-spotify"></i></div><h3>Spotify</h3><p>Playlist</p></a>
+    <a class="card" href="#"><div class="icon"><i class="bi bi-tiktok"></i></div><h3>TikTok</h3><p>Short video</p></a>
+    <a class="card" href="#"><div class="icon"><i class="bi bi-cart"></i></div><h3>Tokopedia</h3><p>Store</p></a>
   </div>
 </section>
 
@@ -268,24 +289,38 @@ footer {
 </footer>
 
 <script>
-const toggle = document.getElementById('themeToggle');
-const icon = toggle.querySelector('i');
-
-function setTheme(theme){
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  icon.className = theme === 'dark'
-    ? 'bi bi-sun-fill'
-    : 'bi bi-moon-stars-fill';
+/* THEME */
+const t=document.getElementById("toggle");
+const i=t.querySelector("i");
+function setTheme(x){
+  document.body.setAttribute("data-theme",x);
+  localStorage.setItem("theme",x);
+  i.className=x==="dark"?"bi bi-sun-fill":"bi bi-moon-stars-fill";
 }
+t.onclick=()=>setTheme(document.body.getAttribute("data-theme")==="dark"?"light":"dark");
+setTheme(localStorage.getItem("theme")||"light");
 
-toggle.onclick = () => {
-  const current = document.documentElement.getAttribute('data-theme');
-  setTheme(current === 'dark' ? 'light' : 'dark');
-}
+/* CURSOR BLOB */
+const blob=document.getElementById("blob");
+window.addEventListener("mousemove",e=>{
+  blob.style.transform=`translate(${e.clientX-210}px,${e.clientY-210}px)`;
+});
 
-const saved = localStorage.getItem('theme') || 'light';
-setTheme(saved);
+/* MAGNETIC CARDS */
+document.querySelectorAll(".card").forEach(card=>{
+  card.addEventListener("mousemove",e=>{
+    const r=card.getBoundingClientRect();
+    const x=e.clientX-r.left-r.width/2;
+    const y=e.clientY-r.top-r.height/2;
+    card.style.transform=
+      `rotateX(${-(y/14)}deg)
+       rotateY(${(x/14)}deg)
+       translateY(-16px)`;
+  });
+  card.addEventListener("mouseleave",()=>{
+    card.style.transform="";
+  });
+});
 </script>
 
 </body>
