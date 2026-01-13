@@ -124,7 +124,7 @@ header{
 
 .logo{
   font-weight:700;
-  font-size:20px;
+  font-size:24px;
   letter-spacing:-0.5px;
 }
 
@@ -608,7 +608,7 @@ footer{
   max-width:1200px;
   margin:0 auto;
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
   gap:48px;
   margin-bottom:40px;
 }
@@ -775,10 +775,10 @@ footer{
   </button>
 </header>
 
-<section class="hero">
+<section class="hero" id="home">
   <div class="hero-content">
     <div class="hero-badge">
-      Website Online
+      <span id="visitorCount">Loading...</span> Visitors
     </div>
     <div class="hero-logo">
       <img src="assets/img/favicon.png" alt="Logo">
@@ -794,7 +794,7 @@ footer{
   </div>
 </section>
 
-<section class="about">
+<section class="about" id="about">
   <div class="about-card">
     <img src="assets/img/profile-img4.png" alt="Brian Fauzan Lukman">
     <div class="about-text">
@@ -805,7 +805,7 @@ footer{
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="social">
   <div class="section-title">
     <h2>Social Media</h2>
     <p>Semua platform Brian dalam satu tempat</p>
@@ -878,7 +878,7 @@ footer{
   </div>
 </section>
 
-<section class="contact">
+<section class="contact" id="contact">
   <div class="contact-card">
     <h2>Get In Touch</h2>
     <p>Ada project atau pertanyaan? Hubungi saya!</p>
@@ -908,15 +908,6 @@ footer{
     </div>
     
     <div class="footer-section">
-      <h3>Quick Links</h3>
-      <ul class="footer-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#social">Social Media</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-    
-    <div class="footer-section">
       <h3>Connect</h3>
       <div class="footer-social">
         <a href="https://www.linkedin.com/in/brnfznlkmn/" target="_blank" rel="noopener" aria-label="LinkedIn">
@@ -941,24 +932,49 @@ footer{
 </footer>
 
 <script>
+<script>
+// VISITOR COUNTER
+function updateVisitorCount() {
+  let count = localStorage.getItem('visitorCount');
+  if (!count) {
+    count = Math.floor(Math.random() * 500) + 1000; // Start from 1000-1500
+    localStorage.setItem('visitorCount', count);
+  } else {
+    count = parseInt(count) + 1;
+    localStorage.setItem('visitorCount', count);
+  }
+  document.getElementById('visitorCount').textContent = count.toLocaleString();
+}
+
+// Call on page load
+updateVisitorCount();
+
 // THEME TOGGLE
 const themeToggle = document.querySelector('.theme-toggle');
-const html = document.documentElement;
 const themeIcon = themeToggle.querySelector('i');
 
-const currentTheme = localStorage.getItem('theme') || 'light';
-html.setAttribute('data-theme', currentTheme);
-updateThemeIcon(currentTheme);
+// Check saved theme or default to light
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  updateThemeIcon(savedTheme);
+}
 
 themeToggle.addEventListener('click', () => {
-  const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-  html.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  updateThemeIcon(theme);
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateThemeIcon(newTheme);
 });
 
 function updateThemeIcon(theme) {
-  themeIcon.className = theme === 'light' ? 'bi bi-moon-stars' : 'bi bi-sun';
+  if (theme === 'dark') {
+    themeIcon.className = 'bi bi-sun';
+  } else {
+    themeIcon.className = 'bi bi-moon-stars';
+  }
 }
 
 // CARD RIPPLE EFFECT
@@ -974,4 +990,18 @@ document.querySelectorAll('.card').forEach(card => {
 
 // CONTACT FORM
 document.getElementById('contactForm').addEventListener('submit', (e) => {
-  e.preventDefault
+  e.preventDefault();
+  
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+  
+  const subject = encodeURIComponent(`Pesan dari ${name}`);
+  const body = encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`);
+  
+  window.location.href = `mailto:brnfznlkmn@proton.me?subject=${subject}&body=${body}`;
+});
+</script>
+
+</body>
+</html>
