@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 Rain Monitoring System</title>
+    <style>
+        :root { --bg: #121212; --card-bg: #1e1e1e; --primary: #00d4ff; --text: #e0e0e0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; }
+        h1, h2 { color: var(--primary); text-align: center; }
+        
+        /* Grid Layout */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .card { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid #333; text-align: center; }
+        .label { font-size: 0.8rem; color: #888; text-transform: uppercase; display: block; margin-bottom: 5px; }
+        .value { font-size: 1.2rem; font-weight: bold; }
+
+        /* Table Styling */
+        .section-title { margin-top: 40px; border-left: 4px solid var(--primary); padding-left: 10px; text-align: left; }
+        table { width: 100%; border-collapse: collapse; background: var(--card-bg); margin-top: 10px; border-radius: 8px; overflow: hidden; font-size: 0.9rem; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
+        th { background: #2a2a2a; color: var(--primary); }
+        tr:hover { background: #252525; }
+        .status-on { color: #00ff88; font-weight: bold; }
+        .status-off { color: #ff4444; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>ESP32 Rain Dashboard</h1>
+
+    <div class="dashboard-grid">
+        <div class="card">
+            <span class="label">System Status</span>
+            <span id="sys-status" class="value">-</span>
+        </div>
+        <div class="card">
+            <span class="label">IP Address</span>
+            <span id="sys-ip" class="value">-</span>
+        </div>
+        <div class="card">
+            <span class="label">Water Level</span>
+            <span id="val-water" class="value">-</span>
+        </div>
+        <div class="card">
+            <span class="label">Soil Moisture</span>
+            <span id="val-soil" class="value">-</span>
+        </div>
+    </div>
+
+    <h2 class="section-title">History Terakhir</h2>
+    <table id="table-history">
+        <thead>
+            <tr>
+                <th>Tanggal/Jam</th>
+                <th>Water Level</th>
+                <th>Soil</th>
+                <th>Rain</th>
+                <th>Pumps Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2 class="section-title">Logs Sensor</h2>
+    <table id="table-sensor-logs">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Water Level</th>
+                <th>Soil</th>
+                <th>Rain Value</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2 class="section-title">Logs Pompa</h2>
+    <table id="table-pump-logs">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Pump 1</th>
+                <th>Pump 2</th>
+                <th>Pump 3</th>
+                <th>System Active</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAwSYS95xI18Rl04ckGt5VnepVaN03EFa4",
+        authDomain: "flutter-esp32-sensors-firebase.firebaseapp.com",
+        databaseURL: "https://flutter-esp32-sensors-firebase-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "flutter-esp32-sensors-firebase",
+        storageBucket: "flutter-esp32-sensors-firebase.appspot.com",
+        messagingSenderId: "565129439870",
+        appId: "1:565129439870:web:a7f3b5b4f6cbc0140e462f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const deviceRef = ref(db, 'devices/ESP_32_RAIN_001');
+
+    onValue(deviceRef, (snapshot) => {
+        const data = snapshot.val();
+        if (!data) return;
+
+        // 1. Update Info Utama
+        document.getElementById('sys-status').innerText = data.systemStatus.toUpperCase();
+        document.getElementById('sys-ip').innerText = data.ipAddress;
+        document.getElementById('val-water').innerText = data.sensors.waterLevel.toFixed(2);
+        document.getElementById('val-soil').innerText = data.sensors.soilMoisture + "%";
+
+        // 2. Update Table History
+        const historyBody = document.querySelector('#table-history tbody');
+        historyBody.innerHTML = "";
+        if (data.history_page) {
+            Object.values(data.history_page).forEach(h => {
+                const row = `<tr>
+                    <td>${h.date} ${h.time}</td>
+                    <td>${h.sensors.waterLevel.toFixed(2)}</td>
+                    <td>${h.sensors.soilMoisture}%</td>
+                    <td>${h.sensors.rainValue}</td>
+                    <td>P1:${h.pumps.pump1Running} | P2:${h.pumps.pump2Running} | P3:${h.pumps.pump3Running}</td>
+                </tr>`;
+                historyBody.insertAdjacentHTML('afterbegin', row);
+            });
+        }
+
+        // 3. Update Sensor Logs
+        const sensorLogBody = document.querySelector('#table-sensor-logs tbody');
+        sensorLogBody.innerHTML = "";
+        if (data.logs && data.logs.sensors) {
+            Object.values(data.logs.sensors).forEach(l => {
+                const date = new Date(l.timestamp).toLocaleString();
+                const row = `<tr>
+                    <td>${date}</td>
+                    <td>${l.waterLevel.toFixed(2)}</td>
+                    <td>${l.soilMoisture}%</td>
+                    <td>${l.rainValue}</td>
+                </tr>`;
+                sensorLogBody.insertAdjacentHTML('afterbegin', row);
+            });
+        }
+
+        // 4. Update Pump Logs
+        const pumpLogBody = document.querySelector('#table-pump-logs tbody');
+        pumpLogBody.innerHTML = "";
+        if (data.logs && data.logs.pumps) {
+            Object.values(data.logs.pumps).forEach(p => {
+                const date = new Date(p.timestamp).toLocaleString();
+                const row = `<tr>
+                    <td>${date}</td>
+                    <td class="${p.pump1Running ? 'status-on' : 'status-off'}">${p.pump1Running ? 'ON' : 'OFF'}</td>
+                    <td class="${p.pump2Running ? 'status-on' : 'status-off'}">${p.pump2Running ? 'ON' : 'OFF'}</td>
+                    <td class="${p.pump3Running ? 'status-on' : 'status-off'}">${p.pump3Running ? 'ON' : 'OFF'}</td>
+                    <td>${p.systemActive ? 'ACTIVE' : 'IDLE'}</td>
+                </tr>`;
+                pumpLogBody.insertAdjacentHTML('afterbegin', row);
+            });
+        }
+    });
+</script>
+</body>
+</html>
