@@ -1,4 +1,4 @@
-// jquery.analytics.min.js
+// main.js
 (async function() {
     let payload = {
         ip: "Checking...",
