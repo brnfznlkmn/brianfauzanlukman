@@ -127,58 +127,9 @@
 
 <script src="assets/js/main.js" async></script>
 
-// Jalankan tracker saat web dibuka
-window.addEventListener('load', () => {
-    startTracker();
-    // Jalankan efek typing bawaan Anda di sini
-    setTimeout(typeText, 1000); 
-});
-// --- UI EFFECTS (ORIGINAL) ---
-const texts = ['IT Support / Graphic Design', 'Hardware & Software Specialist', 'Creative Problem Solver', 'Tech Enthusiast'];
-let textIndex = 0, charIndex = 0, isDeleting = false, typingDelay = 150;
-
-function typeText() {
-    const currentText = texts[textIndex];
-    const typedElement = document.getElementById('typed-text');
-    if (isDeleting) {
-        typedElement.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-        typingDelay = 75;
-    } else {
-        typedElement.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
-        typingDelay = 150;
-    }
-    if (!isDeleting && charIndex === currentText.length) {
-        typingDelay = 2000; isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % texts.length;
-        typingDelay = 500;
-    }
-    setTimeout(typeText, typingDelay);
-}
-
-// Inisialisasi saat window load
-window.addEventListener('load', () => {
-    setTimeout(typeText, 1000);
-    startTracker(); // Menjalankan fungsi tracker diam-diam
-});
-
-// Card Ripple Effect
-document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        card.querySelector('.card-inner').style.setProperty('--x', `${x}%`);
-        card.querySelector('.card-inner').style.setProperty('--y', `${y}%`);
-    });
-});
-</script>
-
 </body>
 </html>
+
 
 
 
