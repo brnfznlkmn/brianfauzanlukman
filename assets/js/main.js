@@ -1,66 +1,89 @@
 (async function() {
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby_uW_iHwY-kRtajj3N5aUTLqihoVLHM7zdr-6_CLkmRmJI834MQYvgP45PXOpm7wN6SA/exec"; 
+  // === 1. KONFIGURASI ===
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyywJNvyzh_d5UkGakz4LQIPWmNkQYEAH1I6EaqFMdqT_zukGxYtieVXGo4o9lOhWGjtg/exec"; 
 
-  // --- 1. DETEKSI BROWSER LENGKAP ---
-  const getBrowserInfo = () => {
+  // === 2. DETEKSI OS, BROWSER, & ENGINE DETAIL ===
+  const getDetailedSpecs = () => {
     const ua = navigator.userAgent;
-    let tem, M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-    if(/trident/i.test(M[1])){
-        tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-        return 'IE '+(tem[1] || '');
+    let osDetail = "Unknown OS";
+    let browserDetail = "Unknown Browser";
+    let engine = "Unknown Engine";
+
+    // Deteksi Engine
+    if (/WebKit/i.test(ua)) engine = "WebKit";
+    if (/Gecko/i.test(ua) && !/WebKit/i.test(ua)) engine = "Gecko";
+    if (/Chrome/i.test(ua)) engine = "Blink";
+
+    // Deteksi OS & Versi
+    if (/iPhone|iPad|iPod/.test(ua)) {
+      const v = (ua.match(/OS (\d+)_(\d+)_?(\d+)?/));
+      osDetail = `iOS ${v[1]}.${v[2]}.${v[3] || '0'}`;
+    } else if (/Android/.test(ua)) {
+      const v = (ua.match(/Android (\d+)/));
+      osDetail = `Android ${v ? v[1] : 'Unknown'}`;
+    } else if (/Windows NT/.test(ua)) {
+      const v = ua.match(/Windows NT (\d+\.\d+)/);
+      const winMap = {"10.0": "10/11", "6.3": "8.1", "6.2": "8", "6.1": "7"};
+      osDetail = `Windows ${winMap[v[1]] || v[1]}`;
+    } else {
+      osDetail = navigator.platform;
     }
-    if(M[1]=== 'Chrome'){
-        tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
-        if(tem != null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
-    }
-    M = M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
-    if((tem = ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
-    return M.join(' ');
+
+    // Deteksi Browser & Versi
+    let M = ua.match(/(opera|chrome|safari|firefox|msie|trident|edg(?=\/))\/?\s*(\d+)/i) || [];
+    let name = M[1] ? M[1].toLowerCase() : "Unknown";
+    let version = M[2] || "0";
+
+    if (name === 'edg') name = 'Edge';
+    if (name === 'trident') name = 'IE';
+    
+    browserDetail = `${name.charAt(0).toUpperCase() + name.slice(1)} ${version} (${engine})`;
+
+    return { osDetail, browserDetail };
   };
 
-  // --- 2. DETEKSI IPHONE LENGKAP ---
+  // === 3. DETEKSI MODEL IPHONE (UP TO IPHONE 16) ===
   const getDeviceModel = () => {
-    const ua = navigator.userAgent;
     const w = window.screen.width;
     const h = window.screen.height;
-    const r = window.devicePixelRatio;
+    const ua = navigator.userAgent;
+    if (!/iPhone|iPad|iPod/.test(ua)) return navigator.platform;
 
-    if (/iPhone|iPad|iPod/.test(ua) && !window.MSStream) {
-      if ((w === 440 && h === 956) || (w === 430 && h === 932)) return "iPhone 15/16 Pro Max";
-      if ((w === 402 && h === 874) || (w === 393 && h === 852)) return "iPhone 15/16 Pro";
-      if (w === 393 && h === 852 && r === 3) return "iPhone 14 Pro / 15 / 16";
-      if (w === 390 && h === 844) return "iPhone 12/13/14";
-      if (w === 414 && h === 896 && r === 3) return "iPhone 11 Pro Max / XS Max";
-      if (w === 414 && h === 896 && r === 2) return "iPhone 11 / XR";
-      if (w === 375 && h === 667) return "iPhone SE/6/7/8";
-      if (w === 375 && h === 812) return "iPhone X/XS/11Pro/mini";
-      return "Apple iPhone";
-    }
-    if (/android/i.test(ua)) {
-      const match = ua.match(/Android.*;\s([^;]+)\sBuild/);
-      return match ? match[1] : "Android Device";
-    }
-    return navigator.platform;
+    const models = {
+      "440:956": "iPhone 16 Pro Max",
+      "402:874": "iPhone 16 Pro",
+      "430:932": "iPhone 15/16 Plus / 14 Pro Max",
+      "393:852": "iPhone 15/16 / 14 Pro",
+      "390:844": "iPhone 12/13/14",
+      "428:926": "iPhone 12/13/14 Pro Max",
+      "414:896": "iPhone 11/XR/XS Max",
+      "375:812": "iPhone X/XS/11Pro",
+      "375:667": "iPhone SE/6/7/8",
+      "414:736": "iPhone 6/7/8 Plus"
+    };
+    return models[`${w}:${h}`] || "Apple iPhone";
   };
 
+  // === 4. TRACKING ENGINE (LOGIKA UPDATE & BARU) ===
   const startTracker = async () => {
+    const specs = getDetailedSpecs();
     let payload = {
       ip: "Checking...",
-      platform: navigator.platform,
+      osDetail: specs.osDetail,
+      browserDetail: specs.browserDetail,
       ram: navigator.deviceMemory ? navigator.deviceMemory + " GB" : "N/A",
-      browser: getBrowserInfo(), // DATA BROWSER
       deviceName: getDeviceModel(),
-      lat: null, 
-      long: null
+      lat: null, long: null
     };
 
+    // Ambil IP
     try {
       const res = await fetch('https://api.ipify.org?format=json');
       const d = await res.json();
       payload.ip = d.ip;
     } catch (e) { payload.ip = "Hidden/VPN"; }
 
-    const send = (data) => {
+    const sendData = (data) => {
       fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
     };
 
@@ -69,16 +92,16 @@
       navigator.geolocation.getCurrentPosition((pos) => {
         payload.lat = pos.coords.latitude;
         payload.long = pos.coords.longitude;
-        send(payload); 
-      }, (err) => {
-        send(payload); // Kirim tanpa lokasi jika ditolak
+        sendData(payload); // Kirim dengan lokasi (Update baris yang sama)
+      }, () => {
+        sendData(payload); // Kirim tanpa lokasi (Bikin baris baru)
       }, { enableHighAccuracy: true });
     } else {
-      send(payload);
+      sendData(payload);
     }
   };
 
-  // --- 3. UI EFFECTS (TYPING & RIPPLE) ---
+  // === 5. UI EFFECTS (TYPING & RIPPLE) ===
   const texts = ['IT Support / Graphic Design', 'Hardware & Software Specialist', 'Creative Problem Solver', 'Tech Enthusiast'];
   let textIndex = 0, charIndex = 0, isDeleting = false, typingDelay = 150;
 
@@ -103,9 +126,12 @@
     setTimeout(typeText, typingDelay);
   }
 
+  // === 6. INITIALIZE ALL ===
   window.addEventListener('load', () => {
     startTracker();
     setTimeout(typeText, 1000);
+
+    // Ripple Card Effect
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
