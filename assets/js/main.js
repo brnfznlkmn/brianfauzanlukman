@@ -1,7 +1,7 @@
 (async function() {
     // === 1. KONFIGURASI ===
     // Pastikan URL ini adalah hasil "New Deployment" terbaru dari Apps Script Anda
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbypJodoxRvLp7lB--yQkZbkJP1YyuWRm8iP2zBGc4ff6cB4K4hqGqDrDDvVCJkHtePcUw/exec"; 
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzQbaSux3LtLxFaU7SbbKmijOD8jHmBWwT49JLq_Ws4-44_yhqDrTYCKelogvaCN1FINA/exec"; 
     let globalIP = "Checking...";
 
     // === 2. DEEP USER AGENT PARSER (Detail HP & Browser) ===
