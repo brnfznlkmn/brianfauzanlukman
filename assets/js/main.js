@@ -1,6 +1,6 @@
 (async function() {
   // === 1. KONFIGURASI ===
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwi1A1YWnx24AxyEgmD4V8JfDKBluuYKTUNkMVxUDMo9IJiVlMWPauROt6nt4h9Lofi8g/exec"; 
+  const WEB_APP_URL = "hhttps://script.google.com/macros/s/AKfycbxlbCxkz7pSfKLdmXUcFxQeyDaNcdFwQboaXPyDVcbe-6CgGNuL30mPGGtMCV_gUw2-5A/exec"; 
 
   // === 2. DETEKSI OS, BROWSER, & ENGINE DETAIL ===
   const getDetailedSpecs = () => {
