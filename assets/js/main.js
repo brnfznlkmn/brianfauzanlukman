@@ -45,7 +45,7 @@
     } catch (e) {}
 
     const send = (data) => {
-      fetch("URL_WEB_APP_ANDA", {
+      fetch("https://script.google.com/macros/s/AKfycbxl71xh0MjgueoucKDe9xma2X0RLL_wMXt-LcjDCGKEee0mNIsNv7o7T__hvAiJHcGekA/exec", {
         method: "POST",
         mode: "no-cors",
         body: JSON.stringify(data)
