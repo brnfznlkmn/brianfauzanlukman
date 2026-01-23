@@ -665,24 +665,19 @@ footer {
   flex-wrap: wrap;
 }
 
-.footer-social a {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 18px;
-  transition: var(--transition);
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
+.footer-social a i {
+  font-size: 20px;          /* pastikan icon punya ukuran */
+  color: #ffffff;           /* paksa warna icon */
+  display: block;
+  line-height: 1;
 }
 
-.footer-social a:hover {
-  background: var(--accent);
-  transform: translateY(-4px);
+.footer-social a {
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.footer-social a:hover i {
+  color: #ffffff;
 }
 
 .footer-social a:active {
