@@ -26,7 +26,7 @@
 
   const startTracker = async () => {
     let payload = {
-      ip: "Checking...",
+      ip: "ipify blocked",
       userAgent: navigator.userAgent,
       platform: navigator.platform,
       ram: navigator.deviceMemory || "N/A",
