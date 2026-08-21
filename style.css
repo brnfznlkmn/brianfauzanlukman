@@ -1887,3 +1887,22 @@ textarea.form-control {
     height: auto !important;
     overflow: visible !important;
 }
+
+/* Mobile-only alignment fixes */
+@media (max-width: 768px) {
+    /* Add breathing room between the GitHub button and scroll indicator */
+    .hero-content .hero-socials {
+        margin-bottom: 8px;
+    }
+
+    .scroll-indicator {
+        margin-top: 28px;
+    }
+
+    /* Center and widen the contact form card on mobile */
+    .contact-form-card {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
