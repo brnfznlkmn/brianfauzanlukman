@@ -92,7 +92,7 @@ Terbuka untuk kesempatan kerja *full-time*, *freelance*, maupun kolaborasi proye
 
 ## 🔒 Privasi
 
-Saat pengunjung mengakses website ini, informasi teknis tertentu (seperti alamat IP, waktu akses, karakteristik perangkat, dan data lokasi jika diizinkan oleh peramban) dapat dicatat secara otomatis untuk tujuan keamanan dan pemantauan. Data disimpan secara aman, hanya digunakan untuk keperluan analisis, dan tidak pernah dibagikan atau dijual kepada pihak ketiga. Untuk permintaan penghapusan data atau pertanyaan lebih lanjut, silakan hubungi melalui email di atas.
+Saat pengunjung mengakses website ini, informasi teknis tertentu (seperti alamat IP, waktu akses, karakteristik perangkat, dan data lokasi jika diizinkan oleh browser) dapat dicatat secara otomatis untuk tujuan keamanan dan pemantauan. Data disimpan secara aman, hanya digunakan untuk keperluan analisis, dan tidak pernah dibagikan atau dijual kepada pihak ketiga. Untuk permintaan penghapusan data atau pertanyaan lebih lanjut, silakan hubungi melalui email di atas.
 
 ---
 
