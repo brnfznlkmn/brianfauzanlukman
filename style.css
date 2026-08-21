@@ -1079,12 +1079,18 @@ body {
     display: flex;
     flex-direction: column;
     gap: 16px;
+   margin-bottom: 20px;
 }
 
 .lang-item {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    padding-bottom: 20px; /* pakai padding */
+}
+
+.lang-item:last-child {
+    padding-bottom: 0;
 }
 
 .lang-info {
