@@ -952,19 +952,64 @@ body {
 }
 
 .edu-card {
+    --edu-accent: #3b82f6;
     display: flex;
     gap: 20px;
     background: var(--gradient-card);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 24px;
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.edu-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--edu-accent);
+    opacity: 0;
+    transform: scaleY(0.5);
+    transform-origin: center;
     transition: var(--transition-smooth);
 }
 
 .edu-card:hover {
-    border-color: rgba(113, 197, 233, 0.2);
-    transform: translateX(5px);
-    box-shadow: 0 10px 25px rgba(113, 197, 233, 0.05);
+    border-color: rgba(59, 130, 246, 0.35);
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18), 0 0 25px rgba(59, 130, 246, 0.08);
+}
+
+.edu-card:hover::before {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.edu-card .edu-logo-wrapper {
+    color: var(--edu-accent);
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.edu-card .edu-header h5,
+.edu-card .edu-sub,
+.edu-card .edu-score {
+    text-decoration: none;
+}
+
+.edu-card .edu-score strong {
+    color: var(--edu-accent);
+}
+
+.edu-card .badge-accent {
+    background: rgba(59, 130, 246, 0.10);
+    color: var(--edu-accent);
 }
 
 .edu-logo-wrapper {
