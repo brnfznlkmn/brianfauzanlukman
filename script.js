@@ -503,7 +503,7 @@ function initContactForm() {
         formStatus.innerHTML = '';
         formStatus.className = 'form-status';
 
-        const emailTarget = 'aryadaiva069@gmail.com';
+        const emailTarget = 'brnfznlkmn@gmail.com';
         const emailSubject = `Pesan Portofolio dari ${name}`;
         const emailBody = `Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`;
         const mailtoUrl = `mailto:${emailTarget}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
