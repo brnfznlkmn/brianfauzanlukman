@@ -102,4 +102,4 @@ Proyek ini merupakan portofolio pribadi. Silakan hubungi pemilik repository sebe
 
 ---
 
-<p align="center">Made with ❤️ &copy; 2026 Brian Fauzan Lukman</p>
+<p align="center">copy; 2026 Brian Fauzan Lukman. All Right Reserved. Developed with ❤️ by brnfznlkmn.</p>
