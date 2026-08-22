@@ -1583,7 +1583,7 @@ body::before {
    utility classes (which are still used elsewhere on the page). */
 .contact-icon.text-red,
 .contact-icon.text-teal {
-    color: #0857C3 !important;
+    color: #71c5e8 !important;
 }
 
 .contact-text .label {
