@@ -1,39 +1,49 @@
 /* ==========================================================================
-   DESIGN SYSTEM & CUSTOM VARIABLES - THEME UPDATE
+   DESIGN SYSTEM & CUSTOM VARIABLES - LIQUID GLASS (iOS 27 style) UPDATE
    ========================================================================== */
    :root {
-    /* Colors - Light Mode (Default): Sky Blue Accent */
-    --bg-dark: #ffffff;
-    --bg-secondary: #f3f8fb;
-    --bg-card: rgba(255, 255, 255, 0.85);
-    --bg-card-hover: rgba(237, 247, 252, 0.95);
+    /* Colors - Light Mode (Default): Sky Blue Accent, glass surfaces */
+    --bg-dark: #eef4fa;
+    --bg-secondary: #e4eef8;
+    --bg-card: rgba(255, 255, 255, 0.38);
+    --bg-card-hover: rgba(255, 255, 255, 0.52);
 
-    --primary: #71C5E9;      /* Sky Blue Accent */
-    --primary-rgb: 113, 197, 233;
-    --secondary: #4AA9D3;    /* Deeper Blue */
-    --accent: #0858C3;       /* Indigo */
-    --accent-rgb: 108, 99, 255;
+    --primary: #71C5E8;      /* Sky Blue Accent */
+    --primary-rgb: 113, 197, 232;
+    --secondary: #3B8FDB;    /* Mid Blue */
+    --accent: #0857C3;       /* Deep Blue */
+    --accent-rgb: 8, 87, 195;
 
-    --text-primary: #101c28;   /* Deep Navy */
-    --text-muted: #5b7184;     /* Slate Gray */
+    --text-primary: #0b1626;   /* Deep Navy */
+    --text-muted: #4c5f72;     /* Slate Gray */
     --text-dark: #94a3b8;      /* Light Gray */
 
-    --border-color: rgba(16, 28, 40, 0.08);
-    --border-glow: rgba(113, 197, 233, 0.35);
+    --border-color: rgba(255, 255, 255, 0.55);
+    --border-glow: rgba(79, 179, 232, 0.55);
 
-    --navbar-bg: rgba(255, 255, 255, 0.7);
-    --navbar-bg-scrolled: rgba(255, 255, 255, 0.9);
-    --floating-badge-bg: rgba(255, 255, 255, 0.85);
-    --mobile-menu-bg: #ffffff;
-    --overlay-tint: rgba(16, 28, 40, 0.04);
+    --navbar-bg: rgba(255, 255, 255, 0.32);
+    --navbar-bg-scrolled: rgba(255, 255, 255, 0.5);
+    --floating-badge-bg: rgba(255, 255, 255, 0.45);
+    --mobile-menu-bg: rgba(238, 244, 250, 0.75);
+    --overlay-tint: rgba(255, 255, 255, 0.28);
     --scrollbar-track: var(--bg-dark);
-    --footer-bg: #eef6fa;
+    --footer-bg: rgba(255, 255, 255, 0.25);
+
+    /* Liquid glass tokens */
+    --glass-blur: 28px;
+    --glass-saturate: 180%;
+    --glass-highlight: rgba(255, 255, 255, 0.85);
+    --glass-shadow-outer: 0 8px 32px rgba(20, 40, 70, 0.14);
+    --glass-shadow-hover: 0 20px 48px rgba(20, 40, 70, 0.22);
+    --glass-radius: 26px;
+    --glass-radius-lg: 34px;
+    --glass-radius-pill: 999px;
 
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, var(--primary), var(--secondary));
     --gradient-accent: linear-gradient(135deg, var(--secondary), var(--accent));
     --gradient-dark: linear-gradient(180deg, var(--bg-dark), var(--bg-secondary));
-    --gradient-card: linear-gradient(145deg, rgba(16, 28, 40, 0.02), rgba(16, 28, 40, 0.005));
+    --gradient-card: linear-gradient(155deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.08));
 
     /* Layout Variables */
     --nav-height: 80px;
@@ -42,41 +52,45 @@
     --transition-fast: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 
     /* Fonts */
-    --font-primary: 'Plus Jakarta Sans', sans-serif;
-    --font-mono: 'Fira Code', monospace;
+    --font-primary: -apple-system, 'SF Pro Display', 'SF Pro Text', 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', monospace;
 }
 
 /* ==========================================================================
    DARK MODE OVERRIDES
    ========================================================================== */
 :root[data-theme="dark"] {
-    --bg-dark: #080c16;
-    --bg-secondary: #0e1422;
-    --bg-card: rgba(18, 26, 42, 0.75);
-    --bg-card-hover: rgba(28, 40, 62, 0.9);
+    --bg-dark: #060a14;
+    --bg-secondary: #0a0f1c;
+    --bg-card: rgba(24, 32, 50, 0.42);
+    --bg-card-hover: rgba(34, 44, 68, 0.58);
 
-    --primary: #71C5E9;      /* Sky Blue Accent */
-    --primary-rgb: 113, 197, 233;
+    --primary: #71C5E8;      /* Sky Blue Accent */
+    --primary-rgb: 113, 197, 232;
     --secondary: #4AA9D3;
-    --accent: #0858C3;       /* Purple */
-    --accent-rgb: 139, 92, 246;
+    --accent: #2E6FE0;       /* Deep Blue (brightened for dark bg) */
+    --accent-rgb: 46, 111, 224;
 
-    --text-primary: #f1f5f9;  /* Off-White */
-    --text-muted: #94a3b8;    /* Slate Gray */
+    --text-primary: #f3f6fa;  /* Off-White */
+    --text-muted: #9fb0c3;    /* Slate Gray */
     --text-dark: #475569;     /* Dark Gray */
 
-    --border-color: rgba(255, 255, 255, 0.06);
-    --border-glow: rgba(113, 197, 233, 0.25);
+    --border-color: rgba(255, 255, 255, 0.12);
+    --border-glow: rgba(94, 194, 245, 0.45);
 
-    --navbar-bg: rgba(8, 12, 22, 0.7);
-    --navbar-bg-scrolled: rgba(8, 12, 22, 0.85);
-    --floating-badge-bg: rgba(14, 20, 34, 0.8);
-    --mobile-menu-bg: #0e1422;
-    --overlay-tint: rgba(255, 255, 255, 0.05);
+    --navbar-bg: rgba(8, 12, 22, 0.42);
+    --navbar-bg-scrolled: rgba(8, 12, 22, 0.6);
+    --floating-badge-bg: rgba(14, 20, 34, 0.5);
+    --mobile-menu-bg: rgba(10, 15, 28, 0.75);
+    --overlay-tint: rgba(255, 255, 255, 0.06);
     --scrollbar-track: var(--bg-dark);
-    --footer-bg: #04060b;
+    --footer-bg: rgba(4, 6, 11, 0.4);
 
-    --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005));
+    --glass-highlight: rgba(255, 255, 255, 0.16);
+    --glass-shadow-outer: 0 8px 32px rgba(0, 0, 0, 0.45);
+    --glass-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.55);
+
+    --gradient-card: linear-gradient(155deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.01));
 }
 
 /* ==========================================================================
@@ -102,6 +116,38 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.4s ease, color 0.4s ease;
+    position: relative;
+}
+
+/* Aurora / mesh-gradient wallpaper behind every glass surface.
+   This is what the frosted panels blur & refract - without it, "liquid glass"
+   just looks like plain grey blur, so we give it colour to bend. */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        radial-gradient(38% 32% at 12% 8%, rgba(113, 197, 232, 0.55), transparent 65%),
+        radial-gradient(34% 30% at 88% 14%, rgba(8, 87, 195, 0.4), transparent 65%),
+        radial-gradient(40% 34% at 78% 82%, rgba(8, 87, 195, 0.45), transparent 65%),
+        radial-gradient(30% 28% at 8% 86%, rgba(113, 197, 232, 0.4), transparent 65%),
+        linear-gradient(180deg, var(--bg-dark), var(--bg-secondary));
+    background-color: var(--bg-dark);
+    filter: blur(60px) saturate(160%);
+    animation: auroraDrift 26s ease-in-out infinite alternate;
+    transition: background-color 0.4s ease;
+}
+
+@keyframes auroraDrift {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(-2%, 1.5%, 0) scale(1.06); }
+    100% { transform: translate3d(2%, -1.5%, 0) scale(1.02); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before { animation: none; }
 }
 
 /* Webkit Scrollbar */
@@ -1089,8 +1135,8 @@ body {
 
 .about-interactive-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(139, 92, 246, 0.2);
-    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.08);
+    border-color: rgba(8, 87, 195, 0.25);
+    box-shadow: 0 10px 25px rgba(8, 87, 195, 0.12);
 }
 
 .card-icon-header {
@@ -1437,14 +1483,14 @@ body {
 
 .cert-item:hover {
     transform: translateY(-3px);
-    border-color: rgba(139, 92, 246, 0.2);
-    box-shadow: 0 10px 20px rgba(139, 92, 246, 0.05);
+    border-color: rgba(8, 87, 195, 0.25);
+    box-shadow: 0 10px 20px rgba(113, 197, 232, 0.1);
 }
 
 .cert-icon-wrapper {
     width: 48px;
     height: 48px;
-    background: rgba(139, 92, 246, 0.05);
+    background: rgba(113, 197, 232, 0.1);
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -1949,5 +1995,245 @@ textarea.form-control {
         width: 100%;
         margin-left: 0;
         margin-right: 0;
+    }
+}
+
+/* ==========================================================================
+   LIQUID GLASS LAYER — iOS 27 style refractive glass
+   Technique: backdrop-filter blur+saturate for the frosted base, layered
+   inset box-shadows for the curved "shine" edge, and coloured glow shadows
+   on hover instead of any overlay that could sit on top of readable
+   content (photos, numbers, labels stay untouched and fully legible).
+   ========================================================================== */
+
+/* ---- Navbar ---- */
+.navbar {
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 1px 0 var(--glass-highlight) inset, var(--glass-shadow-outer);
+}
+
+.navbar.scrolled {
+    background-color: var(--navbar-bg-scrolled);
+    box-shadow: 0 1px 0 var(--glass-highlight) inset, var(--glass-shadow-hover);
+}
+
+/* ---- Generic glass surface mixin, applied to every card-like component ---- */
+.stat-card,
+.edu-card,
+.about-interactive-card,
+.card-glow,
+.skill-badge,
+.cert-item,
+.contact-link-card,
+.contact-form-card,
+.social-card,
+.form-control,
+.theme-toggle-btn,
+.hero-socials a,
+.floating-badge,
+.cv-dropdown-menu,
+.back-to-top,
+.greetings-badge {
+    background: var(--bg-card);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border: 1px solid var(--border-color);
+    box-shadow:
+        inset 0 1px 0 var(--glass-highlight),
+        inset 0 -1px 8px rgba(255, 255, 255, 0.06),
+        var(--glass-shadow-outer);
+}
+
+.stat-card, .edu-card, .about-interactive-card, .card-glow,
+.cert-item, .contact-link-card, .contact-form-card, .social-card {
+    border-radius: var(--glass-radius);
+}
+
+.skill-badge, .form-control { border-radius: 18px; }
+
+.floating-badge, .greetings-badge,
+.cv-dropdown-menu, .back-to-top, .theme-toggle-btn, .hero-socials a {
+    border-radius: var(--glass-radius-pill);
+}
+
+/* .nav-menu itself stays transparent/unstyled on desktop — it's just a
+   flex row of links, not a glass panel. The glass background only
+   belongs to the mobile slide-out version (see mobile media query). */
+
+/* ---- Nav "Sosial Media" button: a clean round pill like the social
+   icons, not a blurry glass box — no backdrop-filter here so it never
+   shows a rectangular blur bleed behind rounded corners. ---- */
+.nav-link.nav-btn {
+    background: rgba(var(--primary-rgb), 0.08);
+    border: 1px solid rgba(var(--primary-rgb), 0.25);
+    border-radius: var(--glass-radius-pill);
+    box-shadow: none;
+}
+
+.nav-link.nav-btn:hover {
+    background: rgba(var(--primary-rgb), 0.16);
+    border-color: rgba(var(--primary-rgb), 0.5);
+    box-shadow: 0 0 22px rgba(var(--primary-rgb), 0.4);
+    color: var(--primary);
+}
+
+/* ---- Buttons: pill-shaped liquid glass ---- */
+.btn {
+    border-radius: var(--glass-radius-pill);
+}
+
+.btn-primary {
+    background: var(--gradient-hero);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        0 8px 24px rgba(var(--primary-rgb), 0.35);
+}
+
+.btn-secondary {
+    background: var(--bg-card);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border-color: var(--border-color);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+}
+
+.back-to-top {
+    background: var(--gradient-hero);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), var(--glass-shadow-outer);
+}
+
+/* ---- Hero avatar: liquid glass ring with lens distortion ---- */
+.avatar-glow-ring {
+    filter: blur(30px) saturate(160%);
+    opacity: 0.55;
+}
+
+.avatar-wrapper {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    box-shadow:
+        inset 0 2px 12px rgba(255, 255, 255, 0.5),
+        0 20px 50px rgba(20, 40, 70, 0.25);
+    padding: 8px;
+}
+
+/* Note: no filter/distortion overlay on the photo itself — the avatar
+   image stays clean and untouched, only the ring behind it glows. */
+
+/* ---- Contact form inputs ---- */
+.form-control {
+    background: var(--overlay-tint);
+}
+
+.form-control:focus {
+    background: var(--bg-card-hover);
+    box-shadow:
+        inset 0 1px 0 var(--glass-highlight),
+        0 0 0 3px rgba(var(--primary-rgb), 0.18);
+}
+
+/* ---- Section surfaces that need a glass tint ---- */
+.footer {
+    background-color: var(--footer-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border-top: 1px solid var(--border-color);
+}
+
+.cert-icon-wrapper, .edu-logo-wrapper, .stat-icon, .contact-icon {
+    backdrop-filter: blur(10px) saturate(160%);
+    -webkit-backdrop-filter: blur(10px) saturate(160%);
+}
+
+/* ---- Scrollbar tuned to the glass palette ---- */
+::-webkit-scrollbar-thumb {
+    background: rgba(var(--primary-rgb), 0.4);
+}
+
+/* ---- Hover = soft colour glow (matching the cursor accent), never a
+   translucent sheen sitting on top of the content — glass must not
+   obscure the info inside the card. ---- */
+.stat-card:hover, .edu-card:hover, .about-interactive-card:hover,
+.cert-item:hover, .contact-link-card:hover, .social-card:hover,
+.skill-badge:hover, .contact-form-card:hover {
+    background: var(--bg-card-hover);
+    box-shadow:
+        inset 0 1px 0 var(--glass-highlight),
+        0 0 0 1px rgba(var(--primary-rgb), 0.4),
+        0 0 36px rgba(var(--primary-rgb), 0.32);
+}
+
+.timeline-item:hover .card-glow {
+    background: var(--bg-card-hover);
+    box-shadow:
+        inset 0 1px 0 var(--glass-highlight),
+        0 0 0 1px rgba(var(--primary-rgb), 0.4),
+        0 0 36px rgba(var(--primary-rgb), 0.32);
+}
+
+.btn-primary:hover {
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.7),
+        0 0 34px rgba(var(--primary-rgb), 0.55),
+        0 10px 28px rgba(var(--primary-rgb), 0.4);
+}
+
+/* ==========================================================================
+   MOBILE SAFETY PASS — lighter glass on small screens (perf), no overlap
+   ========================================================================== */
+@media (max-width: 768px) {
+    :root {
+        --glass-blur: 16px;
+    }
+
+    /* Heavy blur + animation on a fixed full-screen layer is the #1 cause
+       of scroll jank / repaint glitches on mobile browsers — tone it down
+       and freeze the animation on small screens. */
+    body::before {
+        filter: blur(36px) saturate(150%);
+        animation: none;
+    }
+
+    .navbar, .navbar.scrolled {
+        backdrop-filter: blur(14px) saturate(160%);
+        -webkit-backdrop-filter: blur(14px) saturate(160%);
+    }
+
+    /* Mobile nav panel must stay fully readable, not a blurry box */
+    .nav-menu {
+        background: var(--mobile-menu-bg);
+        backdrop-filter: blur(22px) saturate(160%);
+        -webkit-backdrop-filter: blur(22px) saturate(160%);
+    }
+
+    .nav-link.nav-btn {
+        margin-top: 4px;
+    }
+
+    /* Avoid the avatar ring glow spilling outside the viewport/overlapping
+       the floating badges on narrow screens */
+    .avatar-glow-ring {
+        width: 260px;
+        height: 260px;
+    }
+
+    .hero-image-container {
+        max-width: 100%;
+        overflow: visible;
+    }
+
+    .floating-badge {
+        max-width: 46%;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .iot-badge, .dev-badge {
+        font-size: 11px;
+        padding: 8px 12px;
     }
 }
