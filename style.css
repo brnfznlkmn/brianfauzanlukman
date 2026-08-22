@@ -581,7 +581,7 @@ body::before {
     border-radius: 50px;
     font-size: 13px;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--text-primary);
     letter-spacing: 0.5px;
     margin-bottom: 24px;
     text-transform: uppercase;
