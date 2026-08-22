@@ -24,7 +24,7 @@
     --navbar-bg: rgba(255, 255, 255, 0.32);
     --navbar-bg-scrolled: rgba(255, 255, 255, 0.5);
     --floating-badge-bg: rgba(255, 255, 255, 0.45);
-    --mobile-menu-bg: rgba(238, 244, 250, 0.75);
+    --mobile-menu-bg: rgba(238, 244, 250, 0.97);
     --overlay-tint: rgba(255, 255, 255, 0.28);
     --scrollbar-track: var(--bg-dark);
     --footer-bg: rgba(255, 255, 255, 0.25);
@@ -81,7 +81,7 @@
     --navbar-bg: rgba(8, 12, 22, 0.42);
     --navbar-bg-scrolled: rgba(8, 12, 22, 0.6);
     --floating-badge-bg: rgba(14, 20, 34, 0.5);
-    --mobile-menu-bg: rgba(10, 15, 28, 0.75);
+    --mobile-menu-bg: rgba(10, 15, 28, 0.97);
     --overlay-tint: rgba(255, 255, 255, 0.06);
     --scrollbar-track: var(--bg-dark);
     --footer-bg: rgba(4, 6, 11, 0.4);
@@ -1840,6 +1840,19 @@ textarea.form-control {
         padding: 100px 40px;
         transition: 0.4s ease-in-out;
         z-index: 999;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.25);
+        isolation: isolate;
+    }
+
+    /* Solid safety layer behind the menu content: guarantees the panel
+       is fully opaque and readable even if backdrop-filter fails to
+       render in some mobile browsers (a known WebKit quirk). */
+    .nav-menu::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-color: var(--mobile-menu-bg);
     }
     
     .nav-menu.active {
