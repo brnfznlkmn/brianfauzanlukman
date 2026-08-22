@@ -1578,12 +1578,12 @@ body::before {
     font-size: 18px;
 }
 
-/* Email & location icons on the contact cards use the same deep blue
-   as the education logos, overriding the generic .text-red/.text-teal
-   utility classes (which are still used elsewhere on the page). */
+/* Email & location icons on the contact cards use the light sky-blue
+   accent, overriding the generic .text-red/.text-teal utility classes
+   (which are still used elsewhere on the page). */
 .contact-icon.text-red,
 .contact-icon.text-teal {
-    color: #71c5e8 !important;
+    color: #71C5E8 !important;
 }
 
 .contact-text .label {
