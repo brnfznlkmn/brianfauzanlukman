@@ -581,7 +581,7 @@ body::before {
     border-radius: 50px;
     font-size: 13px;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--text-primary) !important;
     letter-spacing: 0.5px;
     margin-bottom: 24px;
     text-transform: uppercase;
@@ -998,7 +998,7 @@ body::before {
 }
 
 .edu-card {
-    --edu-accent: #3b82f6;
+    --edu-accent: #0857C3;
     display: flex;
     gap: 20px;
     background: var(--gradient-card);
@@ -1064,10 +1064,10 @@ body::before {
     align-items: center;
     width: 48px;
     height: 48px;
-    background: rgba(113, 197, 233, 0.05);
+    background: rgba(8, 87, 195, 0.08);
     border-radius: 12px;
     font-size: 20px;
-    color: var(--primary);
+    color: #0857C3;
     flex-shrink: 0;
 }
 
@@ -1576,6 +1576,14 @@ body::before {
     justify-content: center;
     align-items: center;
     font-size: 18px;
+}
+
+/* Email & location icons on the contact cards use the same deep blue
+   as the education logos, overriding the generic .text-red/.text-teal
+   utility classes (which are still used elsewhere on the page). */
+.contact-icon.text-red,
+.contact-icon.text-teal {
+    color: #0857C3 !important;
 }
 
 .contact-text .label {
