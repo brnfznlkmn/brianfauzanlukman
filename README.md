@@ -56,8 +56,8 @@ Website ini merupakan portofolio profesional yang menonjolkan identitas Brian Fa
 
 1. **Clone repository ini**
    ```bash
-   git clone https://github.com/brnfznlkmn/brnfznlkmn.github.io.git
-   cd brnfznlkmn.github.io
+   git clone https://github.com/brnfznlkmn/brianfauzanlukman
+   cd brianfauzanlukman
    ```
 
 2. **Buka file `index.html`**
