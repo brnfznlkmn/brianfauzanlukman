@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#07070d">
+<title>Pilih Cowo</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #07070d;
+    color: #eaeaf2;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% -12%, rgba(120, 80, 255, 0.28), transparent 70%),
+      radial-gradient(ellipse 70% 45% at 95% 15%, rgba(255, 93, 158, 0.14), transparent 70%),
+      radial-gradient(ellipse 70% 45% at 5% 35%, rgba(94, 200, 255, 0.12), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 30px 18px calc(40px + env(safe-area-inset-bottom));
+  }
+
+  /* ---------- TOP BAR ---------- */
+  .topbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    line-height: 1.15;
+    background: linear-gradient(135deg, #ffffff 0%, #a8a8c8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .sub {
+    font-size: 12.5px;
+    color: #6a6a85;
+    margin-top: 5px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .sub b { color: #9a9ab0; font-weight: 700; }
+
+  .reset {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.045);
+    color: #9a9ab0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background .2s, color .2s, transform .12s;
+  }
+  .reset:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+  .reset:active { transform: scale(0.9); }
+  .reset svg { width: 18px; height: 18px; }
+
+  /* ---------- BUDGET ---------- */
+  .budget {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.018));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .budget::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -20px;
+    width: 140px; height: 140px;
+    background: rgba(124, 92, 255, 0.25);
+    filter: blur(60px);
+    pointer-events: none;
+  }
+
+  .budget-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    color: #6a6a85;
+    text-transform: uppercase;
+  }
+
+  .pips {
+    display: flex;
+    gap: 6px;
+    margin-top: 9px;
+  }
+
+  .pips i {
+    display: block;
+    width: 24px;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.09);
+    transition: background .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s;
+  }
+
+  .pips i.on {
+    background: linear-gradient(90deg, #7c5cff, #b06cff);
+    box-shadow: 0 0 12px rgba(140, 92, 255, 0.75);
+  }
+
+  .budget-num {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #fff;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .budget-num span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #55556e;
+    letter-spacing: 0;
+  }
+
+  /* ---------- CARD ---------- */
+  .card {
+    position: relative;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.058), rgba(255, 255, 255, 0.014));
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-radius: 22px;
+    padding: 18px 20px 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: border-color .3s;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -70px;
+    left: -50px;
+    width: 190px;
+    height: 190px;
+    background: var(--c);
+    filter: blur(85px);
+    opacity: 0.16;
+    pointer-events: none;
+    transition: opacity .3s;
+  }
+
+  .card.shake { animation: shake .42s cubic-bezier(.36, .07, .19, .97); }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    18% { transform: translateX(-7px); }
+    38% { transform: translateX(6px); }
+    58% { transform: translateX(-4px); }
+    78% { transform: translateX(3px); }
+  }
+
+  /* auto-sacrifice flash */
+  .card.sacrificed::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    pointer-events: none;
+    background: radial-gradient(circle at 25% 55%, rgba(255, 96, 96, 0.30), transparent 68%);
+    animation: sacFade .7s ease forwards;
+  }
+
+  @keyframes sacFade {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .card.sacrificed {
+    border-color: rgba(255, 110, 110, 0.55);
+    transition: border-color .12s;
+  }
+
+  .card.sacrificed .badge {
+    background: rgba(255, 110, 110, 0.20) !important;
+    border-color: rgba(255, 110, 110, 0.55) !important;
+    color: #ff8a8a !important;
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .icon { font-size: 19px; line-height: 1; }
+
+  .name {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+    flex: 1;
+    color: #f0f0f8;
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--c) 16%, transparent);
+    color: var(--c);
+    border: 1px solid color-mix(in srgb, var(--c) 32%, transparent);
+    transition: all .25s ease;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+  }
+
+  /* ---------- SLIDER (BIG HIT AREA) ---------- */
+  .slider {
+    padding: 24px 14px;
+    margin-top: 2px;
+    position: relative;
+    z-index: 1;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .card.dragging .slider { cursor: grabbing; }
+
+  .track {
+    position: relative;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.09);
+    pointer-events: none;
+  }
+
+  .fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--c) 35%, transparent), var(--c));
+    box-shadow: 0 0 14px color-mix(in srgb, var(--c) 55%, transparent);
+    transition: width .26s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .stop {
+    position: absolute;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .thumb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--c);
+    transform: translate(-50%, -50%);
+    transition: left .26s cubic-bezier(.22, 1, .36, 1),
+                box-shadow .25s,
+                transform .16s ease;
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--c) 18%, transparent),
+      0 0 22px color-mix(in srgb, var(--c) 65%, transparent),
+      0 3px 8px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    will-change: left;
+  }
+
+  .slider:hover .thumb {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .card.dragging .fill,
+  .card.dragging .thumb {
+    transition: none;
+  }
+
+  .card.dragging .thumb {
+    transform: translate(-50%, -50%) scale(1.18);
+    box-shadow:
+      0 0 0 6px color-mix(in srgb, var(--c) 24%, transparent),
+      0 0 28px color-mix(in srgb, var(--c) 80%, transparent),
+      0 4px 10px rgba(0, 0, 0, 0.55);
+  }
+
+  /* ---------- LABELS ---------- */
+  .labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #57576e;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: color .22s;
+    padding: 6px 4px;
+    letter-spacing: 0.1px;
+    line-height: 1;
+  }
+
+  .label.active {
+    color: var(--c);
+    font-weight: 800;
+    text-shadow: 0 0 18px color-mix(in srgb, var(--c) 60%, transparent);
+  }
+
+  /* ---------- RESULT ---------- */
+  .result {
+    margin-top: 24px;
+    padding: 18px 20px;
+    border-radius: 22px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012));
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .result-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    color: #6a6a85;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 8px 13px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--c) 13%, transparent);
+    border: 1px solid color-mix(in srgb, var(--c) 28%, transparent);
+    color: color-mix(in srgb, var(--c) 85%, white);
+    transition: all .25s ease;
+    letter-spacing: 0.1px;
+  }
+
+  .foot {
+    text-align: center;
+    font-size: 11px;
+    color: #3d3d52;
+    margin-top: 22px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  @media (max-width: 360px) {
+    .wrap { padding-left: 14px; padding-right: 14px; }
+    h1 { font-size: 20px; }
+    .label { font-size: 10.5px; }
+    .card { padding: 16px 16px 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div>
+      <h1>Pilih Cowo</h1>
+      <p class="sub">
+        Total <b>4 poin</b> untuk 3 atribut.<br>
+        Naikin satu, yang lain <b>mundur random</b> — siapa aja bisa kena.
+      </p>
+    </div>
+    <button class="reset" id="reset" aria-label="Reset">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/>
+        <path d="M3 3v5h5"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="budget">
+    <div>
+      <div class="budget-label">Poin Tersisa</div>
+      <div class="pips" id="pips"><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div class="budget-num"><b id="remaining">1</b><span>/4</span></div>
+  </div>
+
+  <div id="cards"></div>
+
+  <div class="result">
+    <div class="result-label">Hasil Akhir</div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div class="foot">Geser slider-nya — siapa yang jadi korban? Random.</div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var BUDGET = 4;
+
+  var ATTRS = [
+    { name: 'Muka',   icon: '😎', color: '#ff5d9e', values: ['Jelek', 'Biasa aja', 'Ganteng'] },
+    { name: 'Harta',  icon: '💰', color: '#ffc93c', values: ['Mokondo', 'Pas-pasan', 'Kaya'] },
+    { name: 'Ukuran Kontol', icon: '📏', color: '#5ec8ff', values: ['Kecil', 'Sedang', 'Besar'] }
+  ];
+
+  var state = [1, 1, 1];
+  var cards = [];
+  var cardsEl = document.getElementById('cards');
+  var remainingEl = document.getElementById('remaining');
+  var pipsEl = document.getElementById('pips');
+  var chipsEl = document.getElementById('chips');
+
+  function vibrate(ms) {
+    if (navigator.vibrate) {
+      try { navigator.vibrate(ms); } catch (e) {}
+    }
+  }
+
+  /* ---------- BUILD CARDS ---------- */
+  ATTRS.forEach(function (attr, i) {
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.style.setProperty('--c', attr.color);
+
+    var labelsHtml = attr.values.map(function (v, j) {
+      return '<span class="label" data-idx="' + j + '">' + v + '</span>';
+    }).join('');
+
+    card.innerHTML =
+      '<div class="head">' +
+        '<span class="icon">' + attr.icon + '</span>' +
+        '<span class="name">' + attr.name + '</span>' +
+        '<span class="badge" data-badge></span>' +
+      '</div>' +
+      '<div class="slider" data-slider>' +
+        '<div class="track" data-track>' +
+          '<div class="fill" data-fill></div>' +
+          '<span class="stop" style="left:0%"></span>' +
+          '<span class="stop" style="left:50%"></span>' +
+          '<span class="stop" style="left:100%"></span>' +
+          '<div class="thumb" data-thumb></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="labels">' + labelsHtml + '</div>';
+
+    cardsEl.appendChild(card);
+    cards.push(card);
+
+    var slider = card.querySelector('[data-slider]');
+    var track  = card.querySelector('[data-track]');
+    var dragging = false;
+
+    function updateFromX(clientX) {
+      var rect = track.getBoundingClientRect();
+      if (rect.width === 0) return;
+      var ratio = (clientX - rect.left) / rect.width;
+      if (ratio < 0) ratio = 0;
+      if (ratio > 1) ratio = 1;
+      trySet(i, Math.round(ratio * 2));
+    }
+
+    slider.addEventListener('pointerdown', function (e) {
+      if (e.button !== undefined && e.button !== 0) return;
+      e.preventDefault();
+      dragging = true;
+      card.classList.add('dragging');
+      try { slider.setPointerCapture(e.pointerId); } catch (err) {}
+      updateFromX(e.clientX);
+    });
+
+    slider.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      e.preventDefault();
+      updateFromX(e.clientX);
+    });
+
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+      card.classList.remove('dragging');
+      try { slider.releasePointerCapture(e.pointerId); } catch (err) {}
+    }
+    slider.addEventListener('pointerup', endDrag);
+    slider.addEventListener('pointercancel', endDrag);
+    window.addEventListener('blur', function () {
+      if (dragging) {
+        dragging = false;
+        card.classList.remove('dragging');
+      }
+    });
+
+    card.querySelectorAll('.label').forEach(function (el) {
+      el.addEventListener('click', function () {
+        trySet(i, parseInt(el.getAttribute('data-idx'), 10));
+      });
+    });
+  });
+
+  /* ---------- CORE LOGIC ----------
+     Naikin 1 atribut -> kalau total > budget,
+     pilih RANDOM atribut LAIN yang masih punya poin (> 0) untuk dimundurin.
+     Efeknya kayak whack-a-mole: siapa aja bisa jadi korban,
+     gak selalu yang paling tinggi atau paling rendah.
+  --------------------------------- */
+  function trySet(index, value) {
+    if (value < 0) value = 0;
+    if (value > 2) value = 2;
+    if (state[index] === value) return;
+
+    var next = state.slice();
+    next[index] = value;
+
+    var total = next[0] + next[1] + next[2];
+    var sacrificed = [];
+
+    while (total > BUDGET) {
+      // kumpulin kandidat: atribut lain yang masih punya poin
+      var candidates = [];
+      for (var i = 0; i < 3; i++) {
+        if (i !== index && next[i] > 0) candidates.push(i);
+      }
+
+      // gak ada yang bisa dikorbanin (harusnya gak mungkin, safety aja)
+      if (candidates.length === 0) {
+        var card = cards[index];
+        card.classList.remove('shake');
+        void card.offsetWidth;
+        card.classList.add('shake');
+        setTimeout(function () { card.classList.remove('shake'); }, 450);
+        vibrate(35);
+        return;
+      }
+
+      // pilih kandidat secara RANDOM
+      var pick = candidates[Math.floor(Math.random() * candidates.length)];
+      next[pick]--;
+      total--;
+      if (sacrificed.indexOf(pick) === -1) sacrificed.push(pick);
+    }
+
+    state = next;
+
+    if (sacrificed.length) {
+      vibrate(22);
+      render(sacrificed);
+    } else {
+      vibrate(12);
+      render();
+    }
+  }
+
+  /* ---------- RENDER ---------- */
+  function render(sacrificed) {
+    var total = state[0] + state[1] + state[2];
+    var remaining = BUDGET - total;
+
+    remainingEl.textContent = remaining;
+
+    var pips = pipsEl.querySelectorAll('i');
+    for (var p = 0; p < pips.length; p++) {
+      pips[p].classList.toggle('on', p < remaining);
+    }
+
+    ATTRS.forEach(function (attr, i) {
+      var card = cards[i];
+      var v = state[i];
+      var pct = (v / 2) * 100;
+
+      card.querySelector('[data-fill]').style.width = pct + '%';
+      card.querySelector('[data-thumb]').style.left = pct + '%';
+      card.querySelector('[data-badge]').textContent = attr.values[v];
+
+      var labels = card.querySelectorAll('.label');
+      for (var j = 0; j < labels.length; j++) {
+        labels[j].classList.toggle('active', j === v);
+      }
+    });
+
+    renderChips();
+
+    if (sacrificed && sacrificed.length) {
+      sacrificed.forEach(function (i) {
+        var card = cards[i];
+        card.classList.remove('sacrificed');
+        void card.offsetWidth;
+        card.classList.add('sacrificed');
+        setTimeout(function () { card.classList.remove('sacrificed'); }, 700);
+      });
+    }
+  }
+
+  function renderChips() {
+    chipsEl.innerHTML = ATTRS.map(function (a, i) {
+      return '<span class="chip" style="--c:' + a.color + '">' +
+        a.icon + ' ' + a.values[state[i]] +
+      '</span>';
+    }).join('');
+  }
+
+  /* ---------- RESET ---------- */
+  document.getElementById('reset').addEventListener('click', function () {
+    state = [1, 1, 1];
+    vibrate(18);
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
