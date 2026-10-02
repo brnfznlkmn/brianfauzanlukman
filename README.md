@@ -69,10 +69,6 @@ Website ini merupakan portofolio profesional yang menonjolkan identitas Brian Fa
 
 Tidak diperlukan proses instalasi dependency atau build tool tambahan karena website ini murni HTML/CSS/JS statis.
 
-Pengujian bahasa dapat dijalankan dengan `node --test tests/language.test.cjs`. Deteksi negara memakai [IPWhois](https://ipwhois.io/documentation) melalui HTTPS, hanya meminta kode negara, dan tidak meminta izin GPS. Hasil disimpan selama enam jam dalam sesi browser; pilihan manual selalu didahulukan. Permintaan dibatasi 2,5 detik, lalu memakai bahasa browser jika layanan gagal atau batas layanannya tercapai. Tracking perangkat tetap berjalan melalui fungsi yang sudah ada.
-
-Tracking dimulai melalui handler tersendiri saat DOM siap, terpisah dari tema dan bahasa. Pencarian IP memiliki batas 2,5 detik per layanan (IPify, kemudian IPWhois); data perangkat tetap dikirim jika IP tidak tersedia atau izin GPS belum dijawab. GPS yang diizinkan dikirim sebagai pembaruan setelah permintaan awal. Pengiriman memakai `keepalive` dan mempertahankan endpoint serta format payload Apps Script yang sama. `data-tracking-status` pada elemen HTML menunjukkan `sending`, `request-complete`, atau `network-error`; respons `no-cors` tidak membuktikan penulisan ke Sheet. Jalankan seluruh pengujian dengan `node --test tests/*.test.cjs`.
-
 ---
 
 ## 🌐 Deployment
