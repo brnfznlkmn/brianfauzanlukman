@@ -117,7 +117,7 @@ function initMobileNav() {
         mobileToggle.classList.toggle('active', open);
         navMenu.classList.toggle('active', open);
         mobileToggle.setAttribute('aria-expanded', String(open));
-        mobileToggle.setAttribute('aria-label', open ? 'Tutup menu navigasi' : 'Buka menu navigasi');
+        mobileToggle.setAttribute('aria-label', portfolioText(open ? 'Tutup menu navigasi' : 'Buka menu navigasi'));
     };
 
     mobileToggle.addEventListener('click', () => {
@@ -184,21 +184,21 @@ function initContactForm() {
 
         isSubmitting = true;
         submitBtn.disabled = true;
-        const originalBtnText = submitBtn.innerHTML;
-        submitBtn.innerHTML = 'Mempersiapkan Email... <i class="fa-solid fa-spinner fa-spin"></i>';
+        const originalBtnNodes = Array.from(submitBtn.childNodes);
+        submitBtn.innerHTML = `${portfolioText('Mempersiapkan Email...')} <i class="fa-solid fa-spinner fa-spin"></i>`;
         formStatus.innerHTML = '';
         formStatus.className = 'form-status';
         formStatus.style.opacity = '1';
 
-        const mailtoUrl = `mailto:brnfznlkmn@gmail.com?subject=${encodeURIComponent(`Pesan Portofolio dari ${name}`)}&body=${encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`)}`;
+        const mailtoUrl = `mailto:brnfznlkmn@gmail.com?subject=${encodeURIComponent(`${portfolioText('Pesan Portofolio dari')} ${name}`)}&body=${encodeURIComponent(`${portfolioText('Nama')}: ${name}\nEmail: ${email}\n\n${portfolioText('Pesan')}:\n${message}`)}`;
 
         window.location.href = mailtoUrl;
         formStatus.classList.add('success');
-        formStatus.innerHTML = '<i class="fa-solid fa-circle-check"></i> Membuka aplikasi email Anda...';
+        formStatus.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span data-translation="Membuka aplikasi email Anda...">${portfolioText('Membuka aplikasi email Anda...')}</span>`;
         form.reset();
 
         submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
+        submitBtn.replaceChildren(...originalBtnNodes);
         isSubmitting = false;
 
         setTimeout(() => {

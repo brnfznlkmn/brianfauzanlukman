@@ -18,6 +18,7 @@ Website ini merupakan portofolio profesional yang menonjolkan identitas Brian Fa
 - **Keahlian & Soft Skill** — Rincian kompetensi teknis (desain grafis, IT support, jaringan, cyber security, pemrograman, dsb.) dalam bentuk badge/kategori.
 - **Sosial Media & Kontak** — Daftar tautan ke berbagai platform sosial media (GitHub, LinkedIn, Instagram, TikTok, YouTube, dll.) beserta form kontak yang terhubung langsung ke email.
 - **Dark/Light Mode** — Tombol toggle tema terang/gelap dengan preferensi tersimpan di `localStorage`.
+- **Bahasa ID/EN**: pilihan bahasa tersimpan, dengan animasi hapus–ketik. Pengunjung baru mendapatkan Bahasa Indonesia jika negara IP-nya Indonesia dan English untuk negara lain; bahasa browser menjadi cadangan jika deteksi gagal.
 - **Device Tracking**: deteksi perangkat, browser, IP, dan lokasi sesuai izin browser, dengan pengiriman ke Google Apps Script.
 - **Responsive Design** — Tampilan menyesuaikan untuk perangkat desktop maupun mobile, termasuk menu navigasi mobile.
 - **Smooth Scroll & Scroll Spy** — Navigasi antar section yang halus dengan indikator menu aktif otomatis.
@@ -47,6 +48,8 @@ Website ini merupakan portofolio profesional yang menonjolkan identitas Brian Fa
 ├── README.md        # Dokumentasi proyek
 ├── index.html       # Halaman utama website
 ├── script.js        # Tema, navigasi, form kontak, dan tracking perangkat
+├── language.js      # Terjemahan ID/EN, deteksi negara, dan animasi teks
+├── tests/           # Pengujian pilihan bahasa dan prioritas deteksi negara
 └── portfolio.css    # Tampilan, tema OLED, gradasi, dan tata letak responsif
 ```
 
@@ -65,6 +68,8 @@ Website ini merupakan portofolio profesional yang menonjolkan identitas Brian Fa
    Cukup buka file `index.html` langsung di browser, atau gunakan live server (opsional) agar perubahan lebih mudah dipantau, contohnya dengan ekstensi **Live Server** di VS Code.
 
 Tidak diperlukan proses instalasi dependency atau build tool tambahan karena website ini murni HTML/CSS/JS statis.
+
+Pengujian bahasa dapat dijalankan dengan `node --test tests/language.test.cjs`. Deteksi negara memakai [IPWhois](https://ipwhois.io/documentation) melalui HTTPS, hanya meminta kode negara, dan tidak meminta izin GPS. Hasil disimpan selama enam jam dalam sesi browser; pilihan manual selalu didahulukan. Permintaan dibatasi 2,5 detik, lalu memakai bahasa browser jika layanan gagal atau batas layanannya tercapai. Tracking perangkat tetap berjalan melalui fungsi yang sudah ada.
 
 ---
 

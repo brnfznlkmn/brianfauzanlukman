@@ -30,6 +30,15 @@ Direction chosen for this redesign: an editorial personal portfolio connecting g
 - Reduced-motion preferences bypass the effect. Browsers without View Transitions fade surface and text colors over 600ms. Repeated clicks during the animation are ignored; snapshot failures still apply the selected theme and release the transition state.
 - Verified desktop and 375px mobile transitions in both directions, cleanup after completion, and persistence after reload. Targeted mocked checks cover reduced motion, fallback, repeated clicks, and snapshot failure. Tracking function and its initialization remain unchanged.
 
+## Language switch
+
+- Compact ID/EN control next to the theme toggle, with an underline and stronger weight identifying the active language. Content, form labels/placeholders, accessibility labels, and metadata have English translations; names and technical product names are retained.
+- First-visit default follows IP country (ID versus other countries). Manual preferences bypass detection. Country-only lookup uses HTTPS, a 2.5-second timeout, and a six-hour session cache; failed detection uses browser language. It does not request GPS permission or alter device tracking.
+- Visible text erases for 600ms, pauses for 150ms, then types the translation for 1450ms. Smoothstep easing softens the start and end; outgoing text fades out and incoming text fades in over its first 500ms, without a cursor. Invisible full copies hold space during typing; assistive technology reads the final text, with one completion announcement. Reduced-motion changes are immediate.
+- Measured box dimensions animate over 650ms when typing placeholders enter and leave. Nested elements are measured before any animations begin. Width changes also hold the measured height and clip temporary wrapping, preventing caption line breaks from jolting the portrait or card.
+- Per-frame browser checks in both directions at 1440px and 375px removed the earlier 31.5px card / 15.75px portrait jumps. Largest measured card steps were 1.1px on desktop and 3.1px on mobile, with no overflow or leftover typing wrappers. Eight focused tests pass, including layout measurement and reduced motion.
+- Browser checks cover both languages, persistence, typing cleanup, navigation and phone widths. Mocked tests verify country defaults, invalid responses, manual preference priority, reverse typing, reduced motion, and unchanged tracking.
+
 ## Code cleanup
 
 - Removed six uncalled legacy animation functions and the unused navbar scroll class. Preserved the tracking function's content exactly, apart from file line-ending normalization, and retained its startup call.
