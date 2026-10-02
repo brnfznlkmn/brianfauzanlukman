@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="script.js"></script>
+    <script src="script.js?v=theme-reveal-9" defer></script>
     <script>
         (function () {
             var theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
@@ -15,33 +15,22 @@
         content="Portfolio Profesional Brian Fauzan Lukman - Graphic Designer, IT Support, dan Web Developer. Alumni S1 Teknologi Informasi Universitas Darma Persada.">
     <meta name="author" content="Brian Fauzan Lukman">
     <title>Brian Fauzan Lukman</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="portfolio.css?v=theme-reveal-9">
     <link rel="icon" href="assets/favicon.png">
 
 </head>
 
 <body>
-    
-    <!-- Interactive Particle Background Canvas -->
-    <canvas id="particle-canvas"></canvas>
 
-    <!-- Geometric Background Canvas -->
-    <canvas id="geo-canvas"></canvas>
-
-    <!-- Custom Cursor -->
-    <div class="custom-cursor-dot"></div>
-    <div class="custom-cursor-outline"></div>
+    <a class="skip-link" href="#main-content">Langsung ke konten</a>
 
     <!-- Navigation Header -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#hero" class="nav-logo" id="nav-logo">BRNFZNLKMN<span>.</span></a>
+            <a href="#hero" class="nav-logo" id="nav-logo">Brian Fauzan<span> Lukman.</span></a>
             <div class="nav-right-group">
                 <nav class="nav-menu" id="nav-menu">
                     <ul>
@@ -53,10 +42,10 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle-btn" id="theme-toggle" aria-label="Ganti mode tampilan (terang/gelap)">
-                    <i class="fa-solid fa-sun theme-icon-sun"></i>
-                    <i class="fa-solid fa-moon theme-icon-moon"></i>
+                    <svg class="theme-icon-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+                    <svg class="theme-icon-moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4a8.5 8.5 0 1 0 11.5 11.5Z"/></svg>
                 </button>
-                <button class="mobile-nav-toggle" aria-label="Toggle Navigation menu" id="mobile-toggle">
+                <button class="mobile-nav-toggle" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="nav-menu" id="mobile-toggle">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
@@ -65,51 +54,36 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <div class="greetings-badge" id="greetings-badge">
-                        <span class="pulse-dot"></span> Open to Work!
-                    </div>
-                    <h1 class="hero-title">Hai, Saya <br> <span class="gradient-text">Brian Fauzan Lukman</span></h1>
-                    <h2 class="hero-subtitle">
-                        Saya seorang <span id="typed-text" class="typed-text"></span><span class="typed-cursor">|</span>
-                    </h2>
+                    <p class="hero-kicker">Desain grafis / IT support / Web development</p>
+                    <h1 class="hero-title">Sisi kreatif.<br>Sisi teknis.<br><span>Satu perspektif.</span></h1>
+                    <p class="hero-subtitle">Hai, saya Brian Fauzan Lukman.</p>
                     <p class="hero-description">
-                        Penggemar teknologi lulusan S1 Teknologi Informasi Universitas Darma Persada (IPK 3.42) yang senang
-                        memadukan kekuatan perangkat keras komputer dengan dunia kreatif desain grafis.
+                        Dari merancang visual hingga menangani perangkat komputer, saya senang membuat sesuatu yang enak dilihat dan bekerja dengan baik.
                     </p>
                     <div class="hero-cta-group">
-                        <a href="#contact" class="btn btn-primary" id="hero-cta-contact">Hubungi Saya <i
-                                class="fa-solid fa-paper-plane"></i></a>
+                        <a href="mailto:brnfznlkmn@gmail.com" class="btn btn-primary" id="hero-cta-contact">Hubungi saya</a>
+                        <a href="#experience" class="hero-secondary-link">Lihat pengalaman <span aria-hidden="true">↘</span></a>
                     </div>
-                    <div class="hero-socials">
-                            <a href="https://github.com/brnfznlkmn" target="_blank" aria-label="GitHub" id="social-github"><i
-                                    class="fa-brands fa-github"></i></a>
+                    <div class="hero-note">
+                        <span>Terbuka untuk kesempatan kerja & kolaborasi</span>
+                        <a href="https://github.com/brnfznlkmn" target="_blank" rel="noopener noreferrer" id="social-github">GitHub</a>
                     </div>
                 </div>
                 <div class="hero-image-container">
-                    <div class="avatar-glow-ring"></div>
-                    <div class="avatar-wrapper">
-                        <img src="assets/brian1.jpeg" alt="Brian Fauzan Lukman" class="avatar-img" id="avatar-img">
-                    </div>
-                    <div class="floating-badge iot-badge">
-                        <i class="fa-solid fa-palette"></i>
-                        <span>Graphic Designer</span>
-                    </div>
-                    <div class="floating-badge dev-badge">
-                        <i class="fa-solid fa-headset"></i>
-                        <span>IT Support</span>
-                    </div>
+                    <figure class="portrait">
+                        <div class="avatar-wrapper">
+                            <img src="assets/brian1.jpeg" alt="Potret Brian Fauzan Lukman" class="avatar-img" id="avatar-img" width="2000" height="2000" fetchpriority="high">
+                        </div>
+                        <figcaption><span>Brian Fauzan Lukman</span><span>Desain & teknologi</span></figcaption>
+                    </figure>
                 </div>
             </div>
-            <a href="#about" class="scroll-indicator" aria-label="Scroll to About section" id="scroll-to-about">
-                <span class="mouse-scroll">
-                    <span class="wheel"></span>
-                </span>
-            </a>
+            <div class="container hero-bottom"><span>Portofolio pribadi</span><a href="#about" id="scroll-to-about">Kenali saya lebih dekat <span aria-hidden="true">↓</span></a><span>2026</span></div>
         </section>
 
         <!-- About Section -->
@@ -215,21 +189,16 @@
                     </div>
 
                     <div class="skills-info-column">
-
                         <h4 class="sub-section-title">
                             <i class="fa-solid fa-layer-group"></i> Kompetensi Tambahan
                         </h4>
-                    
+
                         <div class="about-cards-subgrid">
-                    
-                            <!-- Soft Skills -->
                             <div class="about-interactive-card">
                                 <div class="card-icon-header text-purple">
                                     <i class="fa-solid fa-brain"></i>
                                 </div>
-                    
                                 <h3>Soft Skills</h3>
-                    
                                 <ul class="clean-list">
                                     <li><i class="fa-solid fa-circle-check text-purple"></i> Leadership</li>
                                     <li><i class="fa-solid fa-circle-check text-purple"></i> Kemampuan Komunikasi</li>
@@ -239,15 +208,12 @@
                                     <li><i class="fa-solid fa-circle-check text-purple"></i> Manajemen Waktu</li>
                                 </ul>
                             </div>
-                    
-                            <!-- Professional Skills -->
+
                             <div class="about-interactive-card">
                                 <div class="card-icon-header text-blue">
                                     <i class="fa-solid fa-briefcase"></i>
                                 </div>
-                    
                                 <h3>Professional Skills</h3>
-                    
                                 <ul class="clean-list">
                                     <li><i class="fa-solid fa-circle-check text-blue"></i> Desain Grafis</li>
                                     <li><i class="fa-solid fa-circle-check text-blue"></i> Percetakan Digital</li>
@@ -259,10 +225,8 @@
                                     <li><i class="fa-solid fa-circle-check text-blue"></i> Pemrograman (Java & C++)</li>
                                 </ul>
                             </div>
-                    
-                        </div>
-                    </div>
-                            <div class="about-interactive-card">
+
+                            <div class="about-interactive-card full-width-card">
                                 <div class="card-icon-header text-teal">
                                     <i class="fa-solid fa-language"></i>
                                 </div>
@@ -277,8 +241,6 @@
                                             <div class="progress-bar-fill" style="width: 100%"></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="lang-progress">
                                     <div class="lang-item">
                                         <div class="lang-info">
                                             <span>Bahasa Inggris</span>
@@ -495,361 +457,361 @@
         <!-- Skills Section -->
         <section id="skills" class="skills-section section-padding alt-bg">
             <div class="container">
-        
+
                 <div class="section-header">
                     <span class="section-tag">03. Kompetensi</span>
                     <h2 class="section-title">Keahlian & Soft Skill</h2>
                     <div class="title-underline"></div>
                 </div>
-        
+
                 <div class="skills-grid">
-        
+
                     <!-- COLUMN 1: SKILLS -->
                     <div class="skills-column">
-        
+
                         <h3 class="column-title">
                             <i class="fa-solid fa-laptop-code"></i>
                             Keahlian Teknis
                         </h3>
-        
+
                         <!-- Desain Grafis -->
                         <div class="skills-group">
-        
+
                             <h4 class="group-title">
                                 Desain Grafis & Percetakan
                             </h4>
-        
+
                             <div class="skills-badges">
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-brands fa-adobe text-red"></i>
                                     Adobe Photoshop
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-pen-nib text-orange"></i>
                                     Adobe Illustrator
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-film text-purple"></i>
                                     Adobe Premiere Pro
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-swatchbook"></i>
                                     Tipografi, Layout & Warna
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-print"></i>
                                     Digital Printing (Sublimasi & DTG)
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-box-open"></i>
                                     Operasional Mesin Press Cetak
                                 </span>
-        
+
                             </div>
-        
+
                         </div>
-        
+
                         <!-- Pemrograman & Web -->
                         <div class="skills-group">
-        
+
                             <h4 class="group-title">
                                 Pemrograman & Pengembangan Web
                             </h4>
-        
+
                             <div class="skills-badges">
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-brands fa-html5 text-red"></i>
                                     HTML
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-brands fa-css3-alt text-blue"></i>
                                     CSS
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-brands fa-js text-yellow"></i>
                                     JavaScript
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-diagram-project"></i>
                                     Struktur Data & Algoritma
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-arrows-rotate"></i>
                                     Aplikasi Web CRUD
                                 </span>
-        
+
                             </div>
-        
+
                         </div>
-        
+
                         <!-- Basis Data -->
                         <div class="skills-group">
-        
+
                             <h4 class="group-title">
                                 Basis Data
                             </h4>
-        
+
                             <div class="skills-badges">
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-database"></i>
                                     MySQL
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-diagram-project"></i>
                                     Relasi & Normalisasi
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-server"></i>
                                     Manajemen Database
                                 </span>
-        
+
                             </div>
-        
+
                         </div>
-        
+
                         <!-- Jaringan & Cyber Security -->
                         <div class="skills-group">
-        
+
                             <h4 class="group-title">
                                 Jaringan Komputer & Cyber Security
                             </h4>
-        
+
                             <div class="skills-badges">
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-network-wired"></i>
                                     Topologi & Protokol Jaringan
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-shield-halved"></i>
                                     Threats & Vulnerabilities
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-user-shield"></i>
                                     Kontrol Keamanan & Akses
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-house-laptop"></i>
                                     BYOD / WFH Security
                                 </span>
-        
+
                             </div>
-        
+
                         </div>
-        
+
                         <!-- IT Support -->
                         <div class="skills-group">
-        
+
                             <h4 class="group-title">
                                 IT Support & Hardware
                             </h4>
-        
+
                             <div class="skills-badges">
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-computer"></i>
                                     Troubleshooting PC & Laptop
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-arrows-rotate"></i>
                                     Backup & Sinkronisasi Data
                                 </span>
-        
+
                                 <span class="skill-badge">
                                     <i class="fa-solid fa-gears"></i>
                                     Konfigurasi & Deployment Perangkat
                                 </span>
-        
+
                             </div>
-        
+
                         </div>
-        
+
                     </div>
-        
+
                     <!-- COLUMN 2: CERTIFICATIONS -->
                     <div class="skills-column">
-        
+
                         <h3 class="column-title">
                             <i class="fa-solid fa-brain"></i>
                             Soft Skill
                         </h3>
-        
+
                         <div class="certifications-list">
-        
+
                             <!-- SOFT SKILL 1 -->
                             <div class="cert-item">
-        
+
                                 <div class="cert-icon-wrapper">
                                     <i class="fa-solid fa-users"></i>
                                 </div>
-        
+
                                 <div class="cert-info">
-        
+
                                     <h4>
                                         Leadership
                                     </h4>
-        
+
                                     <p class="cert-issuer">
                                         Berpengalaman memimpin tim operasional 10–20 personil dengan fokus pada pembinaan disiplin dan pencapaian target kerja.
                                     </p>
-        
+
                                     <span class="badge">
                                         Soft Skill
                                     </span>
-        
+
                                 </div>
-        
+
                             </div>
-        
+
                             <!-- SOFT SKILL 2 -->
                             <div class="cert-item">
-        
+
                                 <div class="cert-icon-wrapper">
                                     <i class="fa-solid fa-comments"></i>
                                 </div>
-        
+
                                 <div class="cert-info">
-        
+
                                     <h4>
                                         Kemampuan Komunikasi
                                     </h4>
-        
+
                                     <p class="cert-issuer">
                                         Mampu berkomunikasi efektif dengan rekan kerja, klien, maupun pengguna non-teknis secara jelas dan mudah dimengerti.
                                     </p>
-        
+
                                     <span class="badge">
                                         Soft Skill
                                     </span>
-        
+
                                 </div>
-        
+
                             </div>
-        
+
                             <!-- SOFT SKILL 3 -->
                             <div class="cert-item">
-        
+
                                 <div class="cert-icon-wrapper">
                                     <i class="fa-solid fa-people-group"></i>
                                 </div>
-        
+
                                 <div class="cert-info">
-        
+
                                     <h4>
                                         Kerjasama Tim
                                     </h4>
-        
+
                                     <p class="cert-issuer">
                                         Mampu bekerja kolaboratif dalam tim proyek, berbagi ide, dan menyelesaikan tugas secara bersama-sama.
                                     </p>
-        
+
                                     <span class="badge">
                                         Soft Skill
                                     </span>
-        
+
                                 </div>
-        
+
                             </div>
-        
+
                             <!-- SOFT SKILL 4 -->
                             <div class="cert-item">
-        
+
                                 <div class="cert-icon-wrapper">
                                     <i class="fa-solid fa-puzzle-piece"></i>
                                 </div>
-        
+
                                 <div class="cert-info">
-        
+
                                     <h4>
                                         Pemecahan Masalah
                                     </h4>
-        
+
                                     <p class="cert-issuer">
                                         Mampu menganalisis dan mengatasi masalah teknis dengan pendekatan yang logis dan sistematis.
                                     </p>
-        
+
                                     <span class="badge">
                                         Soft Skill
                                     </span>
-        
+
                                 </div>
-        
+
                             </div>
-        
+
                             <!-- SOFT SKILL 5 -->
                             <div class="cert-item">
-        
+
                                 <div class="cert-icon-wrapper">
                                     <i class="fa-solid fa-lightbulb"></i>
                                 </div>
-        
+
                                 <div class="cert-info">
-        
+
                                     <h4>
                                         Kreativitas
                                     </h4>
-        
+
                                     <p class="cert-issuer">
                                         Berpikir kreatif dalam merancang solusi teknis untuk tantangan tertentu dan mengembangkan inovasi di bidang teknologi.
                                     </p>
-        
+
                                     <span class="badge">
                                         Soft Skill
                                     </span>
-        
+
                                 </div>
-        
+
                             </div>
-        
+
                             <!-- SOFT SKILL 6 -->
                             <div class="cert-item">
-        
+
                                 <div class="cert-icon-wrapper">
                                     <i class="fa-regular fa-clock"></i>
                                 </div>
-        
+
                                 <div class="cert-info">
-        
+
                                     <h4>
                                         Manajemen Waktu
                                     </h4>
-        
+
                                     <p class="cert-issuer">
                                         Mampu mengatur waktu dan sumber daya secara efisien, terutama saat menangani proyek dengan batas waktu tertentu.
                                     </p>
-        
+
                                     <span class="badge">
                                         Soft Skill
                                     </span>
-        
+
                                 </div>
-        
+
                             </div>
-        
+
                         </div>
-        
+
                     </div>
-        
+
                 </div>
-        
+
             </div>
         </section>
 
@@ -865,32 +827,32 @@
                 <!-- Grid Kartu Sosial Media -->
                 <div class="social-grid">
                     <a class="social-card" href="https://www.linkedin.com/in/brnfznlkmn/" target="_blank" rel="noopener">
-                        <div class="social-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+                        <div class="social-icon social-monogram" aria-hidden="true">in</div>
                         <div class="social-info"><h4>LinkedIn</h4><p>Halaman Profesional</p></div>
                     </a>
 
                     <a class="social-card" href="https://www.instagram.com/brnfznlkmn" target="_blank" rel="noopener">
-                        <div class="social-icon"><i class="fa-brands fa-instagram"></i></div>
+                        <div class="social-icon social-monogram" aria-hidden="true">ig</div>
                         <div class="social-info"><h4>Instagram</h4><p>Halaman Harian</p></div>
                     </a>
 
                     <a class="social-card" href="https://www.facebook.com/brnfznlkmn/" target="_blank" rel="noopener">
-                        <div class="social-icon"><i class="fa-brands fa-facebook-f"></i></div>
+                        <div class="social-icon social-monogram" aria-hidden="true">f</div>
                         <div class="social-info"><h4>Facebook</h4><p>Halaman Sosial</p></div>
                     </a>
 
                     <a class="social-card" href="https://x.com/brnfznlkmn" target="_blank" rel="noopener">
-                        <div class="social-icon x-social-icon"><img src="assets/x.png" alt="X" class="x-logo-img"></div>
+                        <div class="social-icon social-monogram" aria-hidden="true">x</div>
                         <div class="social-info"><h4>X</h4><p>Halaman Sosial</p></div>
                     </a>
 
                     <a class="social-card" href="https://www.tiktok.com/@brnfznlkmn_" target="_blank" rel="noopener">
-                        <div class="social-icon"><i class="fa-brands fa-tiktok"></i></div>
+                        <div class="social-icon social-monogram" aria-hidden="true">tk</div>
                         <div class="social-info"><h4>TikTok</h4><p>Video Pendek</p></div>
                     </a>
 
                     <a class="social-card" href="http://yt.openinapp.co/86d8g" target="_blank" rel="noopener">
-                        <div class="social-icon"><i class="fa-brands fa-youtube"></i></div>
+                        <div class="social-icon social-monogram" aria-hidden="true">yt</div>
                         <div class="social-info"><h4>YouTube</h4><p>Video Panjang</p></div>
                     </a>
                 </div>
@@ -930,7 +892,8 @@
                     <!-- Contact Form Card -->
                     <div class="contact-form-card card-glow">
                         <h3 class="contact-panel-title">Kirim Pesan</h3>
-                        <form id="contact-form" onsubmit="return handleFormSubmit(event)">
+                        <p class="form-hint">Formulir ini akan membuka aplikasi email Anda.</p>
+                        <form id="contact-form">
                             <div class="form-group">
                                 <label for="name" class="form-label">Nama Lengkap</label>
                                 <input type="text" id="name" name="name" class="form-control"
@@ -947,9 +910,9 @@
                                     placeholder="Tuliskan pesan atau penawaran kerja sama..." required></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block" id="form-submit-btn">
-                                Kirim Pesan <i class="fa-solid fa-paper-plane"></i>
+                                Buka aplikasi email
                             </button>
-                            <div id="form-status" class="form-status"></div>
+                            <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
                         </form>
                     </div>
                 </div>
@@ -972,62 +935,8 @@
 
     <!-- Back to Top Button -->
     <button id="back-to-top" class="back-to-top" aria-label="Kembali ke atas">
-        <i class="fa-solid fa-arrow-up"></i>
+        <span aria-hidden="true">↑</span>
     </button>
-
-    <!-- Inline Form Handler -->
-    <script>
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // Get button and status elements
-            const submitBtn = document.getElementById('form-submit-btn');
-            const formStatus = document.getElementById('form-status');
-            
-            // Disable button and show loading
-            submitBtn.disabled = true;
-            const originalBtnText = submitBtn.innerHTML;
-            submitBtn.innerHTML = 'Mempersiapkan Email... <i class="fa-solid fa-spinner fa-spin"></i>';
-            formStatus.innerHTML = '';
-            formStatus.className = 'form-status';
-            
-            // Target email
-            const emailTarget = 'brnfznlkmn@gmail.com';
-            const emailSubject = `Pesan Portofolio dari ${name}`;
-            const emailBody = `Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`;
-            const mailtoUrl = `mailto:${emailTarget}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-            
-            // Simulate loading then redirect to email
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
-                
-                // Open email client
-                window.location.href = mailtoUrl;
-                
-                formStatus.classList.add('success');
-                formStatus.innerHTML = '<i class="fa-solid fa-circle-check"></i> Membuka aplikasi email Anda...';
-                
-                // Reset form after a moment
-                setTimeout(() => {
-                    document.getElementById('contact-form').reset();
-                    formStatus.style.transition = 'opacity 0.8s';
-                    formStatus.style.opacity = '0';
-                    setTimeout(() => {
-                        formStatus.innerHTML = '';
-                        formStatus.style.opacity = '1';
-                    }, 800);
-                }, 5000);
-            }, 1200);
-            
-            return false;
-        }
-    </script>
 </body>
 
 </html>

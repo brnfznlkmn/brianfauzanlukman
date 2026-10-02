@@ -12,13 +12,13 @@ Website ini merupakan portofolio profesional yang menonjolkan identitas Brian Fa
 
 ### Fitur Utama
 
-- **Hero Section** — Perkenalan singkat dengan efek *typing animation*, foto profil, dan badge peran (Graphic Designer & IT Support).
+- **Hero Section**: perkenalan singkat, tipografi bold, foto berwarna, dan gradasi biru.
 - **Tentang Saya** — Bio singkat, statistik akademik (IPK, jumlah pengalaman kerja, tahun kelulusan), riwayat pendidikan, soft skills, professional skills, dan kemampuan bahasa.
 - **Pengalaman Profesional** — Timeline riwayat karier lengkap dengan jabatan, perusahaan, lokasi, durasi kerja, dan deskripsi tugas.
 - **Keahlian & Soft Skill** — Rincian kompetensi teknis (desain grafis, IT support, jaringan, cyber security, pemrograman, dsb.) dalam bentuk badge/kategori.
 - **Sosial Media & Kontak** — Daftar tautan ke berbagai platform sosial media (GitHub, LinkedIn, Instagram, TikTok, YouTube, dll.) beserta form kontak yang terhubung langsung ke email.
 - **Dark/Light Mode** — Tombol toggle tema terang/gelap dengan preferensi tersimpan di `localStorage`.
-- **Custom Cursor & Background Animation** — Kursor kustom serta animasi latar belakang partikel dan geometris menggunakan `<canvas>`.
+- **Device Tracking**: deteksi perangkat, browser, IP, dan lokasi sesuai izin browser, dengan pengiriman ke Google Apps Script.
 - **Responsive Design** — Tampilan menyesuaikan untuk perangkat desktop maupun mobile, termasuk menu navigasi mobile.
 - **Smooth Scroll & Scroll Spy** — Navigasi antar section yang halus dengan indikator menu aktif otomatis.
 - **Back to Top Button** — Tombol kembali ke atas halaman.
@@ -33,7 +33,7 @@ Website ini merupakan portofolio profesional yang menonjolkan identitas Brian Fa
 | **CSS3** | Styling, animasi, dan tema (light/dark mode) |
 | **JavaScript (Vanilla)** | Interaktivitas, animasi, dan logika form |
 | **Font Awesome 6** | Ikon-ikon UI |
-| **Google Fonts** (Plus Jakarta Sans & Fira Code) | Tipografi |
+| **Bricolage Grotesque & DM Sans** | Font lokal di `assets/fonts/`, beserta lisensi OFL |
 | **GitHub Pages** | Hosting & deployment |
 
 ---
@@ -46,8 +46,8 @@ Website ini merupakan portofolio profesional yang menonjolkan identitas Brian Fa
 ├── CNAME            # Konfigurasi domain kustom (brianfauzanlukman.com)
 ├── README.md        # Dokumentasi proyek
 ├── index.html       # Halaman utama website
-├── script.js        # Logika JavaScript (animasi, tema, navigasi, form, dll.)
-└── style.css         # Styling seluruh halaman
+├── script.js        # Tema, navigasi, form kontak, dan tracking perangkat
+└── portfolio.css    # Tampilan, tema OLED, gradasi, dan tata letak responsif
 ```
 
 ---
