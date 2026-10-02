@@ -19,7 +19,6 @@ Website ini merupakan portofolio profesional yang menonjolkan identitas Brian Fa
 - **Sosial Media & Kontak** — Daftar tautan ke berbagai platform sosial media (GitHub, LinkedIn, Instagram, TikTok, YouTube, dll.) beserta form kontak yang terhubung langsung ke email.
 - **Dark/Light Mode** — Tombol toggle tema terang/gelap dengan preferensi tersimpan di `localStorage`.
 - **Bahasa ID/EN**: pilihan bahasa tersimpan, dengan animasi hapus–ketik. Pengunjung baru mendapatkan Bahasa Indonesia jika negara IP-nya Indonesia dan English untuk negara lain; bahasa browser menjadi cadangan jika deteksi gagal.
-- **Device Tracking**: deteksi perangkat, browser, IP, dan lokasi sesuai izin browser, dengan pengiriman ke Google Apps Script.
 - **Responsive Design** — Tampilan menyesuaikan untuk perangkat desktop maupun mobile, termasuk menu navigasi mobile.
 - **Smooth Scroll & Scroll Spy** — Navigasi antar section yang halus dengan indikator menu aktif otomatis.
 - **Back to Top Button** — Tombol kembali ke atas halaman.
