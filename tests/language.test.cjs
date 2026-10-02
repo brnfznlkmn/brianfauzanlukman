@@ -131,17 +131,12 @@ test('reduced motion and blocked storage still allow language changes', () => {
     blocked.button.click(); assert.equal(blocked.root.lang, 'en'); blocked.resolveCountry();
 });
 
-test('all dictionary entries are nonempty; existing tracking remains intact', () => {
+test('all dictionary entries are nonempty and translation code does not initialize tracking', () => {
     const f = fixture();
     for (const [original, translated] of Object.entries(f.app.portfolioTranslations)) {
         assert.ok(original.trim() && translated.trim());
     }
-    const script = fs.readFileSync(path.join(__dirname, '../script.js'), 'utf8');
-    const { execFileSync } = require('node:child_process');
-    const baseline = execFileSync('git', ['show', 'HEAD:script.js'], { cwd: path.join(__dirname, '..'), encoding: 'utf8' });
-    const tracking = text => text.slice(text.indexOf('function initDeviceTracking()')).replace(/\r\n/g, '\n');
-    assert.equal(tracking(script), tracking(baseline));
-    assert.ok(script.includes('    initDeviceTracking();'));
+    assert.ok(!source.includes('initDeviceTracking('));
 });
 
 test('English contact draft retains button nodes for later language changes', () => {

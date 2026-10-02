@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <script src="language.js?v=languages-layout-12" defer></script>
-    <script src="script.js?v=languages-11" defer></script>
+    <script src="script.js?v=tracking-13" defer></script>
     <script>
         (function () {
-            var theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+            var theme = 'light';
+            try { theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; } catch {}
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>

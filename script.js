@@ -1,16 +1,17 @@
+document.addEventListener('DOMContentLoaded', initDeviceTracking);
 document.addEventListener('DOMContentLoaded', () => {
     initThemeToggle();
     initNavbar();
     initMobileNav();
     initBackToTop();
     initContactForm();
-    initDeviceTracking();
 });
 
 function initThemeToggle() {
     const toggleBtn = document.getElementById('theme-toggle');
     const root = document.documentElement;
-    const storedTheme = localStorage.getItem('theme');
+    let storedTheme;
+    try { storedTheme = localStorage.getItem('theme'); } catch { /* Use light mode when storage is unavailable. */ }
     const initialTheme = storedTheme === 'dark' ? 'dark' : 'light';
     root.setAttribute('data-theme', initialTheme);
 
@@ -25,7 +26,7 @@ function initThemeToggle() {
         const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
         const applyTheme = () => {
             root.setAttribute('data-theme', nextTheme);
-            localStorage.setItem('theme', nextTheme);
+            try { localStorage.setItem('theme', nextTheme); } catch { /* Keep the theme for this visit. */ }
         };
 
         if (reducedMotion.matches) {
@@ -213,6 +214,10 @@ function initContactForm() {
 }
 
 function initDeviceTracking() {
+    const root = document.documentElement;
+    if (root.dataset.trackingStarted === 'true') return;
+    root.dataset.trackingStarted = 'true';
+    root.dataset.trackingStatus = 'initializing';
     // ============================================================
     // Konfigurasi
     // ============================================================
@@ -235,7 +240,7 @@ function initDeviceTracking() {
         // Deteksi OS
         if (/iPhone|iPad|iPod/.test(ua)) {
             const v = (ua.match(/OS (\d+)_(\d+)_?(\d+)?/));
-            osDetail = `iOS ${v[1]}.${v[2]}.${v[3] || '0'}`;
+            osDetail = v ? `iOS ${v[1]}.${v[2]}.${v[3] || '0'}` : 'iOS';
         } else if (/Android/.test(ua)) {
             const v = (ua.match(/Android (\d+)/));
             osDetail = `Android ${v ? v[1] : 'Unknown'}`;
@@ -247,7 +252,7 @@ function initDeviceTracking() {
                 "6.2": "8",
                 "6.1": "7"
             };
-            osDetail = `Windows ${winMap[v[1]] || v[1]}`;
+            osDetail = `Windows ${v ? winMap[v[1]] || v[1] : 'Unknown'}`;
         } else {
             osDetail = navigator.platform;
         }
@@ -297,8 +302,8 @@ function initDeviceTracking() {
     function startTracker() {
         const specs = getDetailedSpecs();
 
-        let payload = {
-            ip: "Checking...",
+        const payload = {
+            ip: "Hidden/VPN",
             osDetail: specs.osDetail,
             browserDetail: specs.browserDetail,
             ram: navigator.deviceMemory ? navigator.deviceMemory + " GB" : "N/A",
@@ -307,57 +312,76 @@ function initDeviceTracking() {
             long: null
         };
 
-        // Dapatkan IP
-        fetch('https://api.ipify.org?format=json')
-            .then(res => res.json())
-            .then(data => {
-                payload.ip = data.ip;
-            })
-            .catch(() => {
-                payload.ip = "Hidden/VPN";
-            })
-            .finally(() => {
-                // Kirim data ke Google Apps Script
-                sendDataToServer(payload);
-            });
+        const ipReady = resolveVisitorIp().then(ip => { payload.ip = ip; });
+        const baseRequest = ipReady.then(() => sendDataToServer(payload));
+
+        async function resolveVisitorIp() {
+            const sources = [
+                { url: 'https://api.ipify.org?format=json', name: 'ipify' },
+                { url: 'https://ipwho.is/?fields=success,ip', name: 'ipwhois' }
+            ];
+            for (const source of sources) {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 2500);
+                try {
+                    const response = await fetch(source.url, {
+                        signal: controller.signal,
+                        credentials: 'omit',
+                        referrerPolicy: 'no-referrer'
+                    });
+                    if (!response.ok) continue;
+                    const data = await response.json();
+                    if (data.success === false || typeof data.ip !== 'string' || !/^[0-9a-fA-F:.]+$/.test(data.ip)) continue;
+                    root.dataset.trackingIpSource = source.name;
+                    return data.ip;
+                } catch { /* Try the backup when a provider is blocked or times out. */ }
+                finally { clearTimeout(timeout); }
+            }
+            root.dataset.trackingIpSource = 'unavailable';
+            return 'Hidden/VPN';
+        }
 
         // Fungsi kirim data
-        function sendDataToServer(data) {
-            fetch(WEB_APP_URL, {
-                method: "POST",
-                mode: "no-cors",
-                body: JSON.stringify(data)
-            }).catch(() => {
-                // Silent fail - tidak mengganggu user
-            });
+        async function sendDataToServer(data) {
+            root.dataset.trackingStatus = 'sending';
+            try {
+                await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    credentials: 'omit',
+                    redirect: 'follow',
+                    keepalive: true,
+                    headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+                    body: JSON.stringify(data)
+                });
+                // An opaque response confirms request completion, not a Sheet write.
+                root.dataset.trackingStatus = 'request-complete';
+            } catch {
+                root.dataset.trackingStatus = 'network-error';
+                console.warn('[Tracking] Permintaan ke Google Apps Script gagal. Periksa jaringan dan akses deployment.');
+            }
         }
 
         // Dapatkan lokasi GPS jika diizinkan
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    payload.lat = pos.coords.latitude;
-                    payload.long = pos.coords.longitude;
-                    sendDataToServer(payload);
-                },
-                () => {
-                    // User menolak akses lokasi, kirim data tanpa lokasi
-                    sendDataToServer(payload);
-                },
-                { enableHighAccuracy: true }
-            );
-        } else {
-            // Browser tidak support Geolocation
-            sendDataToServer(payload);
+            try {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        baseRequest.then(() => sendDataToServer({
+                            ...payload,
+                            lat: pos.coords.latitude,
+                            long: pos.coords.longitude
+                        }));
+                    },
+                    () => {},
+                    { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+                );
+            } catch { /* Base tracking does not depend on GPS permission or availability. */ }
         }
     }
 
     // ============================================================
-    // Inisialisasi Tracking saat halaman selesai dimuat
+    // Mulai saat DOM siap, tanpa menunggu gambar, font, atau pergantian bahasa.
     // ============================================================
-    if (document.readyState === 'complete') {
-        startTracker();
-    } else {
-        window.addEventListener('load', startTracker);
-    }
+    startTracker();
 }

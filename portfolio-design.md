@@ -39,6 +39,13 @@ Direction chosen for this redesign: an editorial personal portfolio connecting g
 - Per-frame browser checks in both directions at 1440px and 375px removed the earlier 31.5px card / 15.75px portrait jumps. Largest measured card steps were 1.1px on desktop and 3.1px on mobile, with no overflow or leftover typing wrappers. Eight focused tests pass, including layout measurement and reduced motion.
 - Browser checks cover both languages, persistence, typing cleanup, navigation and phone widths. Mocked tests verify country defaults, invalid responses, manual preference priority, reverse typing, reduced motion, and unchanged tracking.
 
+## Tracking reliability
+
+- Tracking starts in a separate DOMContentLoaded listener before UI initialization. Theme storage reads/writes tolerate blocked storage; tracking never waits for window load, translation, or GPS permission.
+- IPify and IPWhois lookup attempts each time out after 2.5 seconds. The base request retains the existing endpoint and seven-field payload, with a fallback IP marker if both lookups fail. GPS success adds an update after the base request; denied or unavailable GPS does not duplicate requests.
+- POST remains a simple text/plain no-cors request, now with keepalive and diagnostic DOM states. Request completion is distinct from confirmed Sheet delivery because responses are opaque in browsers.
+- Anonymous diagnostic POST using a clearly marked TEST payload returned HTTP 200 and `Success` from Apps Script. The Sheet itself was not accessed. Automated tests cover both languages, blocked storage, hung lookups, missing GPS, malformed user agents, failed POST, and UI initialization errors.
+
 ## Code cleanup
 
 - Removed six uncalled legacy animation functions and the unused navbar scroll class. Preserved the tracking function's content exactly, apart from file line-ending normalization, and retained its startup call.
