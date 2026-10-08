@@ -17,6 +17,8 @@ const portfolioTranslations = {
     'Desain & teknologi': 'Design & technology',
     'Portofolio pribadi': 'Personal portfolio',
     'Kenali saya lebih dekat': 'Get to know me',
+    'Kerjasama Tim': 'Teamwork',
+    'Manajemen Waktu': 'Time Management',
     '01. Profil': '01. Profile',
     'Memadukan Kekuatan Perangkat Keras Komputer': 'Bringing Computer Hardware',
     'dengan Dunia Kreatif Desain Grafis': 'and Graphic Design Together',
