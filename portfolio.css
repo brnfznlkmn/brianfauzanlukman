@@ -422,3 +422,9 @@ html { scroll-behavior: auto; }
     .timeline-header-wrapper { flex-direction: column-reverse; }
     .timeline-header-wrapper .company-logo { margin-bottom: 15px; }
 }
+
+@media (max-width: 768px) {
+    .edu-card { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .edu-logo-wrapper { margin-right: 0; align-items: flex-start; justify-content: flex-start; }
+    .edu-logo { height: 100px; } /* scale it down a bit for mobile so it looks balanced */
+}
