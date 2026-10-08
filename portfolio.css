@@ -68,7 +68,7 @@ img { max-width: 100%; display: block; }
 .language-copy-final { opacity: 0; }
 .language-copy-previous { visibility: hidden; }
 .nav-menu ul { display: flex; align-items: center; gap: 23px; list-style: none; }
-.nav-link { display: inline-flex; transition: all 0.3s ease; align-items: center; min-height: 44px; font-size: 18px; font-weight: 500; color: var(--muted); border-bottom: 1px solid transparent; }
+.nav-link { display: inline-flex; transition: all 0.3s ease; align-items: center; min-height: 44px; font-size: 18px; font-weight: 500; color: var(--muted); border-bottom: 1px solid transparent; white-space: nowrap; }
 .nav-link.active { color: var(--ink); border-color: var(--ink); }
 .nav-link:hover { color: var(--ink); border-color: var(--ink); transform: translateY(-2px); }
 
