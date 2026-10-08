@@ -385,3 +385,38 @@ function initDeviceTracking() {
     // ============================================================
     startTracker();
 }
+
+
+// --- BLINK EFFECT (Easter Egg) ---
+document.addEventListener('DOMContentLoaded', () => {
+    const avatarImg = document.getElementById('avatar-img');
+    let isBlinking = false;
+
+    if (avatarImg) {
+        // Pre-load the closed-eyes image to avoid delay on first blink
+        const preloadImage = new Image();
+        preloadImage.src = 'assets/brian2.jpeg';
+
+        function blink() {
+            if (isBlinking) return;
+            isBlinking = true;
+            
+            // Swap to closed eyes
+            avatarImg.src = 'assets/brian2.jpeg';
+            
+            // A natural human blink lasts around 150ms
+            setTimeout(() => {
+                // Revert to open eyes
+                avatarImg.src = 'assets/brian1.jpeg';
+                
+                // Add a short cooldown (300ms) before the next blink is allowed
+                setTimeout(() => {
+                    isBlinking = false;
+                }, 300);
+            }, 150);
+        }
+
+        avatarImg.addEventListener('mouseenter', blink);
+        avatarImg.addEventListener('click', blink);
+    }
+});
