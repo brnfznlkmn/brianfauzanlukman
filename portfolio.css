@@ -141,7 +141,7 @@ img { max-width: 100%; display: block; }
 .experience-section { background: linear-gradient(125deg, #092e70 0%, #0d47a1 48%, #1b65b7 100%); color: #ffffff; --ink: #ffffff; --muted: #e3f2fd; --line: rgba(227, 242, 253, .45); --accent: #c5e9ff; }
 .experience-section .section-title { color: var(--ink); }
 :root[data-theme="dark"] .hero-grid {
-    background: linear-gradient(115deg, #000000 0%, #061b41 48%, #0d47a1 100%);
+    background: linear-gradient(125deg, #092e70 0%, #0d47a1 48%, #1b65b7 100%);
     border: 1px solid #234776;
     --hero-ink: #ffffff;
     --hero-muted: #e1e5ec;
