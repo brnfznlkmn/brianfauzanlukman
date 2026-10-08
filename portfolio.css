@@ -198,7 +198,7 @@ img { max-width: 100%; display: block; }
 .social-info h4 { font-size: 26px; font-weight: 600; transition: color 0.3s; }
 .social-info p { font-size: 18px; color: var(--muted); transition: color 0.3s; }
 .social-card:hover .social-info p { color: var(--ink); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; margin-top: 80px; }
 .contact-panel-title { font-family: var(--font-serif); font-size: 30px; font-weight: 800; letter-spacing: -.035em; margin-bottom: 16px; }
 .contact-panel-p { color: var(--muted); font-size: 22px; margin-bottom: 30px; line-height: 1.8; }
 .contact-link-card { display: flex; align-items: center; gap: 18px; padding: 18px 0; }
