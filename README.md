@@ -1,107 +1,61 @@
-# Brian Fauzan Lukman — Portfolio Website
+# ✨ Portfolio Brian Fauzan Lukman ✨
 
-🔗 **Live Site:** [brianfauzanlukman.com](https://brianfauzanlukman.com/)
+Welcome to my personal space on the internet! 🚀
+👉 **Cek langsung webnya di sini:** [brianfauzanlukman.com](https://brianfauzanlukman.com/)
 
-Website portofolio pribadi untuk **Brian Fauzan Lukman**, dirancang untuk menampilkan profil, latar belakang pendidikan, pengalaman kerja, keahlian, serta berbagai sosial media dan platform lain yang digunakan oleh Brian. Website ini dibangun sepenuhnya menggunakan HTML, CSS, dan JavaScript murni (vanilla), tanpa framework, dan di-deploy melalui GitHub Pages.
+Hai! Buat lo yang nyasar ke repo ini, ini tuh *source code* (kode sumber) dari website portofolio pribadi gue. Jujurly, gue bikin web ini buat *flexing* dikit soal apa aja yang udah gue kerjain, skill yang gue punya, dan tempat buat nyimpen CV gue biar gampang diakses siapa aja.
 
----
-
-## 📖 Tentang Website
-
-Website ini merupakan portofolio profesional yang menonjolkan identitas Brian Fauzan Lukman sebagai seorang **Graphic Designer**, **IT Support**, dan **Web Developer**, alumni S1 Teknologi Informasi Universitas Darma Persada. Website dirancang dengan pendekatan *single page application* (SPA) yang membagi konten ke dalam beberapa section yang dapat diakses melalui navigasi scroll maupun menu.
-
-### Fitur Utama
-
-- **Hero Section**: perkenalan singkat, tipografi bold, foto berwarna, dan gradasi biru.
-- **Tentang Saya** — Bio singkat, statistik akademik (IPK, jumlah pengalaman kerja, tahun kelulusan), riwayat pendidikan, soft skills, professional skills, dan kemampuan bahasa.
-- **Pengalaman Profesional** — Timeline riwayat karier lengkap dengan jabatan, perusahaan, lokasi, durasi kerja, dan deskripsi tugas.
-- **Keahlian & Soft Skill** — Rincian kompetensi teknis (desain grafis, IT support, jaringan, cyber security, pemrograman, dsb.) dalam bentuk badge/kategori.
-- **Sosial Media & Kontak** — Daftar tautan ke berbagai platform sosial media (GitHub, LinkedIn, Instagram, TikTok, YouTube, dll.) beserta form kontak yang terhubung langsung ke email.
-- **Dark/Light Mode** — Tombol toggle tema terang/gelap dengan preferensi tersimpan di `localStorage`.
-- **Bahasa ID/EN**: pilihan bahasa tersimpan, dengan animasi hapus–ketik. Pengunjung baru mendapatkan Bahasa Indonesia jika negara IP-nya Indonesia dan English untuk negara lain; bahasa browser menjadi cadangan jika deteksi gagal.
-- **Responsive Design** — Tampilan menyesuaikan untuk perangkat desktop maupun mobile, termasuk menu navigasi mobile.
-- **Smooth Scroll & Scroll Spy** — Navigasi antar section yang halus dengan indikator menu aktif otomatis.
-- **Back to Top Button** — Tombol kembali ke atas halaman.
+Tenang aja, baca ini gak perlu pusing mikirin codingan kok. *Let me spill the tea!* 🍵
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## 👀 Ada Apa Aja Sih di Web Ini?
 
-| Teknologi | Kegunaan |
-|---|---|
-| **HTML5** | Struktur konten website |
-| **CSS3** | Styling, animasi, dan tema (light/dark mode) |
-| **JavaScript (Vanilla)** | Interaktivitas, animasi, dan logika form |
-| **Font Awesome 6** | Ikon-ikon UI |
-| **Bricolage Grotesque & DM Sans** | Font lokal di `assets/fonts/`, beserta lisensi OFL |
-| **GitHub Pages** | Hosting & deployment |
+Web ini tuh ibarat kartu nama digital gue yang di-*upgrade* jadi lebih estetik. Di dalamnya ada:
 
----
-
-## 📁 Struktur Proyek
-
-```
-├── assets/          # Gambar, favicon, dan aset media lainnya
-├── .nojekyll        # Menonaktifkan pemrosesan Jekyll di GitHub Pages
-├── CNAME            # Konfigurasi domain kustom (brianfauzanlukman.com)
-├── README.md        # Dokumentasi proyek
-├── index.html       # Halaman utama website
-├── script.js        # Tema, navigasi, form kontak, dan tracking perangkat
-├── language.js      # Terjemahan ID/EN, deteksi negara, dan animasi teks
-├── tests/           # Pengujian pilihan bahasa dan prioritas deteksi negara
-└── portfolio.css    # Tampilan, tema OLED, gradasi, dan tata letak responsif
-```
+- **Perkenalan Diri:** Biar kenal maka tak sayang, kan? Ada muka gue dan info singkat soal siapa gue.
+- **Tentang Gue:** Curhatan singkat soal pendidikan, skill, dan IPK (ciee 🤓).
+- **Pengalaman Kerja:** *Timeline* lengkap kerjaan gue dari zaman dulu sampai sekarang. Mulai dari desain grafis, IT Support, sampai ngurus operasional.
+- **Skill Check:** Daftar keahlian gue, biar lo tau gue bisa ngapain aja.
+- **Tombol Gelap/Terang (Dark/Light Mode):** Bisa digelapin kalau mata lo lagi capek liat yang terang-terang 🦇.
+- **Ganti Bahasa (ID/EN):** Webnya pinter, otomatis nyesuain bahasa kalian, tapi tetep bisa diganti manual kok! 
+- **Sosial Media:** Semua link ke sosmed gue (LinkedIn, TikTok, Instagram, dll) ngumpul di sini. Tinggal klik!
 
 ---
 
-## 🚀 Cara Menjalankan Secara Lokal
+## 🛠️ Dibuat Pakai Apa?
 
-1. **Clone repository ini**
-   ```bash
-   git clone https://github.com/brnfznlkmn/brianfauzanlukman
-   cd brianfauzanlukman
-   ```
+Gue bikinnya *pure* pake alat-alat dasar anak IT zaman baheula tapi tetep *slay*:
+- **HTML & CSS:** Ibarat batu bata sama cat buat bangun dan ngehias webnya biar *aesthetic*.
+- **JavaScript:** Biar webnya hidup, bisa dipencet-pencet, dan ada animasinya.
+- **GitHub Pages:** Tempat numpang *hosting* gratisan tapi kece badai.
 
-2. **Buka file `index.html`**
-
-   Cukup buka file `index.html` langsung di browser, atau gunakan live server (opsional) agar perubahan lebih mudah dipantau, contohnya dengan ekstensi **Live Server** di VS Code.
-
-Tidak diperlukan proses instalasi dependency atau build tool tambahan karena website ini murni HTML/CSS/JS statis.
+Intinya? Gak pake *framework* yang ribet-ribet. *Back to basics, but make it fabulous!* 💅
 
 ---
 
-## 🌐 Deployment
+## 💻 Cara Liat Web Ini di Laptop Lo (Buat yang Kepo)
 
-Website ini di-deploy secara otomatis melalui **GitHub Pages** setiap kali ada perubahan pada branch `main`, dan dapat diakses melalui domain kustom:
+Kalo lo bukan anak IT dan pengen tau gimana sih cara buka web ini di laptop lo sendiri dari *file* mentahan, gampang banget *no ribet-ribet club*:
 
-👉 **[https://brianfauzanlukman.com/](https://brianfauzanlukman.com/)**
-
----
-
-## 👤 Tentang Saya
-
-**Brian Fauzan Lukman**
-Penggemar teknologi lulusan S1 Teknologi Informasi, Universitas Darma Persada, yang senang memadukan kekuatan perangkat keras komputer dengan dunia kreatif desain grafis. Berpengalaman sebagai Graphic Designer, Area Manager, hingga IT Support / Service Desk.
-
-- 📧 Email: [brnfznlkmn@gmail.com](mailto:brnfznlkmn@gmail.com)
-- 💼 LinkedIn: [linkedin.com/in/brnfznlkmn](https://www.linkedin.com/in/brnfznlkmn/)
-- 🐙 GitHub: [github.com/brnfznlkmn](https://github.com/brnfznlkmn)
-- 📍 Lokasi: Jakarta, Indonesia
-
-Terbuka untuk kesempatan kerja *full-time*, *freelance*, maupun kolaborasi proyek, khususnya di bidang **Desain Grafis**, **IT Support**, dan **Web Development**.
+1. Download semua file di sini (klik tombol hijau **Code** > trus klik **Download ZIP**).
+2. *Extract* (keluarin) file ZIP-nya di laptop lo.
+3. Cari file yang namanya `index.html`.
+4. *Double click* (klik dua kali) file itu.
+5. *Voila!* Webnya bakal kebuka di Google Chrome atau *browser* andalan lo. Gak perlu internet buat bukanya! ✨
 
 ---
 
-## 🔒 Privasi
+## 📞 Let's Connect!
 
-Saat pengunjung mengakses website ini, informasi teknis tertentu (seperti alamat IP, waktu akses, karakteristik perangkat, dan data lokasi jika diizinkan oleh browser) dapat dicatat secara otomatis untuk tujuan keamanan dan pemantauan. Data disimpan secara aman, hanya digunakan untuk keperluan analisis, dan tidak pernah dibagikan atau dijual kepada pihak ketiga. Untuk permintaan penghapusan data atau pertanyaan lebih lanjut, silakan hubungi melalui email di atas.
+Lo butuh partner kerja? Atau mau ngajak *collab* project? *Hit me up!* 
+Gue selalu *open to work* buat posisi **Graphic Designer**, **IT Support**, atau **Web Developer**.
+
+- 📧 **Email:** [brnfznlkmn@gmail.com](mailto:brnfznlkmn@gmail.com)
+- 💼 **LinkedIn:** [linkedin.com/in/brnfznlkmn](https://www.linkedin.com/in/brnfznlkmn/)
+- 🐙 **GitHub:** [github.com/brnfznlkmn](https://github.com/brnfznlkmn)
+- 📍 **Lokasi:** Jakarta, Indonesia
 
 ---
 
-## 📄 Lisensi
-
-Proyek ini merupakan portofolio pribadi. Silakan hubungi pemilik repository sebelum menggunakan ulang desain, konten, atau kode untuk keperluan komersial.
-
----
-
-<p align="center">© 2026 Brian Fauzan Lukman. All Right Reserved. Developed with ❤️ by brnfznlkmn.</p>
+<p align="center">(c) 2026 Brian Fauzan Lukman. All Right Reserved. Stay awesome! ✌️</p>
