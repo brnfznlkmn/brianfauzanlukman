@@ -418,5 +418,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         avatarImg.addEventListener('mouseenter', blink);
         avatarImg.addEventListener('click', blink);
+        
+        // Auto-blink every 4 seconds
+        setInterval(blink, 4000);
     }
 });
