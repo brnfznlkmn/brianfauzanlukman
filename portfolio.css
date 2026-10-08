@@ -54,7 +54,7 @@ img { max-width: 100%; display: block; }
 .navbar { position: sticky; top: 0; z-index: 20; background: var(--paper); border-bottom: 1px solid var(--line); }
 .nav-logo { font-family: var(--font-serif); font-weight: 800; letter-spacing: -.6px; font-size: 22px; line-height: 1.1; }
 .footer-logo { font-family: var(--font-serif); font-weight: 800; letter-spacing: -.6px; font-size: 18px; line-height: 1.1; display: inline-block; margin-bottom: 16px; }
-.nav-logo span { display: block; }
+.nav-logo span { display: inline; }
 .nav-right-group { display: flex; align-items: center; gap: 28px; }
 .nav-utilities { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .language-toggle-btn { display: flex; align-items: center; justify-content: center; gap: 5px; width: 66px; height: 44px; border: 1px solid var(--muted); border-radius: 22px; background: transparent; color: var(--muted); font-family: var(--font-primary); font-size: 14px; font-weight: 600; }
