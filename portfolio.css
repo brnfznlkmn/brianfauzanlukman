@@ -147,10 +147,10 @@ img { max-width: 100%; display: block; }
     --hero-muted: #e1e5ec;
 }
 :root[data-theme="dark"] .hero-kicker {
-    color: #90caf9;
+    color: #ffffff;
 }
 :root[data-theme="dark"] .section-tag {
-    color: #90caf9;
+    color: #ffffff;
 }
 :root[data-theme="dark"] .nav-link.active {
     color: #90caf9;
