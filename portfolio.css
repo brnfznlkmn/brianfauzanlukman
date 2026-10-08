@@ -52,8 +52,8 @@ img { max-width: 100%; display: block; }
 .skip-link { position: fixed; top: -100px; left: 24px; padding: 12px 20px; background: var(--ink); color: var(--paper); z-index: 100; }
 .skip-link:focus { top: 12px; }
 .navbar { position: sticky; top: 0; z-index: 20; background: var(--paper); border-bottom: 1px solid var(--line); }
-.nav-logo { font-family: var(--font-display); font-weight: 800; letter-spacing: -.6px; font-size: 22px; line-height: 1.1; }
-.footer-logo { font-family: var(--font-display); font-weight: 800; letter-spacing: -.6px; font-size: 18px; line-height: 1.1; display: inline-block; margin-bottom: 16px; }
+.nav-logo { font-family: var(--font-serif); font-weight: 800; letter-spacing: -.6px; font-size: 22px; line-height: 1.1; }
+.footer-logo { font-family: var(--font-serif); font-weight: 800; letter-spacing: -.6px; font-size: 18px; line-height: 1.1; display: inline-block; margin-bottom: 16px; }
 .nav-logo span { display: block; }
 .nav-right-group { display: flex; align-items: center; gap: 28px; }
 .nav-utilities { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
@@ -115,7 +115,7 @@ img { max-width: 100%; display: block; }
 .about-stats-grid { display: grid; grid-template-columns: 1fr 1fr; align-content: start; gap: 28px; }
 .stat-card { padding-top: 15px; border-top: 1px solid var(--line); }
 .stat-icon { display: none; }
-.stat-number { font-family: var(--font-display); font-size: 46px; font-weight: 800; line-height: 1.2; letter-spacing: -.035em; }
+.stat-number { font-family: var(--font-serif); font-size: 46px; font-weight: 800; line-height: 1.2; letter-spacing: -.035em; }
 .stat-label { font-size: 18px; color: var(--muted); margin-top: 8px; }
 .about-details-grid { display: grid; grid-template-columns: 1fr; gap: 60px; margin-top: 60px; }
 .sub-section-title { font-size: 24px; font-weight: 700; margin-bottom: 22px; letter-spacing: -.025em; }
@@ -207,7 +207,7 @@ img { max-width: 100%; display: block; }
 .social-info p { font-size: 18px; color: var(--muted); transition: color 0.3s; }
 .social-card:hover .social-info p { color: var(--ink); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
-.contact-panel-title { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.035em; margin-bottom: 16px; }
+.contact-panel-title { font-family: var(--font-serif); font-size: 30px; font-weight: 800; letter-spacing: -.035em; margin-bottom: 16px; }
 .contact-panel-p { color: var(--muted); font-size: 22px; margin-bottom: 30px; line-height: 1.8; }
 .contact-link-card { display: flex; align-items: center; gap: 18px; padding: 18px 0; border-top: 1px solid var(--line); }
 .contact-icon { font-size: 17px; width: 25px; color: var(--ink); }
