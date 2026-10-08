@@ -195,12 +195,16 @@ img { max-width: 100%; display: block; }
 .contact-section { border-top: 1px solid var(--line); }
 .contact-section .section-title { font-size: clamp(36px, 4vw, 54px); }
 .social-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 36px; margin-bottom: 70px; }
-.social-card { display: flex; align-items: center; gap: 18px; padding: 22px 0; border-top: 1px solid var(--line); transition: color .18s; padding-block: 28px; }
-.social-card:hover { color: var(--accent); }
-.social-icon { width: 30px; height: 30px; display: grid; place-items: center; font-size: 22px; flex-shrink: 0; }
+.social-card { display: flex; align-items: center; gap: 18px; padding: 22px 0; border-top: 1px solid var(--line); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); padding-block: 28px; position: relative; z-index: 1; text-decoration: none; }
+.social-card::before { content: ''; position: absolute; inset: 0 -20px; background: var(--surface); border-radius: 12px; opacity: 0; transform: scale(0.95); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); z-index: -1; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+.social-card:hover { color: var(--accent); border-top-color: transparent; transform: translateY(-4px); }
+.social-card:hover::before { opacity: 1; transform: scale(1); }
+.social-icon { width: 30px; height: 30px; display: grid; place-items: center; font-size: 22px; flex-shrink: 0; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.social-card:hover .social-icon { transform: scale(1.25) rotate(-5deg); color: var(--accent); }
 .social-monogram { font-family: var(--font-display); font-size: 21px; font-weight: 800; letter-spacing: -1px; }
-.social-info h4 { font-size: 26px; font-weight: 600; }
-.social-info p { font-size: 18px; color: var(--muted); }
+.social-info h4 { font-size: 26px; font-weight: 600; transition: color 0.3s; }
+.social-info p { font-size: 18px; color: var(--muted); transition: color 0.3s; }
+.social-card:hover .social-info p { color: var(--ink); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
 .contact-panel-title { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.035em; margin-bottom: 16px; }
 .contact-panel-p { color: var(--muted); font-size: 22px; margin-bottom: 30px; line-height: 1.8; }
