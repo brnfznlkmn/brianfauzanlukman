@@ -395,12 +395,12 @@ html { scroll-behavior: auto; }
 
 /* Bounce Arrow */
 @keyframes bounceDown {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(5px); }
+    0%, 100% { transform: translateY(-3px); }
+    50% { transform: translateY(12px); }
 }
 .bounce-arrow {
     display: inline-block;
-    animation: bounceDown 2s infinite ease-in-out;
+    animation: bounceDown 1.5s infinite ease-in-out;
 }
 /* Company Logo */
 .company-logo {
