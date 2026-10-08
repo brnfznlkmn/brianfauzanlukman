@@ -29,6 +29,7 @@ const portfolioTranslations = {
     'Fakultas Teknik — S1 Teknologi Informasi': 'Faculty of Engineering / Bachelor’s in Information Technology',
     'Kompetensi Keahlian: Desain Grafis': 'Specialization: Graphic Design',
     'Rata-rata Ujian Sekolah:': 'Average School Exam Score:',
+    'IPK:': 'GPA:',
     'Sekolah Menengah Pertama': 'Junior High School',
     'Sekolah Dasar': 'Elementary School',
     'Kemampuan Komunikasi': 'Communication',
