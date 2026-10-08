@@ -143,8 +143,8 @@ img { max-width: 100%; display: block; }
 :root[data-theme="dark"] .hero-grid {
     background: linear-gradient(125deg, #092e70 0%, #0d47a1 48%, #1b65b7 100%);
     border: 1px solid #234776;
-    --hero-ink: #ffffff;
-    --hero-muted: #e1e5ec;
+    --hero-ink: #c5e9ff;
+    --hero-muted: #e3f2fd;
 }
 :root[data-theme="dark"] .hero-kicker {
     color: #ffffff;
