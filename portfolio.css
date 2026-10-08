@@ -190,9 +190,7 @@ img { max-width: 100%; display: block; }
 .contact-section .section-title { font-size: clamp(36px, 4vw, 54px); }
 .social-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 36px; margin-bottom: 70px; }
 .social-card { display: flex; align-items: center; gap: 18px; padding: 22px 0; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); padding-block: 28px; position: relative; z-index: 1; text-decoration: none; }
-.social-card::before { content: ''; position: absolute; inset: 0 -20px; background: var(--surface); border-radius: 12px; opacity: 0; transform: scale(0.95); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); z-index: -1; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
-.social-card:hover { color: var(--accent); border-top-color: transparent; transform: translateY(-4px); }
-.social-card:hover::before { opacity: 1; transform: scale(1); }
+.social-card:hover { color: var(--accent); }
 .social-icon { width: 38px; height: 38px; display: grid; place-items: center; font-size: 22px; flex-shrink: 0; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 .social-card:hover .social-icon { transform: scale(1.25) rotate(-5deg); color: var(--accent); }
 .social-info h4 { font-size: 26px; font-weight: 600; transition: color 0.3s; }
@@ -392,3 +390,6 @@ html { scroll-behavior: auto; }
 .theme-icon-moon { display: none; }
 :root[data-theme="dark"] .theme-icon-sun { display: none; }
 :root[data-theme="dark"] .theme-icon-moon { display: block; }
+
+.social-info { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: left center; }
+.social-card:hover .social-info { transform: scale(1.05) translateX(4px); }
