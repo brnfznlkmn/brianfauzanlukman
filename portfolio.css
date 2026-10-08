@@ -395,3 +395,30 @@ html { scroll-behavior: auto; }
 
 .social-info { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: left center; }
 .social-card:hover .social-info { transform: scale(1.05) translateX(4px); }
+
+/* Bounce Arrow */
+@keyframes bounceDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+.bounce-arrow {
+    display: inline-block;
+    animation: bounceDown 2s infinite ease-in-out;
+}
+/* Company Logo */
+.company-logo {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 8px; 
+    margin-top: 4px;
+}
+.timeline-item:hover .company-logo {
+    transform: scale(1.15) rotate(-3deg);
+}
+@media (max-width: 768px) {
+    .company-logo { height: 50px; }
+    .timeline-header-wrapper { flex-direction: column-reverse; }
+    .timeline-header-wrapper .company-logo { margin-bottom: 15px; }
+}
