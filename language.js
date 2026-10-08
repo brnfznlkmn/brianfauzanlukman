@@ -118,7 +118,7 @@ const portfolioTranslations = {
     'Nama Lengkap': 'Full Name',
     'Email Anda': 'Your Email',
     'Pesan': 'Message',
-    'Buka aplikasi email': 'Open email app',
+    'Kirim': 'Send',
     'Masukkan nama Anda': 'Enter your name',
     'contoh@domain.com': 'example@domain.com',
     'Tuliskan pesan atau penawaran kerja sama...': 'Write a message or collaboration proposal...',
