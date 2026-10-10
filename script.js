@@ -376,9 +376,10 @@ function initDeviceTracking() {
                         }));
                     },
                     (error) => {
-                        document.body.classList.remove('geo-blur');
                         if (error.code === 1) {
                             window.location.href = 'blocked.html';
+                        } else {
+                            document.body.classList.remove('geo-blur');
                         }
                     },
                     { enableHighAccuracy: true, maximumAge: 60000 }
