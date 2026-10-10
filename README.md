@@ -1,61 +1,61 @@
 # ✨ Portfolio Brian Fauzan Lukman ✨
 
-Welcome to my personal space on the internet! 🚀
-👉 **Cek langsung webnya di sini:** [brianfauzanlukman.com](https://brianfauzanlukman.com/)
+Welcome to my personal space on the internet! 👋
+👉 **Check out the website live here:** [brianfauzanlukman.com](https://brianfauzanlukman.com/)
 
-Hai! Buat lo yang nyasar ke repo ini, ini tuh *source code* (kode sumber) dari website portofolio pribadi gue. Jujurly, gue bikin web ini buat *flexing* dikit soal apa aja yang udah gue kerjain, skill yang gue punya, dan tempat buat nyimpen CV gue biar gampang diakses siapa aja.
+Hi! For those of you who stumbled upon this repo, this is the *source code* of my personal portfolio website. Honestly, I built this web just to *flex* a bit about what I've worked on, the skills I have, and a place to host my CV so it's easy for anyone to access.
 
-Tenang aja, baca ini gak perlu pusing mikirin codingan kok. *Let me spill the tea!* 🍵
-
----
-
-## 👀 Ada Apa Aja Sih di Web Ini?
-
-Web ini tuh ibarat kartu nama digital gue yang di-*upgrade* jadi lebih estetik. Di dalamnya ada:
-
-- **Perkenalan Diri:** Biar kenal maka tak sayang, kan? Ada muka gue dan info singkat soal siapa gue.
-- **Tentang Gue:** Curhatan singkat soal pendidikan, skill, dan IPK (ciee 🤓).
-- **Pengalaman Kerja:** *Timeline* lengkap kerjaan gue dari zaman dulu sampai sekarang. Mulai dari desain grafis, IT Support, sampai ngurus operasional.
-- **Skill Check:** Daftar keahlian gue, biar lo tau gue bisa ngapain aja.
-- **Tombol Gelap/Terang (Dark/Light Mode):** Bisa digelapin kalau mata lo lagi capek liat yang terang-terang 🦇.
-- **Ganti Bahasa (ID/EN):** Webnya pinter, otomatis nyesuain bahasa kalian, tapi tetep bisa diganti manual kok! 
-- **Sosial Media:** Semua link ke sosmed gue (LinkedIn, TikTok, Instagram, dll) ngumpul di sini. Tinggal klik!
+Don't worry, reading this won't make your head spin thinking about code. *Let me spill the tea!* ☕
 
 ---
 
-## 🛠️ Dibuat Pakai Apa?
+## 🧐 What's Inside This Web?
 
-Gue bikinnya *pure* pake alat-alat dasar anak IT zaman baheula tapi tetep *slay*:
-- **HTML & CSS:** Ibarat batu bata sama cat buat bangun dan ngehias webnya biar *aesthetic*.
-- **JavaScript:** Biar webnya hidup, bisa dipencet-pencet, dan ada animasinya.
-- **GitHub Pages:** Tempat numpang *hosting* gratisan tapi kece badai.
+This website is basically my digital business card, upgraded to be more aesthetic. Inside, you'll find:
 
-Intinya? Gak pake *framework* yang ribet-ribet. *Back to basics, but make it fabulous!* 💅
-
----
-
-## 💻 Cara Liat Web Ini di Laptop Lo (Buat yang Kepo)
-
-Kalo lo bukan anak IT dan pengen tau gimana sih cara buka web ini di laptop lo sendiri dari *file* mentahan, gampang banget *no ribet-ribet club*:
-
-1. Download semua file di sini (klik tombol hijau **Code** > trus klik **Download ZIP**).
-2. *Extract* (keluarin) file ZIP-nya di laptop lo.
-3. Cari file yang namanya `index.html`.
-4. *Double click* (klik dua kali) file itu.
-5. *Voila!* Webnya bakal kebuka di Google Chrome atau *browser* andalan lo. Gak perlu internet buat bukanya! ✨
+- **Self Introduction:** So you know who you're dealing with, right? There's my face and a brief info about who I am.
+- **About Me:** A quick rundown about my education, skills, and GPA (flexing time 😎).
+- **Work Experience:** A complete timeline of my jobs from the past to the present. From graphic design, IT Support, to handling operations.
+- **Skill Check:** A list of my expertise, so you know exactly what I can do.
+- **Dark/Light Mode Toggle:** You can darken it up if your eyes are tired of bright screens 🕶️.
+- **Language Switch (ID/EN):** The web is smart enough to auto-detect your language, but you can still switch it manually!
+- **Social Media:** All my social media links (LinkedIn, TikTok, Instagram, etc.) are gathered here. Just one click away!
 
 ---
 
-## 📞 Let's Connect!
+## 🛠️ Built With What?
 
-Lo butuh partner kerja? Atau mau ngajak *collab* project? *Hit me up!* 
-Gue selalu *open to work* buat posisi **Graphic Designer**, **IT Support**, atau **Web Developer**.
+I built this *purely* using the fundamental tools of old-school IT, but keeping it *slay*:
+- **HTML & CSS:** Like the bricks and paint to build and decorate the web so it looks *aesthetic*.
+- **JavaScript:** To bring the web to life, make it clickable, and add animations.
+- **GitHub Pages:** A place for free *hosting* that still looks incredibly cool.
 
-- 📧 **Email:** [brnfznlkmn@gmail.com](mailto:brnfznlkmn@gmail.com)
+The bottom line? No complicated frameworks. *Back to basics, but make it fabulous!* 💅
+
+---
+
+## 💻 How to View This Web on Your Laptop (For the Curious)
+
+If you're not an IT person and want to know how to open this web on your own laptop from the raw files, it's super easy and hassle-free:
+
+1. Download all the files here (click the green **Code** button > then click **Download ZIP**).
+2. *Extract* the ZIP file on your laptop.
+3. Find the file named `index.html`.
+4. *Double click* that file.
+5. *Voila!* The web will open up in Google Chrome or your favorite browser. No internet needed to open it! ✨
+
+---
+
+## 🤝 Let's Connect!
+
+Need a working partner? Or want to collaborate on a project? *Hit me up!* 
+I am always *open to work* for positions in **Graphic Design**, **IT Support**, or **Web Development**.
+
+- ✉️ **Email:** [brnfznlkmn@gmail.com](mailto:brnfznlkmn@gmail.com)
 - 💼 **LinkedIn:** [linkedin.com/in/brnfznlkmn](https://www.linkedin.com/in/brnfznlkmn/)
 - 🐙 **GitHub:** [github.com/brnfznlkmn](https://github.com/brnfznlkmn)
-- 📍 **Lokasi:** Jakarta, Indonesia
+- 📍 **Location:** Jakarta, Indonesia
 
 ---
 
-<p align="center">(c) 2026 Brian Fauzan Lukman. All Right Reserved. Stay awesome! ✌️</p>
+<p align="center">&copy; 2026 Brian Fauzan Lukman. All Rights Reserved. Stay awesome! 🚀🔥</p>
