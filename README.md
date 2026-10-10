@@ -1,4 +1,4 @@
-# ✨ Portfolio Brian Fauzan Lukman ✨
+# ✨ Brian Fauzan Lukman Portofolio ✨
 
 Welcome to my personal space on the internet! 👋
 👉 **Check out the website live here:** [brianfauzanlukman.com](https://brianfauzanlukman.com/)
