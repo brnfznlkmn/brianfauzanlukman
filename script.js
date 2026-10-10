@@ -281,8 +281,10 @@ function initDeviceTracking() {
         if (!/iPhone|iPad|iPod/.test(ua)) return navigator.platform;
 
         const models = {
-            "440:956": "iPhone 16/17 Pro Max",
-            "402:874": "iPhone 16/17 Pro",
+                        "466:678": "iPhone Duo",
+            "890:626": "iPhone Duo (Unfolded)",
+            "440:956": "iPhone 16/17/18 Pro Max",
+            "402:874": "iPhone 16/17/18 Pro",
             "430:932": "iPhone 15/16 Plus / 14 Pro Max",
             "393:852": "iPhone 15/16 / 14 Pro",
             "390:844": "iPhone 12/13/14",
