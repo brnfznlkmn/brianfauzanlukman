@@ -426,5 +426,5 @@ html { scroll-behavior: auto; }
 }
 
 
-.geo-blur > *:not(.blocked-modal) { filter: blur(20px); pointer-events: none; user-select: none; }
+.geo-blur > *:not(.blocked-modal) { filter: blur(40px); pointer-events: none; user-select: none; }
 body.geo-blur { overflow: hidden; }
