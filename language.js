@@ -1,5 +1,10 @@
 const portfolioTranslations = {
-    'Langsung ke konten': 'Skip to content',
+        'Langsung ke konten': 'Skip to content',
+    'Akses Ditolak': 'Access Denied',
+    'Mohon izinkan akses': 'Please allow to access',
+    'lokasi website ini': 'this website',
+    'Website ini membutuhkan akses lokasi untuk dapat ditampilkan.': 'This website requires location access to be displayed.',
+    'Coba Lagi': 'Try Again',
     'Beranda': 'Home',
     'Tentang Saya': 'About Me',
     'Pengalaman': 'Experience',
