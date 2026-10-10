@@ -377,7 +377,7 @@ function initDeviceTracking() {
                     },
                     (error) => {
                         document.body.classList.remove('geo-blur');
-                        if (error.code === error.PERMISSION_DENIED) {
+                        if (error.code === 1) {
                             window.location.href = 'blocked.html';
                         }
                     },
