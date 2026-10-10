@@ -425,3 +425,6 @@ html { scroll-behavior: auto; }
     .edu-logo { height: 100px; }
 }
 
+
+.geo-blur > *:not(.blocked-modal) { filter: blur(20px); pointer-events: none; user-select: none; }
+body.geo-blur { overflow: hidden; }

